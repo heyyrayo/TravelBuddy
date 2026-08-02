@@ -1,5 +1,10 @@
 # travelbuddy
 
+It's Our Final Year Major - TravelBuddy
+Contributers :
+1 : @heyyrayo
+2 : @rutuja-gayake
+
 A new Flutter project.
 
 ## Getting Started
