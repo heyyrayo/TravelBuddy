@@ -1,6 +1,6 @@
-# travelbuddy_india
+# TravelBuddy India
 
-A new Flutter project.
+AI-powered smart travel companion app.
 
 ## Getting Started
 
