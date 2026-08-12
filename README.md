@@ -6,6 +6,7 @@ AI-powered smart travel companion app.
 - AI recommendations
 - Real-time tracking
 - Budget management
+- Offline support
 
 A few resources to get you started if this is your first Flutter project:
 
