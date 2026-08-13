@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recommended for You - TravelBuddy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#00201d",
+                      "on-primary-fixed": "#001b3c",
+                      "on-background": "#1c1c1a",
+                      "on-secondary-container": "#684000",
+                      "tertiary": "#002522",
+                      "on-tertiary-fixed-variant": "#005049",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c4c6cf",
+                      "on-surface": "#1c1c1a",
+                      "error-container": "#ffdad6",
+                      "inverse-surface": "#31302f",
+                      "primary": "#002045",
+                      "inverse-primary": "#adc7f7",
+                      "surface-container-high": "#eae8e5",
+                      "on-secondary-fixed": "#2a1700",
+                      "background": "#fcf9f6",
+                      "primary-fixed": "#d6e3ff",
+                      "surface-container": "#f0edea",
+                      "on-surface-variant": "#43474e",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "secondary": "#855300",
+                      "surface-container-low": "#f6f3f0",
+                      "surface-tint": "#455f88",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed-variant": "#2d476f",
+                      "on-tertiary-container": "#3cafa2",
+                      "inverse-on-surface": "#f3f0ed",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "secondary-container": "#fea619",
+                      "error": "#ba1a1a",
+                      "secondary-fixed": "#ffddb8",
+                      "primary-container": "#1a365d",
+                      "on-primary-container": "#86a0cd",
+                      "surface-variant": "#e5e2df",
+                      "outline": "#74777f",
+                      "primary-fixed-dim": "#adc7f7",
+                      "surface-dim": "#dcdad7",
+                      "surface": "#fcf9f6",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#89f5e7",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "tertiary-container": "#003d37",
+                      "surface-bright": "#fcf9f6",
+                      "tertiary-fixed-dim": "#6bd8cb",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#e5e2df"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px",
+                      "2xl": "1.5rem"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "xxl": "48px",
+                      "margin-desktop": "32px",
+                      "margin-mobile": "16px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "title-lg": [
+                              "Inter"
+                      ],
+                      "label-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "title-lg": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.1px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.25px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "57px",
+                              {
+                                      "lineHeight": "64px",
+                                      "letterSpacing": "-0.25px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Topographic pattern for backgrounds */
+        .bg-topography {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.83v58.34l-.83.83H.83l-.83-.83V.83L.83 0h53.797zm-1.66 2.49H2.49v55.02h50.477V2.49z' fill='%23002045' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pt-16 pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-sm flex items-center justify-between px-margin-mobile h-16 transition-colors md:px-margin-desktop">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container-low transition-colors active:scale-95 transition-transform duration-200 rounded-full p-2 flex items-center justify-center">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar showing a smiling traveler with a backpack in a light-filled setting. The style is bright, optimistic, and welcoming, fitting a premium Indian travel app. High-key lighting, soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDShDJ4RoWb0v2g--3bdYJ6JmWuUYfe0kb3YQPkMVYkGpXHsmueqeK9j33AMBBTIDSEiKAQd-zHS81qhpsAnt1BPrsdHjL-3WdTa1NuLqUCaWhd_nK-hA0BtHvIX0iTrCQsbdGsymxDJ_DOoIheB4wOn9LaxsalP-uu7CjeN4HC_YLxLROtP4wIN1bSf13vRBFAwLjMVfPOivIHpeJLVjfc4rH3fiCIW1f08vGBN-IdaZ_kbDe_hMT20Q"/>
+</button>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim tracking-tight md:font-headline-lg md:text-headline-lg">TravelBuddy</span>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg flex items-center gap-2 px-3 py-2 rounded-full hover:bg-surface-container-low" href="#"><span class="material-symbols-outlined text-[20px]">home</span>Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg flex items-center gap-2 px-3 py-2 rounded-full hover:bg-surface-container-low" href="#"><span class="material-symbols-outlined text-[20px]">map</span>Trips</a>
+<a class="text-primary bg-secondary-container text-on-secondary-container font-label-lg text-label-lg flex items-center gap-2 px-4 py-2 rounded-full" href="#"><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">explore</span>Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg flex items-center gap-2 px-3 py-2 rounded-full hover:bg-surface-container-low" href="#"><span class="material-symbols-outlined text-[20px]">payments</span>Budget</a>
+</nav>
+<button class="hover:bg-surface-container-low transition-colors active:scale-95 transition-transform duration-200 text-on-surface-variant dark:text-outline p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-lg relative bg-topography">
+<!-- Header Section -->
+<div class="mb-lg md:mb-xl text-center md:text-left pt-sm">
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Recommended for You</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Discover hand-picked Indian destinations tailored to your travel style and preferences.</p>
+</div>
+<!-- Bento Grid / Masonry Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter md:gap-lg auto-rows-max">
+<!-- Card 1: Rishikesh (Featured/Large) -->
+<article class="md:col-span-2 lg:col-span-2 bg-surface-container rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,32,69,0.05)] hover:shadow-lg transition-shadow duration-400 group flex flex-col md:flex-row min-h-[300px]">
+<div class="relative h-48 md:h-auto md:w-1/2 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.2,0.0,0,1.0)]" data-alt="A serene morning view of the Ganges river in Rishikesh, India. A majestic suspension bridge in the distance, lush green mountains, and soft golden hour light reflecting on the water. Premium travel photography style, peaceful and majestic mood." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCs5kqXeN2YbuxE9yufkGefY_llDDp5-WigIVMiPHukV5vCSLyf9c0Mx94huK5gKnyM24FQuKK2qMlrtlHt8Z_ed6LvSFa_ZIpTHdyQuabqFdkbP9QzlpBFZB3W1ynfIyVhjXDeGd8wLDy9HH015ThqH5KKDiWGhpFfKXVbhWdnpiBgH6_kvwff5ZX2wMJxFKgkggPPfzOhMltkTezxJEK5q05SUwY_alH9ieQhAa9puyFevkX7vBnK6g')"></div>
+<div class="absolute inset-0 bg-primary/10"></div>
+<div class="absolute top-4 left-4 flex flex-wrap gap-2">
+<span class="bg-surface/90 backdrop-blur-sm text-primary font-label-md text-label-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">stars</span> Perfect for Students
+                        </span>
+<span class="bg-secondary-container/90 backdrop-blur-sm text-on-secondary-container font-label-md text-label-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">hiking</span> Adventure
+                        </span>
+</div>
+</div>
+<div class="p-lg md:w-1/2 w-full flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">Rishikesh</h2>
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">favorite</span></button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-4">"Ideal for a spiritual retreat and thrilling river rapids"</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]">calendar_month</span>
+<div>
+<p class="font-label-md text-label-md text-outline">Best Season</p>
+<p class="font-label-lg text-label-lg text-on-surface">Sep - Nov</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]">group</span>
+<div>
+<p class="font-label-md text-label-md text-outline">Travel Type</p>
+<p class="font-label-lg text-label-lg text-on-surface">Solo / Friends</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-surface-variant">
+<div class="flex items-baseline gap-1">
+<span class="font-title-lg text-title-lg text-secondary">₹₹</span>
+<span class="font-body-md text-body-md text-outline">/ day approx</span>
+</div>
+<button class="bg-primary text-on-primary font-label-lg text-label-lg px-4 py-3 rounded-xl hover:bg-primary/90 transition-colors active:scale-95 flex items-center gap-2">
+                            Explore <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2: Munnar -->
+<article class="bg-surface-container rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,32,69,0.05)] hover:shadow-lg transition-shadow duration-400 group flex flex-col relative h-[420px]">
+<div class="relative h-48 w-full overflow-hidden shrink-0">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.2,0.0,0,1.0)]" data-alt="Expansive view of rolling tea plantations in Munnar, Kerala. Misty hills in the background, vibrant lush green terraces catching the early morning sunlight. Premium, serene, and nature-focused aesthetic. Clean composition." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfAQm7xMe4xJ_7JfzsNulLMC4WeuoHc1ZsNhjmdNO7Tlyt8tfbHYzs98HBXhmM6cnJpuLF_6t5amxCkQaISCw_dd4ovNKH-oDLoxfGZ_bEpDYKKwyIOYJATWfj58oBs7azSbZsEK8APZxbm4KzPJ1EGgrmzMrSDki2W8NUjhBhVlbfGXfwtN8PiHhAjfYp-dfwDYgMeujg_4dP97c8vPV_ExxibpHPGUwRrhyg_jHH-jyDtnuKgBSAyA')"></div>
+<div class="absolute inset-0 bg-primary/10"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-surface/90 backdrop-blur-sm text-primary font-label-md text-label-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">family_restroom</span> Family Friendly
+                        </span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-grow bg-surface-container">
+<div class="flex justify-between items-start mb-1">
+<h2 class="font-title-lg text-title-lg text-on-surface line-clamp-1">Munnar</h2>
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">favorite</span></button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-4 line-clamp-2">"Lush tea gardens and cool breeze"</p>
+<div class="space-y-3 mt-auto">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-outline text-[18px]">partly_cloudy_day</span>
+<span class="font-label-lg text-label-lg">Sep - Mar</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-outline text-[18px]">favorite</span>
+<span class="font-label-lg text-label-lg">Couple / Family</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-surface-variant">
+<span class="font-title-lg text-title-lg text-secondary">₹₹₹</span>
+<button class="text-primary hover:text-primary/80 font-label-lg text-label-lg flex items-center gap-1 transition-colors">
+                                Details <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 3: Jaisalmer -->
+<article class="bg-surface-container rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,32,69,0.05)] hover:shadow-lg transition-shadow duration-400 group flex flex-col relative h-[420px]">
+<div class="relative h-48 w-full overflow-hidden shrink-0">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.2,0.0,0,1.0)]" data-alt="The golden sandstone architecture of Jaisalmer Fort against a clear blue sky, Rajasthan, India. Warm, earthy saffron tones, intricate carvings, casting sharp shadows. Premium, majestic, heritage travel photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAM9EL0hpCi0_QWbgzwmYZvrRw4vaQABkYsrrJigl6V-RyjhIFZZEOFmr5fMP8I-jRR7vdrDzlU2zHs5VoaFjoaKDTyZYeBv9R1sZQkSOdr-vZeNZi7MBZVyx6h73YPxUuRftU6soxXZfhrMT_D7IUov4WsOKyrdHx3ac6s6yjs6qXkcvy8NYbhZnsQyzY_8k_n7avb1u6eBS2Kgr1knoogb2LARFgkuU5bfc4hPbdpmv71r_YaxbbN8Q')"></div>
+<div class="absolute inset-0 bg-primary/10"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary-container/90 backdrop-blur-sm text-on-secondary-container font-label-md text-label-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">account_balance</span> Heritage
+                        </span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-grow bg-surface-container">
+<div class="flex justify-between items-start mb-1">
+<h2 class="font-title-lg text-title-lg text-on-surface line-clamp-1">Jaisalmer</h2>
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">favorite</span></button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-4 line-clamp-2">"Golden sands and royal history"</p>
+<div class="space-y-3 mt-auto">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-outline text-[18px]">sunny</span>
+<span class="font-label-lg text-label-lg">Nov - Mar</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-outline text-[18px]">diversity_3</span>
+<span class="font-label-lg text-label-lg">Couple / Solo</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-surface-variant">
+<span class="font-title-lg text-title-lg text-secondary">₹₹₹</span>
+<button class="text-primary hover:text-primary/80 font-label-lg text-label-lg flex items-center gap-1 transition-colors">
+                                Details <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 4: Gokarna (Compact / List-like for variety on desktop) -->
+<article class="md:col-span-2 lg:col-span-1 bg-surface-container rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,32,69,0.05)] hover:shadow-lg transition-shadow duration-400 group flex flex-row items-center p-2 relative h-[140px] md:h-auto">
+<div class="w-32 h-full md:w-40 md:h-32 rounded-xl overflow-hidden relative shrink-0">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.2,0.0,0,1.0)]" data-alt="A tranquil, pristine beach cove in Gokarna, India. Golden sand, gentle turquoise waves, and rocky green cliffs in the background. Calm, relaxing mood, bright sunny day, premium drone photography perspective." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFu3mUgYY7ZX1shWF5dUMY8uM4sKOEXMHG9P4iKZ9vK5Ky46_-FJeTXeQfWPeApTEOeuJXzBa5CZyUtoh64UxqfvE3pLCcQJiuSSHIJFYkvwhuguXpT4yuAVY3voFY1g_k4bYKozrTY4ful3o4LTX70XNreTbbxxeWbv_eiZWTwVItxnrUZCe5iSUvmlF1K4uT1EprUM2SXcYFRbx0kNHfEtx6XLs1lp8uD5K9u6b2Elt2dfT7PCtXUg')"></div>
+</div>
+<div class="p-3 flex-grow h-full flex flex-col justify-between">
+<div>
+<h2 class="font-title-lg text-title-lg text-on-surface line-clamp-1 leading-tight">Gokarna</h2>
+<p class="font-body-md text-body-md text-on-surface-variant italic line-clamp-1 text-sm">"Laid-back beaches and temples"</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="bg-surface/80 text-primary font-label-md text-label-md px-2 py-0.5 rounded flex items-center gap-1 border border-surface-variant">
+<span class="material-symbols-outlined text-[14px]">savings</span> Budget
+                         </span>
+<span class="font-label-lg text-label-lg text-secondary">₹</span>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 bg-surface-container shadow-[0px_-4px_12px_rgba(0,32,69,0.05)] rounded-t-xl z-50">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-xl w-16">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-xl w-16">
+<span class="material-symbols-outlined mb-1">map</span>
+<span class="font-label-md text-label-md">Trips</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 hover:bg-surface-container-high transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-md text-label-md">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-xl w-16">
+<span class="material-symbols-outlined mb-1">payments</span>
+<span class="font-label-md text-label-md">Budget</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-xl w-16">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</button>
+</nav>
+</body></html>

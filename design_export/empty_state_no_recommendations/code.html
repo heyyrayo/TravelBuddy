@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TravelBuddy - No Recommendations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fcf9f6",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#855300",
+                        "on-surface": "#1c1c1a",
+                        "surface-container-highest": "#e5e2df",
+                        "background": "#fcf9f6",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "inverse-on-surface": "#f3f0ed",
+                        "surface-variant": "#e5e2df",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "primary": "#002045",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-container-low": "#f6f3f0",
+                        "on-secondary-fixed": "#2a1700",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-primary-container": "#86a0cd",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#003d37",
+                        "outline": "#74777f",
+                        "on-surface-variant": "#43474e",
+                        "inverse-surface": "#31302f",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary-fixed": "#89f5e7",
+                        "surface-tint": "#455f88",
+                        "primary-container": "#1a365d",
+                        "on-background": "#1c1c1a",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-container": "#f0edea",
+                        "surface": "#fcf9f6",
+                        "on-tertiary-fixed": "#00201d",
+                        "secondary-container": "#fea619",
+                        "on-primary-fixed": "#001b3c",
+                        "on-tertiary-container": "#3cafa2",
+                        "surface-dim": "#dcdad7",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "tertiary": "#002522",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#684000",
+                        "primary-fixed-dim": "#adc7f7",
+                        "surface-container-high": "#eae8e5",
+                        "inverse-primary": "#adc7f7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xxl": "48px",
+                        "xl": "32px",
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "sm": "8px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-sans">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim flat no shadows flex items-center justify-between px-margin-mobile w-full h-16 z-50">
+<div class="flex items-center space-x-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed">arrow_back</span>
+</button>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary dark:text-primary-fixed font-bold tracking-tight">TravelBuddy</h1>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed">search</span>
+</button>
+</header>
+<!-- Main Content - Empty State -->
+<main class="flex-grow flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface">
+<div class="max-w-md w-full flex flex-col items-center text-center space-y-lg animate-[fadeIn_0.5s_ease-out]">
+<!-- Illustration Container -->
+<div class="w-64 h-64 md:w-80 md:h-80 relative rounded-full overflow-hidden bg-surface-container-low mb-md shadow-sm border border-outline-variant/20 flex items-center justify-center">
+<img alt="No recommendations" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8Mkm4SerOb5BIjN5D80vLxM8CER8JM3iQejuVc3DCMWxWJ_4RdzpMNjSHx0zXUFUpGkM2NLDGpVSKs3YQ-tX-WIpdxgagmy5bCWoVeZvuK40uGvk86bSXu1pXjB1XKkLHCcKXL5ucmzy8e4pLglyKh7uex5Xdq0sOwSQFJ9Fuq3wh6hthphDXK3gWA757PsY4yyDn11gCFoUsuUk-JvtDpfHVqx0rnbKf9I4Qnystk6gz7FPm_XzHHQ"/>
+</div>
+<!-- Text Content -->
+<div class="space-y-sm">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">Still Learning...</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-sm mx-auto">
+                    Tell us more about your travel style so we can suggest the perfect Indian getaway.
+                </p>
+</div>
+<!-- CTA Button -->
+<button class="mt-lg bg-secondary-container text-on-secondary-container font-label-lg text-label-lg px-xl py-3 rounded-full hover:bg-secondary hover:text-on-secondary transition-all active:scale-95 shadow-sm hover:shadow-md border border-transparent">
+                Set Preferences
+            </button>
+<!-- Secondary Action (Ghost) -->
+<button class="mt-sm bg-transparent border border-outline text-on-surface-variant font-label-lg text-label-lg px-xl py-3 rounded-full hover:bg-surface-container transition-all active:scale-95">
+                Explore Popular Destinations
+            </button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container dark:bg-surface-container-low shadow-[0px_-4px_12px_rgba(0,32,69,0.05)] shadow-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">luggage</span>
+<span class="font-label-md text-label-md">Trips</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container dark:bg-secondary dark:text-on-secondary rounded-full px-5 py-1 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-md text-label-md font-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">account_balance_wallet</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Safe area padding for mobile nav */
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 12px);
+        }
+    </style>
+</body></html>

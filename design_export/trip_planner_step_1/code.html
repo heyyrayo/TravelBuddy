@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trip Planner - Destination &amp; Dates</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1c1c1a",
+                        "primary-fixed": "#d6e3ff",
+                        "tertiary-container": "#003d37",
+                        "surface-dim": "#dcdad7",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c4c6cf",
+                        "secondary-container": "#fea619",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#43474e",
+                        "on-background": "#1c1c1a",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-container-high": "#eae8e5",
+                        "on-tertiary-fixed": "#00201d",
+                        "surface-container": "#f0edea",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e5e2df",
+                        "inverse-surface": "#31302f",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-primary-container": "#86a0cd",
+                        "surface-variant": "#e5e2df",
+                        "on-tertiary-container": "#3cafa2",
+                        "on-secondary-container": "#684000",
+                        "on-error-container": "#93000a",
+                        "outline": "#74777f",
+                        "surface-container-low": "#f6f3f0",
+                        "on-secondary-fixed": "#2a1700",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#455f88",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "error": "#ba1a1a",
+                        "secondary": "#855300",
+                        "background": "#fcf9f6",
+                        "primary-container": "#1a365d",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "inverse-on-surface": "#f3f0ed",
+                        "on-error": "#ffffff",
+                        "surface": "#fcf9f6",
+                        "on-primary-fixed": "#001b3c",
+                        "primary-fixed-dim": "#adc7f7",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "primary": "#002045",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#89f5e7",
+                        "inverse-primary": "#adc7f7",
+                        "surface-bright": "#fcf9f6",
+                        "tertiary": "#002522"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "margin-desktop": "32px",
+                        "sm": "8px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-lg min-h-screen flex flex-col antialiased relative overflow-hidden">
+<!-- Subtle Topographic Background Element (Simulated with SVG pattern) -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none z-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0c25 0 25 25 50 25s25-25 50-25v100c-25 0-25-25-50-25s-25 25-50 25z\' fill=\'none\' stroke=\'%23002045\' stroke-width=\'1\'/%3E%3C/svg%3E');"></div>
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface flex items-center justify-between px-margin-mobile md:px-margin-desktop w-full h-16 z-20">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<div class="font-display-lg text-display-lg-mobile md:text-title-lg text-primary font-bold">TravelBuddy</div>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="flex-grow flex flex-col max-w-2xl mx-auto w-full px-margin-mobile md:px-0 py-lg z-10 relative">
+<!-- Progress Indicator -->
+<div class="mb-xl w-full">
+<div class="flex justify-between items-center mb-sm">
+<span class="font-label-md text-label-md text-primary">Step 1 of 8</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Destination &amp; Dates</span>
+</div>
+<div class="flex gap-1 h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/8 rounded-full"></div>
+<div class="h-full bg-surface-variant w-1/8 rounded-full"></div>
+<div class="h-full bg-surface-variant w-1/8 rounded-full"></div>
+<div class="h-full bg-surface-variant w-1/8 rounded-full"></div>
+<div class="h-full bg-surface-variant w-1/8 rounded-full"></div>
+<div class="h-full bg-surface-variant w-1/8 rounded-full"></div>
+<div class="h-full bg-surface-variant w-1/8 rounded-full"></div>
+<div class="h-full bg-surface-variant w-1/8 rounded-full"></div>
+</div>
+</div>
+<!-- Header -->
+<div class="mb-xl">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-sm">Where and when are you headed?</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Let's start building your itinerary.</p>
+</div>
+<!-- Form Area -->
+<div class="space-y-lg flex-grow">
+<!-- Destination Field -->
+<div class="relative group">
+<label class="absolute -top-2.5 left-3 bg-surface px-1 font-label-md text-label-md text-primary transition-all z-10" for="destination">Destination</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant z-10 pointer-events-none">location_on</span>
+<input class="w-full bg-transparent border-2 border-outline-variant hover:border-on-surface focus:border-primary focus:ring-0 rounded-[16px] py-4 pl-12 pr-4 font-body-lg text-body-lg text-on-surface outline-none transition-colors peer" id="destination" placeholder="Search a city or region" type="text" value="Manali"/>
+</div>
+</div>
+<!-- Date Range Picker (Simulated) -->
+<div class="grid grid-cols-2 gap-md">
+<div class="relative group">
+<label class="absolute -top-2.5 left-3 bg-surface px-1 font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-all z-10" for="start_date">Start Date</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant z-10 pointer-events-none">calendar_today</span>
+<input class="w-full bg-transparent border-2 border-outline-variant hover:border-on-surface focus:border-primary focus:ring-0 rounded-[16px] py-4 pl-12 pr-4 font-body-lg text-body-lg text-on-surface outline-none transition-colors cursor-pointer" id="start_date" placeholder="Select date" readonly="" type="text"/>
+</div>
+</div>
+<div class="relative group">
+<label class="absolute -top-2.5 left-3 bg-surface px-1 font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-all z-10" for="end_date">End Date</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant z-10 pointer-events-none">event</span>
+<input class="w-full bg-transparent border-2 border-outline-variant hover:border-on-surface focus:border-primary focus:ring-0 rounded-[16px] py-4 pl-12 pr-4 font-body-lg text-body-lg text-on-surface outline-none transition-colors cursor-pointer" id="end_date" placeholder="Select date" readonly="" type="text"/>
+</div>
+</div>
+</div>
+<!-- Visual Context Map (Decorative) -->
+<div class="w-full h-48 rounded-[24px] overflow-hidden relative shadow-sm bg-surface-container-high border border-surface-variant mt-lg">
+<img class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A detailed map visualization of the Manali region in India, featuring subtle topographic lines and clean modern styling suitable for a premium travel app. Light mode aesthetic with cool blue and soft gray tones. High quality, crisp lines, minimal UI map style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJM_OychMqtWpO9vhmWprAA9F5fD3A9syaSRSGIIfW_d_U0LcKiAnpFb5xbKvFosfYcwWCWGtab7iF-LvFJy8CzQRTtGI-yMsM9YJEdY36p67Vbs5_ohLGFcK1oWz2L7QsKEa_CKW4LYxJ8rf5Lr2eJfiGF_HNq_viJAU-lVB9Tm284jxWtG6b23Twy2Gf4UWBX1ViLnnazXgqC1SlRMgQJ-vSG8GMnAPoGk_Yol-3rZdrLs2HvgPIlg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2 bg-surface/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm icon-filled">pin_drop</span>
+<span class="font-label-md text-label-md text-on-surface">Manali, Himachal Pradesh</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Actions Sticky -->
+<div class="sticky bottom-0 w-full bg-surface/90 backdrop-blur-md border-t border-surface-variant py-md px-margin-mobile md:px-margin-desktop z-30">
+<div class="max-w-2xl mx-auto flex justify-between items-center gap-md">
+<button class="flex items-center justify-center gap-2 px-[16px] py-[12px] border-2 border-outline-variant text-on-surface rounded-full font-label-lg text-label-lg hover:bg-surface-container-low active:scale-95 transition-all duration-200">
+                Back
+            </button>
+<button class="flex items-center justify-center gap-2 px-[24px] py-[12px] bg-primary text-on-primary rounded-full font-label-lg text-label-lg shadow-md hover:shadow-lg hover:bg-primary/90 active:scale-95 transition-all duration-200 flex-grow max-w-[200px]">
+                Next
+                <span class="material-symbols-outlined text-on-primary">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

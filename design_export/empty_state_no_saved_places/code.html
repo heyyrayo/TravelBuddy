@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TravelBuddy - No Saved Places</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#fcf9f6",
+                      "outline-variant": "#c4c6cf",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary": "#855300",
+                      "on-surface": "#1c1c1a",
+                      "surface-container-highest": "#e5e2df",
+                      "background": "#fcf9f6",
+                      "tertiary-fixed-dim": "#6bd8cb",
+                      "inverse-on-surface": "#f3f0ed",
+                      "surface-variant": "#e5e2df",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed-variant": "#2d476f",
+                      "primary": "#002045",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#d6e3ff",
+                      "surface-container-low": "#f6f3f0",
+                      "on-secondary-fixed": "#2a1700",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-primary-container": "#86a0cd",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#003d37",
+                      "outline": "#74777f",
+                      "on-surface-variant": "#43474e",
+                      "inverse-surface": "#31302f",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "tertiary-fixed": "#89f5e7",
+                      "surface-tint": "#455f88",
+                      "primary-container": "#1a365d",
+                      "on-background": "#1c1c1a",
+                      "secondary-fixed": "#ffddb8",
+                      "surface-container": "#f0edea",
+                      "surface": "#fcf9f6",
+                      "on-tertiary-fixed": "#00201d",
+                      "secondary-container": "#fea619",
+                      "on-primary-fixed": "#001b3c",
+                      "on-tertiary-container": "#3cafa2",
+                      "surface-dim": "#dcdad7",
+                      "on-tertiary-fixed-variant": "#005049",
+                      "tertiary": "#002522",
+                      "on-error-container": "#93000a",
+                      "on-primary": "#ffffff",
+                      "on-secondary-container": "#684000",
+                      "primary-fixed-dim": "#adc7f7",
+                      "surface-container-high": "#eae8e5",
+                      "inverse-primary": "#adc7f7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "xxl": "48px",
+                      "xl": "32px",
+                      "margin-desktop": "32px",
+                      "md": "16px",
+                      "gutter": "16px",
+                      "margin-mobile": "16px",
+                      "sm": "8px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "label-lg": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "title-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.1px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "title-lg": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.25px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "57px",
+                              {
+                                      "lineHeight": "64px",
+                                      "letterSpacing": "-0.25px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .topographic-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23002045' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+      </style>
+</head>
+<body class="bg-surface font-body-lg text-on-surface antialiased min-h-screen flex flex-col topographic-pattern">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim flat no shadows flex items-center justify-between px-margin-mobile w-full h-16 z-50 md:hidden">
+<button aria-label="Back" class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-display-lg text-display-lg-mobile text-primary dark:text-primary-fixed font-bold">TravelBuddy</h1>
+<button aria-label="Search" class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- Desktop Nav Cluster (Hidden on Mobile) -->
+<header class="hidden md:flex w-full top-0 sticky bg-surface dark:bg-surface-dim flat no shadows items-center justify-between px-margin-desktop w-full h-20 z-50">
+<h1 class="font-display-lg text-primary dark:text-primary-fixed font-bold">TravelBuddy</h1>
+<nav class="flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200 px-4 py-2 rounded-full font-label-lg text-label-lg flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">home</span> Home
+            </a>
+<a class="text-primary dark:text-primary-fixed-dim bg-secondary-container/10 font-label-lg text-label-lg px-4 py-2 rounded-full flex items-center gap-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">luggage</span> Trips
+            </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200 px-4 py-2 rounded-full font-label-lg text-label-lg flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">explore</span> Explore
+            </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200 px-4 py-2 rounded-full font-label-lg text-label-lg flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span> Budget
+            </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200 px-4 py-2 rounded-full font-label-lg text-label-lg flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">person</span> Profile
+            </a>
+</nav>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop py-xl">
+<div class="max-w-md w-full flex flex-col items-center text-center">
+<!-- Featured Illustration -->
+<div class="w-64 h-64 md:w-80 md:h-80 mb-lg relative">
+<div class="absolute inset-0 bg-primary-fixed-dim/20 rounded-full blur-3xl -z-10 transform translate-y-4"></div>
+<img alt="India-inspired minimal travel illustration, flat vector style. An empty traditional Indian jewelry box or treasure chest, soft gold and teal accents. Clean composition, professional design, white background. Symbolizes 'No Saved Places'." class="w-full h-full object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.2,0.0,0,1.0)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNIcQhQeHj_mi1Y4Ln2fNs5rcaCYNPPfPcqT7HzPW2XnR-BF86hGxEXxweO8DF9OTakCO67eRAiyVpCEwKt-WLcBpKr3kxkmN9zjZg69DU4dqO-WDcLVGl-oqh8JZ1oHN9lWwkSYbxDQOZlkvUn084gMo3JMTiBI6DG3JKgGY8fh6Yxabgat3unYeeZlEZlc4WkjWkl8bxRg-H6vSeBENcaCUDBNXngndQ3k_vF0kRvsOVDx4F5XOdpw"/>
+</div>
+<!-- Empty State Messaging -->
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-sm">Your Wishlist is Empty</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-sm">Start saving your favorite Indian spots to build your dream itinerary.</p>
+<!-- Call to Action -->
+<button class="bg-secondary-container text-on-secondary-container font-label-lg text-label-lg px-[16px] py-[12px] rounded-full hover:bg-secondary-fixed transition-colors active:scale-95 duration-200 flex items-center gap-sm shadow-md">
+                Explore Destinations
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container dark:bg-surface-container-low shadow-[0px_-4px_12px_rgba(0,32,69,0.05)] shadow-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container dark:bg-secondary dark:text-on-secondary rounded-full px-5 py-1 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">luggage</span>
+<span class="font-label-md text-label-md">Trips</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">explore</span>
+<span class="font-label-md text-label-md">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">account_balance_wallet</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+</body></html>

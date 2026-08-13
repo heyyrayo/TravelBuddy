@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TravelBuddy - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#003d37",
+                        "on-surface-variant": "#43474e",
+                        "surface-container-low": "#f6f3f0",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#fea619",
+                        "surface-bright": "#fcf9f6",
+                        "tertiary": "#002522",
+                        "on-background": "#1c1c1a",
+                        "surface-variant": "#e5e2df",
+                        "surface-dim": "#dcdad7",
+                        "on-secondary-container": "#684000",
+                        "tertiary-fixed": "#89f5e7",
+                        "inverse-on-surface": "#f3f0ed",
+                        "on-primary-fixed": "#001b3c",
+                        "background": "#fcf9f6",
+                        "on-primary-container": "#86a0cd",
+                        "secondary": "#855300",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "outline": "#74777f",
+                        "surface-tint": "#455f88",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#31302f",
+                        "surface": "#fcf9f6",
+                        "outline-variant": "#c4c6cf",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#d6e3ff",
+                        "on-secondary-fixed": "#2a1700",
+                        "primary-container": "#1a365d",
+                        "on-tertiary-container": "#3cafa2",
+                        "on-tertiary-fixed": "#00201d",
+                        "inverse-primary": "#adc7f7",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-surface": "#1c1c1a",
+                        "surface-container": "#f0edea",
+                        "surface-container-highest": "#e5e2df",
+                        "primary-fixed-dim": "#adc7f7",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-container-high": "#eae8e5",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#002045",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-sm hidden md:flex items-center justify-between px-margin-desktop h-16 transition-colors">
+<div class="flex items-center gap-4">
+<h1 class="font-display-lg text-title-lg font-bold text-primary dark:text-primary-fixed-dim active:scale-95 duration-200 ease-in-out cursor-pointer hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-lg px-2 py-1">TravelBuddy</h1>
+</div>
+<nav class="flex gap-8">
+<a class="font-label-lg text-label-lg text-primary dark:text-primary-fixed flex flex-col items-center justify-center relative active:scale-95 duration-200 ease-in-out hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-lg px-3 py-2" href="#">
+                Home
+                <div class="absolute bottom-0 w-1/2 h-0.5 bg-primary rounded-t-full"></div>
+</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-on-surface-variant flex flex-col items-center justify-center active:scale-95 duration-200 ease-in-out hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-lg px-3 py-2" href="#">
+                Trips
+            </a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-on-surface-variant flex flex-col items-center justify-center active:scale-95 duration-200 ease-in-out hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-lg px-3 py-2" href="#">
+                Explore
+            </a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-on-surface-variant flex flex-col items-center justify-center active:scale-95 duration-200 ease-in-out hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-lg px-3 py-2" href="#">
+                Budget
+            </a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-on-surface-variant flex flex-col items-center justify-center active:scale-95 duration-200 ease-in-out hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-lg px-3 py-2" href="#">
+                Profile
+            </a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-200 ease-in-out p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A close up portrait of a professional Indian man with a warm smile, well lit studio lighting, solid neutral background, high resolution photography conveying trust and friendliness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC91SqmFjvDkAQ6Sn1CK4kLJ3fUbbU3JX5jL2C4bB2xhW2sgP2OScmYe6xHEG3hrezqx0qIYzSm04c-HZp2I0WwujsXI6hllYD75S8jhEBtebbVdECk_xQrBqczT3Whrep4Y2pW4DEdwPkY00FQFQWto2ibDRIGYFDCf-E9V8ra3ZmtOlZeSLBAiS8twuSxfPKo5MJVrrmckz-9d1wXKStJvaAkMJ1HxZRZqUwal0VBDQaqCugorDuwiQ"/>
+</div>
+</div>
+</header>
+<!-- Mobile Header -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-sm flex md:hidden items-center justify-between px-margin-mobile h-16">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A close up portrait of a professional Indian man with a warm smile, well lit studio lighting, solid neutral background, high resolution photography conveying trust and friendliness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATfOt1Y673neY34dyJ_AgUrEr2m03eXT8P6v8YfBzKd3XOvGSaoKyjQMxrjP9MrrUFHN2nvuhiTT1_EbTqtZKnidEfVWlOXpyU_iWXqUsc1YRe5poaQPZAv9ygZB8R3ycDKGrJlLInqZbPigWorTnr68biHPahOsn1uOb2VDGk7urkh4cKDRqcpVkxMqvLOVcCcMR_nt_pVErAEMEL6t4bVFonXOdKHkaBd25gjOrEJSwPBjIOh1lRBA"/>
+</div>
+<h1 class="font-display-lg text-title-lg font-bold text-primary dark:text-primary-fixed-dim">TravelBuddy</h1>
+<button class="text-on-surface-variant dark:text-on-surface-variant p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="pt-24 md:pt-32 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto space-y-12">
+<!-- Hero Section -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="space-y-2">
+<h2 class="font-body-lg text-body-lg text-on-surface-variant">Good Morning, Amit</h2>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background max-w-lg">Ready for your next adventure?</h3>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-label-lg text-label-lg flex items-center gap-2 hover:bg-secondary-container/90 active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+                Plan New Trip
+            </button>
+</section>
+<!-- Trip Readiness Card -->
+<section class="bg-surface-container rounded-[24px] p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 border border-outline-variant/30 relative overflow-hidden">
+<!-- Subtle topography pattern -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M54.627 0l.83.83v58.34l-.83.83H5.373l-.83-.83V.83l.83-.83h49.254zM53.5 1.96H6.5v56.08h47V1.96zm-20.91 38.64a4.42 4.42 0 1 0 0-8.84 4.42 4.42 0 0 0 0 8.84zm0 1.96a6.38 6.38 0 1 1 0-12.76 6.38 6.38 0 0 1 0 12.76zM32 30.2a6.4 6.4 0 1 1 0-12.8 6.4 6.4 0 0 1 0 12.8zm0 1.96a8.36 8.36 0 1 0 0-16.72 8.36 8.36 0 0 0 0 16.72z\' fill=\'%23000000\' fill-opacity=\'1\' fill-rule=\'evenodd\'/%3E%3C/svg%3E');"></div>
+<div class="flex-1 space-y-4 z-10 w-full">
+<div>
+<h4 class="font-title-lg text-title-lg text-primary">Manali Retreat Readiness</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Departing in 4 days</p>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Flights Confirmed</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Hotel Booked</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline">radio_button_unchecked</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Pack Winter Gear</span>
+</div>
+</div>
+</div>
+<div class="relative w-32 h-32 flex-shrink-0 z-10">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+<path class="text-secondary-container stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="92, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-title-lg text-title-lg font-bold text-primary">92%</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Ready</span>
+</div>
+</div>
+</section>
+<!-- Upcoming Trips (Horizontal Scroll) -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-title-lg text-title-lg text-on-background">Upcoming Journeys</h4>
+<a class="font-label-md text-label-md text-primary hover:underline" href="#">View all</a>
+</div>
+<div class="flex overflow-x-auto gap-4 pb-4 no-scrollbar -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0">
+<!-- Card 1 -->
+<div class="min-w-[280px] md:min-w-[320px] bg-surface rounded-[24px] overflow-hidden shadow-sm border border-outline-variant/30 flex-shrink-0 cursor-pointer group">
+<div class="h-40 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A scenic view of snow-capped mountains in Manali, India during golden hour. Pine trees in the foreground. High quality landscape photography, warm and inspiring lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhzK3aanBvoy1vs4q4-DrLU39nAAZclHODhF73DYJERH3FsJrprbxxvvfqTIdQflFHquCRVCJkvgE27Gjn3VWbuWn_5Y8qVCFFpz5siNqiT9ZlZFHIWLGo4Gjefi0LU2tUVdoxokiWKqkSZAbZlrXpbw0aHg4whP38UJD98KmuCpCxC6h3cHfXIC5eA1Te8ZopirMtmNBFvrj8l7BWKBehfVu_zYPe6lZ9brvdVpXZ3RJ-_BU1ZppNjg"/>
+<div class="absolute inset-0 bg-primary/10"></div>
+<div class="absolute top-4 right-4 bg-surface/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">schedule</span>
+<span class="font-label-md text-label-md font-bold text-tertiary-container">4 Days</span>
+</div>
+</div>
+<div class="p-4 space-y-2">
+<h5 class="font-title-lg text-title-lg text-on-background">Manali Escape</h5>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+<span>Oct 12 - Oct 18</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[280px] md:min-w-[320px] bg-surface rounded-[24px] overflow-hidden shadow-sm border border-outline-variant/30 flex-shrink-0 cursor-pointer group">
+<div class="h-40 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautiful sunset over a pristine beach in Goa, India. Palm trees silhouetted against a vibrant orange and purple sky. High quality, serene and relaxing mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDf5e6e7-WhpSPYRz7QczEGpQDl00mbPRByYM13Qu7Tu7AxbzCzJkyoqWNVx8HBtfYEFAsH5G-86U4G2DuCDZ4iP5PwGhDVq9gul2ki8_FLc9B-Ux44_ArFGWd9xXCvW3LnDXoOTuMWNc-J3U8YldVpBGgtdmoeuIYjDvn7hdn8K1e_pF0Z-mRurSQ6D0X2NCVoPs0svHofjCiQVnCiqzOfVgL_WYO65UBjcuz86TXiolubEsPeePbcQ"/>
+<div class="absolute inset-0 bg-primary/10"></div>
+<div class="absolute top-4 right-4 bg-surface/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">schedule</span>
+<span class="font-label-md text-label-md font-bold text-on-surface-variant">42 Days</span>
+</div>
+</div>
+<div class="p-4 space-y-2">
+<h5 class="font-title-lg text-title-lg text-on-background">Goa Workation</h5>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+<span>Nov 20 - Dec 05</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container dark:bg-surface-container-low shadow-[0px_-4px_12px_rgba(0,32,69,0.05)] md:hidden fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4 pb-2">
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-5 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 rounded-full px-3 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">travel_explore</span>
+<span class="font-label-md text-label-md mt-1">Trips</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 rounded-full px-3 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-md text-label-md mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 rounded-full px-3 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-md text-label-md mt-1">Budget</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 rounded-full px-3 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

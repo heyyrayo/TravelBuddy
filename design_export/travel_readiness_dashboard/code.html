@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Travel Readiness</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#fea619",
+                        "on-primary-container": "#86a0cd",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "primary": "#002045",
+                        "on-primary-fixed": "#001b3c",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcdad7",
+                        "tertiary-container": "#003d37",
+                        "background": "#fcf9f6",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#adc7f7",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary-container": "#3cafa2",
+                        "inverse-primary": "#adc7f7",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e5e2df",
+                        "primary-container": "#1a365d",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#31302f",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#d6e3ff",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "on-surface-variant": "#43474e",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-surface": "#1c1c1a",
+                        "surface-container-low": "#f6f3f0",
+                        "inverse-on-surface": "#f3f0ed",
+                        "surface": "#fcf9f6",
+                        "surface-container": "#f0edea",
+                        "on-background": "#1c1c1a",
+                        "outline": "#74777f",
+                        "tertiary-fixed": "#89f5e7",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-secondary-container": "#684000",
+                        "outline-variant": "#c4c6cf",
+                        "tertiary": "#002522",
+                        "surface-tint": "#455f88",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "on-secondary-fixed": "#2a1700",
+                        "surface-bright": "#fcf9f6",
+                        "on-error-container": "#93000a",
+                        "secondary": "#855300",
+                        "surface-container-highest": "#e5e2df",
+                        "surface-container-high": "#eae8e5",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "xxl": "48px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: #eae8e5; /* surface-container-high */
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+        @keyframes progress {
+            0% {
+                stroke-dasharray: 0 100;
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col pb-xxl">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim shadow-sm flex items-center justify-between px-margin-mobile py-sm w-full z-40 md:px-margin-desktop transition-colors duration-200 ease-in-out">
+<div class="flex items-center gap-sm">
+<button aria-label="Go back" class="p-2 hover:bg-surface-container-high transition-colors rounded-full flex items-center justify-center text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim md:font-headline-lg md:text-headline-lg">TravelBuddy</h1>
+</div>
+<div class="flex items-center hover:bg-surface-container-high transition-colors rounded-full p-1 cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-margin-mobile md:px-margin-desktop py-lg space-y-xl">
+<!-- Readiness Gauge Section -->
+<section class="flex flex-col items-center justify-center py-lg relative">
+<div class="text-center mb-md">
+<h2 class="font-title-lg text-title-lg text-primary">Manali Trip Readiness</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Departs in 3 days</p>
+</div>
+<div class="relative w-48 h-48 md:w-64 md:h-64 flex items-center justify-center">
+<svg class="circular-chart w-full h-full drop-shadow-sm" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle stroke-primary" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="92, 100"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-lg text-display-lg text-primary">92%</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mt-xs">Ready</span>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Checklist Section -->
+<section class="lg:col-span-2">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md">Travel Checklist</h3>
+<div class="bg-surface-container-low rounded-[24px] p-md space-y-sm">
+<!-- Item: Budget -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded-lg group cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Budget</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Confirmed</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary-container">check_circle</span>
+</div>
+<!-- Item: Hotel -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded-lg group cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined" data-icon="hotel" data-weight="fill" style="font-variation-settings: 'FILL' 1;">hotel</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Hotel</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Booked</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary-container">check_circle</span>
+</div>
+<!-- Item: Transport -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded-lg group cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined" data-icon="flight" data-weight="fill" style="font-variation-settings: 'FILL' 1;">flight</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Transport</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Ticketed</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary-container">check_circle</span>
+</div>
+<!-- Item: Packing -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded-lg group cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="luggage" data-weight="fill" style="font-variation-settings: 'FILL' 1;">luggage</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Packing</p>
+<p class="font-body-md text-body-md text-on-surface-variant">12/15 items</p>
+</div>
+</div>
+<div class="w-16 bg-surface-variant rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<!-- Item: Offline Maps -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded-lg group cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined" data-icon="map" data-weight="fill" style="font-variation-settings: 'FILL' 1;">map</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Offline Maps</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Downloaded</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary-container">check_circle</span>
+</div>
+<!-- Item: Emergency Contacts -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded-lg group cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined" data-icon="contact_emergency" data-weight="fill" style="font-variation-settings: 'FILL' 1;">contact_emergency</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Emergency Contacts</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Saved</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary-container">check_circle</span>
+</div>
+<!-- Item: Documents (Incomplete) -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded-lg group cursor-pointer border-2 border-transparent hover:border-error-container">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Documents</p>
+<p class="font-body-md text-body-md text-error">Missing Travel Insurance</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-error">error</span>
+</div>
+</div>
+</section>
+<!-- Suggestions Section -->
+<section class="lg:col-span-1 space-y-md">
+<h3 class="font-title-lg text-title-lg text-on-surface">Suggestions</h3>
+<div class="bg-surface-container-low rounded-[24px] p-md border border-outline-variant shadow-sm flex flex-col gap-md">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-xs">lightbulb</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface">Upload your Travel Insurance to reach 100% readiness.</p>
+<button class="mt-sm bg-primary text-on-primary font-label-lg text-label-lg px-md py-sm rounded-full hover:bg-primary-container transition-colors">
+                                Upload Document
+                            </button>
+</div>
+</div>
+<div class="h-px bg-outline-variant w-full"></div>
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-xs">explore</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface">Download Manali offline maps for remote trails.</p>
+<button class="mt-sm text-primary font-label-lg text-label-lg hover:bg-surface-container px-sm py-xs rounded-full transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span> Download Map
+                            </button>
+</div>
+</div>
+</div>
+<!-- Atmospheric visual anchor -->
+<div class="rounded-[24px] overflow-hidden h-48 relative shadow-sm mt-md hidden md:block">
+<div class="bg-cover bg-center w-full h-full opacity-80" data-alt="A serene, minimalist illustration of the Manali mountains at sunrise, featuring soft pastel topographical lines in shades of pale indigo and warm saffron, creating a calming, premium travel aesthetic suitable for a high-end app dashboard." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDaMp4nTsDLMTzHxuciEF02Ji_UvdhZQDdgaEMi6MytUjtPmAsjUh1NXDB3gPmtH7N9S8g8JxopO4knNsZg2sAzDeI5OZmWM10tSaX_v79pkaA1UiPiuODcs8wY0qUVv2zqgqBIMIgufbrGgcXqMPNvmCret3AnOmhbfVvj5AjqO9kT_mqOCklVgNSk07GBkHfs1OTURajLd49sSfgcUVNRiXnCV2Byi_f1R5QagWvU0qQi13wv4KpPJA')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent flex items-end p-md">
+<span class="font-label-lg text-label-lg text-on-primary font-medium tracking-wide">Destination: Manali</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center py-sm px-md bg-surface-container dark:bg-surface-container-highest shadow-[0px_-4px_12px_rgba(0,32,69,0.05)] rounded-t-xl transition-transform duration-200 md:hidden">
+<!-- Explore (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-md text-label-md mt-1">Explore</span>
+</a>
+<!-- Trips (Active - mapping Readiness to Trips) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 scale-95 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="travel_explore" data-weight="fill" style="font-variation-settings: 'FILL' 1;">travel_explore</span>
+<span class="font-label-md text-label-md mt-1">Trips</span>
+</a>
+<!-- Saved (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-label-md text-label-md mt-1">Saved</span>
+</a>
+<!-- Profile (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

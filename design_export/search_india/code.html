@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Explore India - TravelBuddy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fcf9f6",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#855300",
+                        "on-surface": "#1c1c1a",
+                        "surface-container-highest": "#e5e2df",
+                        "background": "#fcf9f6",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "inverse-on-surface": "#f3f0ed",
+                        "surface-variant": "#e5e2df",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "primary": "#002045",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-container-low": "#f6f3f0",
+                        "on-secondary-fixed": "#2a1700",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-primary-container": "#86a0cd",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#003d37",
+                        "outline": "#74777f",
+                        "on-surface-variant": "#43474e",
+                        "inverse-surface": "#31302f",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary-fixed": "#89f5e7",
+                        "surface-tint": "#455f88",
+                        "primary-container": "#1a365d",
+                        "on-background": "#1c1c1a",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-container": "#f0edea",
+                        "surface": "#fcf9f6",
+                        "on-tertiary-fixed": "#00201d",
+                        "secondary-container": "#fea619",
+                        "on-primary-fixed": "#001b3c",
+                        "on-tertiary-container": "#3cafa2",
+                        "surface-dim": "#dcdad7",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "tertiary": "#002522",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#684000",
+                        "primary-fixed-dim": "#adc7f7",
+                        "surface-container-high": "#eae8e5",
+                        "inverse-primary": "#adc7f7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xxl": "48px",
+                        "xl": "32px",
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "sm": "8px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .topographic-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10c10-5 20-5 30 0s20 10 30 5 20-15 30-20v10c-10 5-20 15-30 20s-20-5-30-10-20-5-30 0V10zm0 20c10-5 20-5 30 0s20 10 30 5 20-15 30-20v10c-10 5-20 15-30 20s-20-5-30-10-20-5-30 0V30z' fill='%23002045' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen font-body-lg flex flex-col md:pb-0 pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim flex items-center justify-between px-margin-mobile w-full h-16 z-40 transition-colors">
+<button aria-label="Go back" class="text-primary dark:text-primary-fixed active:scale-95 duration-200 hover:bg-surface-container-high transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-display-lg text-display-lg-mobile text-primary dark:text-primary-fixed font-bold tracking-tight">TravelBuddy</h1>
+<button aria-label="Search" class="text-on-surface-variant dark:text-outline-variant active:scale-95 duration-200 hover:bg-surface-container-high transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</header>
+<main class="flex-1 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<!-- Header & Search -->
+<section class="mb-xl">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-on-surface mb-md">Explore India</h2>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input aria-label="Search destinations" class="block w-full pl-12 pr-12 py-4 rounded-full border-2 border-surface-container-highest bg-surface-container-lowest focus:ring-0 focus:border-primary text-on-surface font-body-lg placeholder-outline-variant transition-all duration-300 shadow-sm focus:shadow-md topographic-pattern bg-right-bottom bg-no-repeat" placeholder="Where to next? Try 'Kerala Backwaters'" type="text"/>
+<div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+<button class="p-2 text-outline hover:text-secondary-container transition-colors rounded-full active:scale-95">
+<span class="material-symbols-outlined">mic</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Search Suggestions -->
+<section class="mb-xl">
+<div class="flex flex-col md:flex-row gap-lg md:gap-xxl">
+<!-- Trending Searches -->
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-sm">
+<span class="material-symbols-outlined text-secondary-container text-lg" data-weight="fill" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<h3 class="font-title-lg text-on-surface">Trending Searches</h3>
+</div>
+<div class="flex flex-wrap gap-sm">
+<button class="px-4 py-2 rounded-full bg-surface-container border border-surface-container-highest text-on-surface-variant hover:bg-surface-container-high hover:text-primary hover:border-primary transition-all active:scale-95 font-label-md flex items-center gap-1">
+                            Goa Beaches
+                        </button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-surface-container-highest text-on-surface-variant hover:bg-surface-container-high hover:text-primary hover:border-primary transition-all active:scale-95 font-label-md flex items-center gap-1">
+                            Jaipur Forts
+                        </button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-surface-container-highest text-on-surface-variant hover:bg-surface-container-high hover:text-primary hover:border-primary transition-all active:scale-95 font-label-md flex items-center gap-1">
+                            Manali Trekking
+                        </button>
+</div>
+</div>
+<!-- Recent Searches -->
+<div class="flex-1 mt-md md:mt-0">
+<div class="flex items-center justify-between mb-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg">history</span>
+<h3 class="font-title-lg text-on-surface">Recent Searches</h3>
+</div>
+<button class="text-primary font-label-md hover:underline">Clear</button>
+</div>
+<ul class="space-y-2">
+<li>
+<button class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low transition-colors group">
+<span class="font-body-md text-on-surface-variant group-hover:text-primary transition-colors">Kerala Ayurvedic Retreats</span>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity">north_west</span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low transition-colors group">
+<span class="font-body-md text-on-surface-variant group-hover:text-primary transition-colors">Mumbai Street Food Tour</span>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity">north_west</span>
+</button>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Categories -->
+<section class="mb-xl">
+<h3 class="font-title-lg text-on-surface mb-md">Browse by Category</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<button class="flex flex-col items-center justify-center p-lg bg-surface-container-lowest rounded-xl border border-surface-container-highest hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+<div class="w-12 h-12 rounded-full bg-primary-fixed/20 flex items-center justify-center mb-sm group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">landscape</span>
+</div>
+<span class="font-label-lg text-on-surface">Hill Stations</span>
+</button>
+<button class="flex flex-col items-center justify-center p-lg bg-surface-container-lowest rounded-xl border border-surface-container-highest hover:shadow-lg hover:border-secondary-container/30 hover:-translate-y-1 transition-all duration-300 group">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed/20 flex items-center justify-center mb-sm group-hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-secondary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">beach_access</span>
+</div>
+<span class="font-label-lg text-on-surface">Beaches</span>
+</button>
+<button class="flex flex-col items-center justify-center p-lg bg-surface-container-lowest rounded-xl border border-surface-container-highest hover:shadow-lg hover:border-tertiary-container/30 hover:-translate-y-1 transition-all duration-300 group">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed/20 flex items-center justify-center mb-sm group-hover:bg-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined text-tertiary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<span class="font-label-lg text-on-surface">Heritage</span>
+</button>
+<button class="flex flex-col items-center justify-center p-lg bg-surface-container-lowest rounded-xl border border-surface-container-highest hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+<div class="w-12 h-12 rounded-full bg-primary-fixed/20 flex items-center justify-center mb-sm group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">hiking</span>
+</div>
+<span class="font-label-lg text-on-surface">Adventure</span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-surface-container dark:bg-surface-container-low shadow-[0px_-4px_12px_rgba(0,32,69,0.05)] rounded-t-xl md:hidden">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="luggage">luggage</span>
+<span class="font-label-md text-label-md mt-1">Trips</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container dark:bg-secondary dark:text-on-secondary rounded-full px-5 py-1 hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="explore" data-weight="fill" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-md text-label-md mt-1 font-semibold">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-md text-label-md mt-1">Budget</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</button>
+</nav>
+</body></html>
