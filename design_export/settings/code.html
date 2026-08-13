@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - TravelBuddy</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#002522",
+                        "secondary-container": "#fea619",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-tertiary-container": "#3cafa2",
+                        "on-surface-variant": "#43474e",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "on-tertiary-fixed": "#00201d",
+                        "outline": "#74777f",
+                        "secondary-fixed": "#ffddb8",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#89f5e7",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#d6e3ff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e5e2df",
+                        "surface-container-high": "#eae8e5",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f6f3f0",
+                        "on-secondary-container": "#684000",
+                        "secondary": "#855300",
+                        "inverse-surface": "#31302f",
+                        "surface-dim": "#dcdad7",
+                        "inverse-on-surface": "#f3f0ed",
+                        "surface-container-highest": "#e5e2df",
+                        "background": "#fcf9f6",
+                        "on-primary-fixed": "#001b3c",
+                        "on-primary-container": "#86a0cd",
+                        "surface-tint": "#455f88",
+                        "primary-fixed-dim": "#adc7f7",
+                        "inverse-primary": "#adc7f7",
+                        "surface-container": "#f0edea",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1c1c1a",
+                        "surface-bright": "#fcf9f6",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#003d37",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "outline-variant": "#c4c6cf",
+                        "primary-container": "#1a365d",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "on-background": "#1c1c1a",
+                        "primary": "#002045",
+                        "surface": "#fcf9f6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Toggle Switch Styles */
+        .toggle-checkbox:checked + .toggle-label {
+            @apply bg-primary;
+        }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot {
+            transform: translateX(1.25rem);
+        }
+        
+        /* Topographic pattern hint for background */
+        .bg-topo {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.83v58.34l-.83.83H5.373l-.83-.83V.83l.83-.83h49.254zm-2.072 2.072H7.445v55.856h45.11V2.072zM21.2 19.3l-2.8 2.8-2.8-2.8 2.8-2.8 2.8 2.8zm2.8 2.8l2.8-2.8 2.8 2.8-2.8 2.8-2.8-2.8zm-5.6 5.6l-2.8 2.8-2.8-2.8 2.8-2.8 2.8 2.8zm5.6 0l2.8-2.8 2.8 2.8-2.8 2.8-2.8-2.8zm-5.6-11.2l-2.8 2.8-2.8-2.8 2.8-2.8 2.8 2.8zm0 22.4l-2.8 2.8-2.8-2.8 2.8-2.8 2.8 2.8zm5.6-5.6l2.8-2.8 2.8 2.8-2.8 2.8-2.8-2.8zm0 11.2l2.8-2.8 2.8 2.8-2.8 2.8-2.8-2.8zm-11.2 0l-2.8 2.8-2.8-2.8 2.8-2.8 2.8 2.8z' fill='%231a365d' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-lg antialiased min-h-screen relative bg-topo">
+<!-- Header (Task-Focused / Linear context - no bottom nav) -->
+<header class="sticky top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-variant/30 px-margin-mobile h-16 flex items-center justify-between">
+<div class="flex items-center">
+<button class="w-10 h-10 flex items-center justify-center -ml-2 rounded-full text-on-surface hover:bg-surface-container-high transition-colors active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" style="font-size: 24px;">arrow_back</span>
+</button>
+<h1 class="ml-2 font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Settings</h1>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="px-margin-mobile py-lg pb-xxl max-w-2xl mx-auto space-y-xl">
+<!-- Preferences Group -->
+<section>
+<h2 class="font-label-md text-label-md text-primary uppercase tracking-widest px-4 mb-4">Preferences</h2>
+<div class="bg-surface-container-lowest rounded-[24px] shadow-sm border border-surface-variant/50 overflow-hidden flex flex-col">
+<!-- Dark Mode Toggle -->
+<label class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/30 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined fill">dark_mode</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Dark Mode</span>
+</div>
+<div class="relative inline-block w-12 h-6 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 opacity-0" name="toggle" type="checkbox"/>
+<div class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300">
+<span class="toggle-dot absolute top-1 left-1 bg-surface-container-lowest w-4 h-4 rounded-full shadow-sm transition-transform duration-300"></span>
+</div>
+</div>
+</label>
+<div class="h-px bg-surface-variant/50 w-full ml-16"></div>
+<!-- Language Selection -->
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer group text-left w-full">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/30 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">language</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Language</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="font-body-md text-body-md">English</span>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</div>
+</button>
+<div class="h-px bg-surface-variant/50 w-full ml-16"></div>
+<!-- Notifications Toggle -->
+<label class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined fill">notifications</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Notifications</span>
+</div>
+<div class="relative inline-block w-12 h-6 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 opacity-0" name="toggle" type="checkbox"/>
+<div class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300">
+<span class="toggle-dot absolute top-1 left-1 bg-surface-container-lowest w-4 h-4 rounded-full shadow-sm transition-transform duration-300"></span>
+</div>
+</div>
+</label>
+</div>
+</section>
+<!-- Privacy & Security Group -->
+<section>
+<h2 class="font-label-md text-label-md text-primary uppercase tracking-widest px-4 mb-4">Privacy &amp; Security</h2>
+<div class="bg-surface-container-lowest rounded-[24px] shadow-sm border border-surface-variant/50 overflow-hidden flex flex-col">
+<!-- Privacy Policy -->
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer group text-left w-full">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">policy</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Privacy Policy</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">chevron_right</span>
+</button>
+<div class="h-px bg-surface-variant/50 w-full ml-16"></div>
+<!-- Permissions -->
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer group text-left w-full">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Permissions</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Support Group -->
+<section>
+<h2 class="font-label-md text-label-md text-primary uppercase tracking-widest px-4 mb-4">Support</h2>
+<div class="bg-surface-container-lowest rounded-[24px] shadow-sm border border-surface-variant/50 overflow-hidden flex flex-col">
+<!-- Help Center -->
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer group text-left w-full">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/30 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">help</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Help Center</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">chevron_right</span>
+</button>
+<div class="h-px bg-surface-variant/50 w-full ml-16"></div>
+<!-- About TravelBuddy -->
+<button class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer group text-left w-full">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/30 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">info</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">About TravelBuddy</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant mr-2">v2.4.1</span>
+</button>
+</div>
+</section>
+<div class="w-full flex justify-center pt-8 pb-4">
+<button class="font-label-lg text-label-lg text-error hover:bg-error-container/30 px-6 py-3 rounded-full transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">logout</span>
+                Sign Out
+            </button>
+</div>
+</main>
+</body></html>

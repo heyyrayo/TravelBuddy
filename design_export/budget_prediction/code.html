@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Prediction</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#1c1c1a",
+                      "primary-fixed": "#d6e3ff",
+                      "tertiary-container": "#003d37",
+                      "surface-dim": "#dcdad7",
+                      "error-container": "#ffdad6",
+                      "outline-variant": "#c4c6cf",
+                      "secondary-container": "#fea619",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#43474e",
+                      "on-background": "#1c1c1a",
+                      "secondary-fixed": "#ffddb8",
+                      "surface-container-high": "#eae8e5",
+                      "on-tertiary-fixed": "#00201d",
+                      "surface-container": "#f0edea",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#e5e2df",
+                      "inverse-surface": "#31302f",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-primary-container": "#86a0cd",
+                      "surface-variant": "#e5e2df",
+                      "on-tertiary-container": "#3cafa2",
+                      "on-secondary-container": "#684000",
+                      "on-error-container": "#93000a",
+                      "outline": "#74777f",
+                      "surface-container-low": "#f6f3f0",
+                      "on-secondary-fixed": "#2a1700",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-tint": "#455f88",
+                      "tertiary-fixed-dim": "#6bd8cb",
+                      "on-primary-fixed-variant": "#2d476f",
+                      "error": "#ba1a1a",
+                      "secondary": "#855300",
+                      "background": "#fcf9f6",
+                      "primary-container": "#1a365d",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "inverse-on-surface": "#f3f0ed",
+                      "on-error": "#ffffff",
+                      "surface": "#fcf9f6",
+                      "on-primary-fixed": "#001b3c",
+                      "primary-fixed-dim": "#adc7f7",
+                      "on-tertiary-fixed-variant": "#005049",
+                      "primary": "#002045",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#89f5e7",
+                      "inverse-primary": "#adc7f7",
+                      "surface-bright": "#fcf9f6",
+                      "tertiary": "#002522"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "margin-desktop": "32px",
+                      "sm": "8px",
+                      "xxl": "48px",
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "md": "16px",
+                      "gutter": "16px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "title-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "title-lg": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.25px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "57px",
+                              {
+                                      "lineHeight": "64px",
+                                      "letterSpacing": "-0.25px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.1px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        .topographic-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231a365d' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen flex flex-col topographic-pattern">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim z-40">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop w-full h-16">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary font-bold">TravelBuddy</h1>
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</header>
+<main class="flex-grow px-margin-mobile md:px-margin-desktop py-lg pb-xxl max-w-7xl mx-auto w-full">
+<!-- Step Indicator -->
+<div class="flex items-center justify-center mb-xl">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-lg">1</div>
+<div class="w-12 h-1 bg-primary"></div>
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-lg">2</div>
+<div class="w-12 h-1 bg-primary"></div>
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-lg ring-4 ring-primary-container/20">3</div>
+</div>
+</div>
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-primary mb-sm">Your Budget Prediction</h2>
+<p class="text-on-surface-variant font-body-md">Based on 5 days in Manali for 2 travelers.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Main Budget Card -->
+<div class="lg:col-span-8 space-y-lg">
+<div class="bg-surface-container-lowest rounded-[24px] p-lg shadow-sm border border-outline-variant/30">
+<div class="text-center mb-lg pb-lg border-b border-outline-variant/20">
+<p class="text-on-surface-variant font-label-lg mb-xs uppercase tracking-wider">Estimated Total Budget</p>
+<h3 class="font-display-lg text-[48px] md:text-display-lg text-primary">₹45,500</h3>
+</div>
+<h4 class="font-title-lg text-primary mb-md">Breakdown</h4>
+<div class="space-y-md">
+<!-- Accommodation -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined icon-fill">hotel</span>
+</div>
+<span class="font-body-lg text-on-surface">Accommodation</span>
+</div>
+<span class="font-title-lg text-primary">₹15,000</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-4">
+<div class="bg-primary h-2 rounded-full" style="width: 33%"></div>
+</div>
+<!-- Transport -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined icon-fill">directions_car</span>
+</div>
+<span class="font-body-lg text-on-surface">Transport</span>
+</div>
+<span class="font-title-lg text-primary">₹12,000</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-4">
+<div class="bg-primary/80 h-2 rounded-full" style="width: 26%"></div>
+</div>
+<!-- Food -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined icon-fill">restaurant</span>
+</div>
+<span class="font-body-lg text-on-surface">Food</span>
+</div>
+<span class="font-title-lg text-primary">₹8,500</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-4">
+<div class="bg-primary/60 h-2 rounded-full" style="width: 19%"></div>
+</div>
+<!-- Activities -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined icon-fill">hiking</span>
+</div>
+<span class="font-body-lg text-on-surface">Activities</span>
+</div>
+<span class="font-title-lg text-primary">₹6,000</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-4">
+<div class="bg-primary/40 h-2 rounded-full" style="width: 13%"></div>
+</div>
+<!-- Shopping -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined icon-fill">shopping_bag</span>
+</div>
+<span class="font-body-lg text-on-surface">Shopping</span>
+</div>
+<span class="font-title-lg text-primary">₹2,000</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-4">
+<div class="bg-primary/20 h-2 rounded-full" style="width: 5%"></div>
+</div>
+<!-- Emergency -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-error-container/50 flex items-center justify-center text-error">
+<span class="material-symbols-outlined icon-fill">health_and_safety</span>
+</div>
+<span class="font-body-lg text-on-surface">Emergency Buffer</span>
+</div>
+<span class="font-title-lg text-on-surface">₹2,000</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-4">
+<div class="bg-error/50 h-2 rounded-full" style="width: 5%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Cards -->
+<div class="lg:col-span-4 space-y-lg">
+<!-- Potential Savings -->
+<div class="bg-surface-container-lowest rounded-[24px] p-lg shadow-sm border border-secondary-container relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/10 rounded-bl-full -mr-16 -mt-16"></div>
+<div class="flex items-start gap-md relative z-10">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined icon-fill">savings</span>
+</div>
+<div>
+<h4 class="font-title-lg text-on-surface mb-xs">Potential Savings</h4>
+<p class="font-body-md text-on-surface-variant mb-md">Book your accommodation and transport now to save up to <span class="font-bold text-on-secondary-container">₹5,000</span>.</p>
+<button class="bg-secondary text-on-secondary font-label-lg px-md py-sm rounded-full hover:bg-secondary/90 transition-colors">
+                                View Early Bird Deals
+                            </button>
+</div>
+</div>
+</div>
+<!-- AI Suggestion -->
+<div class="bg-primary-container rounded-[24px] p-lg shadow-sm relative overflow-hidden">
+<div class="absolute bottom-0 right-0 w-40 h-40 bg-white/5 rounded-tl-full -mr-10 -mb-10 pointer-events-none"></div>
+<div class="flex items-start gap-md relative z-10">
+<div class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined icon-fill">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-title-lg text-white mb-xs">AI Suggestion</h4>
+<p class="font-body-md text-primary-fixed-dim mb-md">Consider a homestay in Old Manali for a more authentic and budget-friendly experience compared to central hotels.</p>
+<button class="text-white font-label-lg flex items-center gap-xs hover:text-primary-fixed transition-colors">
+                                Explore Homestays <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-xl flex justify-end gap-md">
+<button class="bg-transparent border border-primary text-primary font-label-lg px-md py-sm rounded-full hover:bg-primary/5 transition-colors">
+                Recalculate
+            </button>
+<button class="bg-primary text-on-primary font-label-lg px-lg py-md rounded-full hover:bg-primary/90 transition-colors shadow-md">
+                Save &amp; Continue
+            </button>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on Desktop per instruction, shown on Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container shadow-[0px_-4px_12px_rgba(0,32,69,0.05)]">
+<div class="flex justify-around items-center px-4 py-3">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">luggage</span>
+<span class="font-label-md mt-1">Trips</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-md mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined icon-fill">account_balance_wallet</span>
+<span class="font-label-md mt-1">Budget</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/10 transition-all active:scale-90 duration-200 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md mt-1">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

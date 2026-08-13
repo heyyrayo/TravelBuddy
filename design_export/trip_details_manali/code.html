@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Manali Retreat - Trip Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#fea619",
+                        "on-primary-container": "#86a0cd",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "primary": "#002045",
+                        "on-primary-fixed": "#001b3c",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcdad7",
+                        "tertiary-container": "#003d37",
+                        "background": "#fcf9f6",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#adc7f7",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary-container": "#3cafa2",
+                        "inverse-primary": "#adc7f7",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e5e2df",
+                        "primary-container": "#1a365d",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#31302f",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#d6e3ff",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "on-surface-variant": "#43474e",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-surface": "#1c1c1a",
+                        "surface-container-low": "#f6f3f0",
+                        "inverse-on-surface": "#f3f0ed",
+                        "surface": "#fcf9f6",
+                        "surface-container": "#f0edea",
+                        "on-background": "#1c1c1a",
+                        "outline": "#74777f",
+                        "tertiary-fixed": "#89f5e7",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-secondary-container": "#684000",
+                        "outline-variant": "#c4c6cf",
+                        "tertiary": "#002522",
+                        "surface-tint": "#455f88",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "on-secondary-fixed": "#2a1700",
+                        "surface-bright": "#fcf9f6",
+                        "on-error-container": "#93000a",
+                        "secondary": "#855300",
+                        "surface-container-highest": "#e5e2df",
+                        "surface-container-high": "#eae8e5",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "xxl": "48px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Topographic pattern for premium feel */
+        .bg-topography {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.83v58.34l-.83.83H5.373l-.83-.83V.83l.83-.83h49.254zm-1.66 1.66H7.033v56.68h45.934V1.66zM27 34c0-2.761 2.239-5 5-5s5 2.239 5 5-2.239 5-5 5-5-2.239-5-5zm2 0c0 1.657 1.343 3 3 3s3-1.343 3-3-1.343-3-3-3-3 1.343-3 3zm11-14c0-2.761 2.239-5 5-5s5 2.239 5 5-2.239 5-5 5-5-2.239-5-5zm2 0c0 1.657 1.343 3 3 3s3-1.343 3-3-1.343-3-3-3-3 1.343-3 3zM15 17c0-2.761 2.239-5 5-5s5 2.239 5 5-2.239 5-5 5-5-2.239-5-5zm2 0c0 1.657 1.343 3 3 3s3-1.343 3-3-1.343-3-3-3-3 1.343-3 3zM17 48c0-2.761 2.239-5 5-5s5 2.239 5 5-2.239 5-5 5-5-2.239-5-5zm2 0c0 1.657 1.343 3 3 3s3-1.343 3-3-1.343-3-3-3-3 1.343-3 3z' fill='%231a365d' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased font-body-md min-h-screen flex flex-col md:flex-row pb-20 md:pb-0">
+<!-- TopAppBar (JSON) -->
+<header class="w-full top-0 sticky bg-surface shadow-sm z-40 hidden md:flex items-center justify-between px-margin-mobile py-sm w-full">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors duration-200 ease-in-out text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg text-primary">TravelBuddy</h1>
+</div>
+<div class="flex items-center">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors duration-200 ease-in-out">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Mobile TopAppBar -->
+<header class="w-full top-0 sticky bg-surface shadow-sm z-40 md:hidden flex items-center justify-between px-margin-mobile py-sm w-full">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">TravelBuddy</h1>
+</div>
+</header>
+<!-- SideNav (Desktop) -->
+<nav class="hidden md:flex flex-col w-64 bg-surface-container h-screen sticky top-0 border-r border-outline-variant pt-lg px-md gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-lg text-label-lg">Explore</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-full bg-secondary-container text-on-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined filled">travel_explore</span>
+<span class="font-label-lg text-label-lg font-bold">Trips</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-lg text-label-lg">Saved</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-lg text-label-lg">Profile</span>
+</a>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-lg space-y-lg relative">
+<!-- Background decorative element -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/5 rounded-full blur-3xl -z-10"></div>
+<div class="absolute top-40 left-0 w-48 h-48 bg-secondary-container/10 rounded-full blur-3xl -z-10"></div>
+<!-- Header / Hero Section -->
+<section class="relative bg-surface-container rounded-2xl overflow-hidden shadow-sm">
+<div class="h-48 md:h-64 w-full bg-surface-variant relative">
+<div class="bg-cover bg-center w-full h-full absolute inset-0" data-alt="A breathtaking, wide-angle landscape photograph of the snow-capped Himalayan mountains in Manali, India during early morning light. The scene features lush green pine forests in the foreground, mist rolling through the valleys, and a crisp, clear blue sky. The lighting is soft and golden, creating a serene, premium, and inspiring travel mood." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDDe5my5X0ikmeba9wPM_abM5dptYUskK-PI1SOEhQtOYk7o3vyrhkshKnjx9rEV2WY-Sq6TB7RhYTTF0Ht-u0Hpty8wJhnJMgaPdL3n2GZESI5V5o1DldZgsqs6OTWYgkV1czI0ytlDaPFKg2CemdRMumNkwjrlRrHU9_LEO1cb5GtAreo-80v_mE-fo-TCDGmatFFxifEqHOLBennJXDVQ_GbBcFs97d5t-x3L3gN5dl1l2G0A1C4Aw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md md:p-lg w-full flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary-container text-on-secondary-container font-label-md text-label-md px-2 py-1 rounded-md">Upcoming</span>
+<span class="text-on-primary font-label-md text-label-md opacity-90">Oct 12 - Oct 18</span>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-primary">Manali Retreat</h2>
+</div>
+<!-- Circular Readiness Score -->
+<div class="flex flex-col items-center justify-center bg-surface/10 backdrop-blur-md p-3 rounded-xl border border-white/20">
+<div class="relative w-16 h-16">
+<svg class="w-16 h-16 transform -rotate-90">
+<circle cx="32" cy="32" fill="none" r="28" stroke="rgba(255,255,255,0.2)" stroke-width="4"></circle>
+<circle class="text-secondary-container" cx="32" cy="32" fill="none" r="28" stroke="#fea619" stroke-dasharray="175" stroke-dashoffset="14" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-on-primary">
+<span class="font-title-lg text-title-lg text-[18px] leading-tight">92%</span>
+</div>
+</div>
+<span class="text-on-primary font-label-md text-[10px] mt-1 opacity-90 uppercase tracking-wider">Ready</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Layout for Details -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md md:gap-lg">
+<!-- Left Column (Timeline & Notes) -->
+<div class="col-span-1 md:col-span-7 space-y-md md:space-y-lg">
+<!-- Itinerary Timeline -->
+<section class="bg-surface-container rounded-2xl p-md md:p-lg shadow-sm border border-surface-variant bg-topography">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-title-lg text-title-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container">map</span>
+                            Itinerary
+                        </h3>
+<button class="text-primary font-label-lg text-label-lg hover:bg-surface-variant px-3 py-1 rounded-full transition-colors">Edit</button>
+</div>
+<div class="relative pl-6 space-y-6">
+<!-- Vertical line -->
+<div class="absolute left-[11px] top-2 bottom-4 w-[2px] bg-outline-variant"></div>
+<!-- Step 1: Completed -->
+<div class="relative">
+<div class="absolute -left-6 mt-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10 border-2 border-surface-container">
+<span class="material-symbols-outlined text-[14px] text-on-primary">flight_takeoff</span>
+</div>
+<div class="bg-surface p-4 rounded-xl shadow-sm border border-surface-variant opacity-70">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-md text-label-md text-outline">Oct 12, 08:30 AM</p>
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface mt-1">Flight to Kullu (KUU)</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Air India AI-442 • Terminal 3</p>
+</div>
+<span class="material-symbols-outlined text-outline">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Step 2: Active -->
+<div class="relative">
+<div class="absolute -left-6 mt-1 w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center z-10 border-2 border-surface-container ring-4 ring-secondary-container/20">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-container">hotel</span>
+</div>
+<div class="bg-surface p-4 rounded-xl shadow-sm border border-secondary-container/30 ring-1 ring-secondary-container/10">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-md text-label-md text-secondary">Oct 12, 02:00 PM</p>
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface mt-1">Check-in: The Himalayan</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Hadimba Temple Road, Manali</p>
+</div>
+<button class="bg-primary/10 text-primary p-2 rounded-full hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">directions</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Step 3: Upcoming -->
+<div class="relative">
+<div class="absolute -left-6 mt-1 w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center z-10 border-2 border-surface-container">
+<span class="material-symbols-outlined text-[14px] text-outline">landscape</span>
+</div>
+<div class="bg-surface p-4 rounded-xl shadow-sm border border-surface-variant">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-md text-label-md text-outline">Oct 13, 09:00 AM</p>
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface mt-1">Solang Valley Tour</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Pre-booked guide: Rahul (+91 9876543210)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-outline-variant text-primary font-label-lg text-label-lg rounded-xl hover:bg-surface-variant transition-colors flex items-center justify-center gap-2">
+                        View Full Itinerary <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</section>
+<!-- Trip Notes Card -->
+<section class="bg-tertiary-container/10 rounded-2xl p-md shadow-sm border border-tertiary-container/20 flex gap-4 items-start">
+<div class="p-3 bg-tertiary-container rounded-xl text-on-tertiary-container mt-1 shrink-0">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-tertiary-container font-semibold mb-1">Quick Reference</h4>
+<div class="space-y-2">
+<div class="flex items-center justify-between border-b border-tertiary-container/20 pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Flight PNR</span>
+<span class="font-body-md text-body-md text-on-surface font-medium font-mono bg-surface px-2 py-0.5 rounded">TZ284</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">Hotel ID</span>
+<span class="font-body-md text-body-md text-on-surface font-medium font-mono bg-surface px-2 py-0.5 rounded">#99482</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (Budget, Weather, Extras) -->
+<div class="col-span-1 md:col-span-5 space-y-md md:space-y-lg">
+<!-- Weather Widget -->
+<section class="bg-gradient-to-br from-primary-fixed to-inverse-primary rounded-2xl p-md shadow-sm relative overflow-hidden">
+<!-- Sun decorative graphic -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-secondary-container/30 rounded-full blur-xl"></div>
+<div class="flex justify-between items-center relative z-10">
+<div>
+<p class="font-label-md text-label-md text-on-primary-fixed-variant opacity-80 uppercase tracking-wide">Today in Manali</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h3 class="font-display-lg text-[48px] leading-tight font-bold text-on-primary-fixed">12°C</h3>
+<span class="font-title-lg text-title-lg text-on-primary-fixed-variant">Sunny</span>
+</div>
+<p class="font-body-md text-body-md text-on-primary-fixed-variant mt-2 text-sm">H: 16° L: 4° • UV Index: Low</p>
+</div>
+<div class="text-secondary-container drop-shadow-md">
+<span class="material-symbols-outlined text-[64px] filled">light_mode</span>
+</div>
+</div>
+</section>
+<!-- Budget Progress -->
+<section class="bg-surface-container rounded-2xl p-md shadow-sm border border-surface-variant">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-title-lg text-title-lg text-primary flex items-center gap-2 text-[18px]">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+                            Budget
+                        </h3>
+<span class="bg-surface text-primary font-label-md text-[11px] px-2 py-1 rounded-md border border-outline-variant">INR (₹)</span>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="font-headline-lg-mobile text-[24px] font-semibold text-on-surface">₹38,000</span>
+<span class="font-body-md text-body-md text-on-surface-variant mb-1">of ₹45,500</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface h-3 rounded-full overflow-hidden border border-surface-variant">
+<div class="bg-primary h-full rounded-full" style="width: 83%"></div>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant text-right">83% spent</p>
+</div>
+</section>
+<!-- Packing Checklist Summary -->
+<section class="bg-surface-container rounded-2xl p-md shadow-sm border border-surface-variant flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-primary/10 rounded-xl text-primary">
+<span class="material-symbols-outlined">luggage</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-[16px] text-on-surface font-medium">Packing List</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">12/15 items packed</p>
+</div>
+</div>
+<div class="w-12 h-12 relative">
+<svg class="w-12 h-12 transform -rotate-90">
+<circle cx="24" cy="24" fill="none" r="20" stroke="var(--tw-colors-surface-variant)" stroke-width="4"></circle>
+<circle cx="24" cy="24" fill="none" r="20" stroke="var(--tw-colors-tertiary-container)" stroke-dasharray="125" stroke-dashoffset="25" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+</div>
+</section>
+<!-- Quick Services Grid -->
+<section>
+<h3 class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider mb-3 ml-2">Local Services</h3>
+<div class="grid grid-cols-3 gap-3">
+<button class="bg-surface-container hover:bg-surface-variant transition-colors p-3 rounded-2xl border border-surface-variant flex flex-col items-center justify-center gap-2 shadow-sm">
+<div class="w-10 h-10 rounded-full bg-error/10 text-error flex items-center justify-center">
+<span class="material-symbols-outlined filled">local_hospital</span>
+</div>
+<span class="font-label-md text-[11px] text-on-surface text-center">Hospital</span>
+</button>
+<button class="bg-surface-container hover:bg-surface-variant transition-colors p-3 rounded-2xl border border-surface-variant flex flex-col items-center justify-center gap-2 shadow-sm">
+<div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined filled">local_police</span>
+</div>
+<span class="font-label-md text-[11px] text-on-surface text-center">Police</span>
+</button>
+<button class="bg-surface-container hover:bg-surface-variant transition-colors p-3 rounded-2xl border border-surface-variant flex flex-col items-center justify-center gap-2 shadow-sm">
+<div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined filled">atm</span>
+</div>
+<span class="font-label-md text-[11px] text-on-surface text-center">ATM</span>
+</button>
+</div>
+</section>
+<!-- Emergency Contact CTA -->
+<button class="w-full bg-error-container text-on-error-container hover:bg-error/20 transition-colors p-4 rounded-2xl border border-error/20 flex items-center justify-center gap-2 font-title-lg text-[16px] shadow-sm">
+<span class="material-symbols-outlined">emergency</span>
+                    Emergency Contacts
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (JSON) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center py-sm px-md bg-surface-container dark:bg-surface-container-highest md:hidden rounded-t-xl shadow-lg border-t-0 shadow-[0px_-4px_12px_rgba(0,32,69,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-md text-label-md mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-highest transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined filled">travel_explore</span>
+<span class="font-label-md text-label-md mt-1 font-bold">Trips</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-md text-label-md mt-1">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

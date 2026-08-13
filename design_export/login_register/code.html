@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TravelBuddy - Login / Register</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config defined by Design System -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#653e00",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#855300",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#684000",
+                    "on-tertiary-fixed": "#00201d",
+                    "on-tertiary-fixed-variant": "#005049",
+                    "on-primary-fixed-variant": "#2d476f",
+                    "surface-bright": "#fcf9f6",
+                    "on-primary": "#ffffff",
+                    "on-primary-container": "#86a0cd",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#002522",
+                    "surface-variant": "#e5e2df",
+                    "secondary-container": "#fea619",
+                    "inverse-on-surface": "#f3f0ed",
+                    "on-surface": "#1c1c1a",
+                    "on-tertiary-container": "#3cafa2",
+                    "surface-container-low": "#f6f3f0",
+                    "tertiary-container": "#003d37",
+                    "secondary-fixed-dim": "#ffb95f",
+                    "primary-fixed": "#d6e3ff",
+                    "primary": "#002045",
+                    "error-container": "#ffdad6",
+                    "outline": "#74777f",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#adc7f7",
+                    "background": "#fcf9f6",
+                    "outline-variant": "#c4c6cf",
+                    "tertiary-fixed": "#89f5e7",
+                    "secondary-fixed": "#ffddb8",
+                    "inverse-surface": "#31302f",
+                    "on-primary-fixed": "#001b3c",
+                    "tertiary-fixed-dim": "#6bd8cb",
+                    "primary-container": "#1a365d",
+                    "inverse-primary": "#adc7f7",
+                    "surface-container-high": "#eae8e5",
+                    "on-secondary-fixed": "#2a1700",
+                    "surface-tint": "#455f88",
+                    "surface-dim": "#dcdad7",
+                    "on-surface-variant": "#43474e",
+                    "on-background": "#1c1c1a",
+                    "error": "#ba1a1a",
+                    "surface-container": "#f0edea",
+                    "surface": "#fcf9f6",
+                    "surface-container-highest": "#e5e2df"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "xs": "4px",
+                    "xxl": "48px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }],
+                    "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                    "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                    "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                    "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                    "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                    "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                    "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom styles for Material 3 floating labels */
+        .floating-input:focus-within label,
+        .floating-input input:not(:placeholder-shown) + label {
+            transform: translateY(-50%) scale(0.75);
+            top: 0;
+            background-color: theme('colors.surface-container-lowest');
+            padding: 0 4px;
+            color: theme('colors.primary');
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s cubic-bezier(0.2, 0.0, 0, 1.0) forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-active {
+            border-bottom: 2px solid theme('colors.primary');
+            color: theme('colors.primary');
+        }
+        
+        .tab-inactive {
+            color: theme('colors.on-surface-variant');
+            border-bottom: 2px solid transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col lg:flex-row overflow-x-hidden">
+<!-- Hero Image Section (Split Left on Desktop, Top on Mobile) -->
+<div class="relative w-full lg:w-[45%] h-[353px] lg:h-screen flex-shrink-0 flex flex-col justify-between overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A stunning, highly detailed wide shot of a modern Indian backpacker looking out over a breathtaking valley in the Himalayas. The lighting is soft morning sunlight, creating a bright, optimistic, and premium light-mode aesthetic. The color palette features warm saffron oranges, deep indigo skies, and lush greens, matching a high-end travel brand identity. The mood is adventurous yet serene and luxurious." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCSDwv3jg-EBE1WPQApdiK36OWbrZ8Q-39AxxJQGgvRN-ruVSYoR7n0x78H36CkVzgpRJbytgWnzTAwy6XNx4DyshOdPeCj00KWouGlsKHRafAafzTjGideQyDDmNKZYrVSy1cnUawmhDFKeHf5Z7Jb7gtYgRv4HbxDLXs_SqKlp689WOkTwHlthXoOgowGsEBbSVn7d1HXBrIYPhIixWJKB43kpp1I6nJBO0NybxNgh3Upfde-K07H9g')">
+</div>
+<!-- Subtle Gradient Overlay for Text Readability -->
+<div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-surface lg:bg-gradient-to-r lg:from-black/30 lg:to-transparent"></div>
+<!-- Brand Top Anchor -->
+<div class="relative z-10 p-margin-mobile lg:p-margin-desktop w-full top-0 flex items-center gap-2">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-title-lg text-title-lg text-white font-bold tracking-tight">TravelBuddy</span>
+</div>
+<!-- Motivational Text (Desktop Only) -->
+<div class="relative z-10 hidden lg:block p-margin-desktop pb-[132px]">
+<h1 class="font-display-lg text-display-lg text-white mb-4 drop-shadow-md">Discover India's Hidden Gems.</h1>
+<p class="font-body-lg text-body-lg text-white/90 max-w-md">Your premium companion for seamless, breathtaking travel experiences across the subcontinent.</p>
+</div>
+</div>
+<!-- Form Section (Split Right on Desktop, Bottom overlapping on Mobile) -->
+<div class="w-full lg:w-[55%] flex-grow flex items-center justify-center p-4 lg:p-12 relative z-20 -mt-10 lg:mt-0">
+<!-- Glassmorphic / Elevated Container -->
+<div class="w-full max-w-md bg-surface-container-lowest rounded-[24px] shadow-lg p-6 lg:p-8 flex flex-col gap-6 fade-in">
+<!-- Header & Tabs -->
+<div class="flex flex-col gap-4">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile lg:font-headline-lg lg:text-headline-lg text-on-surface">Welcome Back</h2>
+<!-- Custom Tab Navigation -->
+<div class="flex w-full border-b border-surface-variant">
+<button class="flex-1 pb-2 text-center font-label-lg text-label-lg tab-active transition-colors duration-200" id="tab-login" onclick="switchTab('login')">
+                        Login
+                    </button>
+<button class="flex-1 pb-2 text-center font-label-lg text-label-lg tab-inactive transition-colors duration-200" id="tab-register" onclick="switchTab('register')">
+                        Register
+                    </button>
+</div>
+</div>
+<!-- LOGIN FORM -->
+<form class="flex flex-col gap-4 w-full" id="form-login" onsubmit="event.preventDefault();">
+<!-- Email Input (Material 3 Outlined Style) -->
+<div class="relative w-full h-14 floating-input">
+<input class="w-full h-full px-4 pt-2 bg-transparent border border-outline rounded-[16px] text-on-surface font-body-md text-body-md focus:outline-none focus:border-primary focus:border-2 transition-colors placeholder-transparent peer" id="login-email" placeholder="Email Address" type="email"/>
+<label class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md text-body-md transition-all duration-200 pointer-events-none origin-left" for="login-email">Email Address</label>
+</div>
+<!-- Password Input -->
+<div class="relative w-full h-14 floating-input">
+<input class="w-full h-full px-4 pt-2 bg-transparent border border-outline rounded-[16px] text-on-surface font-body-md text-body-md focus:outline-none focus:border-primary focus:border-2 transition-colors placeholder-transparent peer" id="login-password" placeholder="Password" type="password"/>
+<label class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md text-body-md transition-all duration-200 pointer-events-none origin-left" for="login-password">Password</label>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+<div class="flex justify-end w-full">
+<a class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors" href="#">Forgot Password?</a>
+</div>
+<!-- Primary CTA -->
+<button class="w-full h-12 mt-2 bg-primary text-on-primary font-label-lg text-label-lg rounded-full shadow-md hover:bg-primary-container hover:shadow-lg active:scale-[0.98] transition-all duration-200 flex justify-center items-center gap-2" type="submit">
+                    Login
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+<!-- REGISTER FORM (Hidden by default) -->
+<form class="hidden flex-col gap-4 w-full" id="form-register" onsubmit="event.preventDefault();">
+<!-- Name Input -->
+<div class="relative w-full h-14 floating-input">
+<input class="w-full h-full px-4 pt-2 bg-transparent border border-outline rounded-[16px] text-on-surface font-body-md text-body-md focus:outline-none focus:border-primary focus:border-2 transition-colors placeholder-transparent peer" id="reg-name" placeholder="Full Name" type="text"/>
+<label class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md text-body-md transition-all duration-200 pointer-events-none origin-left" for="reg-name">Full Name</label>
+</div>
+<!-- Email Input -->
+<div class="relative w-full h-14 floating-input">
+<input class="w-full h-full px-4 pt-2 bg-transparent border border-outline rounded-[16px] text-on-surface font-body-md text-body-md focus:outline-none focus:border-primary focus:border-2 transition-colors placeholder-transparent peer" id="reg-email" placeholder="Email Address" type="email"/>
+<label class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md text-body-md transition-all duration-200 pointer-events-none origin-left" for="reg-email">Email Address</label>
+</div>
+<!-- Password Input -->
+<div class="relative w-full h-14 floating-input">
+<input class="w-full h-full px-4 pt-2 bg-transparent border border-outline rounded-[16px] text-on-surface font-body-md text-body-md focus:outline-none focus:border-primary focus:border-2 transition-colors placeholder-transparent peer" id="reg-password" placeholder="Create Password" type="password"/>
+<label class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md text-body-md transition-all duration-200 pointer-events-none origin-left" for="reg-password">Create Password</label>
+</div>
+<!-- Primary CTA -->
+<button class="w-full h-12 mt-2 bg-primary text-on-primary font-label-lg text-label-lg rounded-full shadow-md hover:bg-primary-container hover:shadow-lg active:scale-[0.98] transition-all duration-200 flex justify-center items-center gap-2" type="submit">
+                    Create Account
+                </button>
+</form>
+<!-- Divider -->
+<div class="flex items-center w-full gap-4 mt-2">
+<div class="flex-1 h-px bg-surface-variant"></div>
+<span class="font-label-md text-label-md text-on-surface-variant">OR</span>
+<div class="flex-1 h-px bg-surface-variant"></div>
+</div>
+<!-- Social Login -->
+<button class="w-full h-12 bg-transparent border border-outline-variant text-on-surface font-label-lg text-label-lg rounded-full hover:bg-surface-container-high transition-colors flex justify-center items-center gap-3" type="button">
+<!-- Using a simple SVG for Google G to avoid external dependencies, stylized as per premium minimalism -->
+<svg class="w-5 h-5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                Continue with Google
+            </button>
+<!-- Contextual CTA / Guest Mode -->
+<div class="mt-4 flex justify-center">
+<button class="group flex items-center gap-1 font-label-lg text-label-lg text-secondary hover:text-secondary-container transition-colors" type="button">
+                    Explore India as Guest
+                    <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">east</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+        function switchTab(tab) {
+            const loginTab = document.getElementById('tab-login');
+            const registerTab = document.getElementById('tab-register');
+            const loginForm = document.getElementById('form-login');
+            const registerForm = document.getElementById('form-register');
+            const title = document.querySelector('h2');
+
+            if (tab === 'login') {
+                loginTab.classList.replace('tab-inactive', 'tab-active');
+                registerTab.classList.replace('tab-active', 'tab-inactive');
+                
+                loginForm.classList.remove('hidden');
+                loginForm.classList.add('flex');
+                
+                registerForm.classList.add('hidden');
+                registerForm.classList.remove('flex');
+                
+                title.textContent = "Welcome Back";
+            } else {
+                registerTab.classList.replace('tab-inactive', 'tab-active');
+                loginTab.classList.replace('tab-active', 'tab-inactive');
+                
+                registerForm.classList.remove('hidden');
+                registerForm.classList.add('flex');
+                
+                loginForm.classList.add('hidden');
+                loginForm.classList.remove('flex');
+                
+                title.textContent = "Create Account";
+            }
+        }
+    </script>
+</body></html>

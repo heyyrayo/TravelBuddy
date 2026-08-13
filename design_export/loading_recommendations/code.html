@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Finding Destinations - TravelBuddy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#450a00",
+                        "on-secondary-fixed": "#2f1400",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffdcc4",
+                        "on-secondary-fixed-variant": "#6f3800",
+                        "on-tertiary-fixed": "#3c0700",
+                        "secondary-container": "#ffab69",
+                        "surface-variant": "#e5e2df",
+                        "error": "#ba1a1a",
+                        "background": "#fcf9f6",
+                        "tertiary-container": "#6b1500",
+                        "surface-container-highest": "#e5e2df",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6cf",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#455f88",
+                        "on-secondary-container": "#783d01",
+                        "on-primary-fixed": "#001b3c",
+                        "surface-container-high": "#eae8e5",
+                        "on-surface-variant": "#43474e",
+                        "surface-bright": "#fcf9f6",
+                        "outline": "#74777f",
+                        "primary": "#002045",
+                        "primary-fixed-dim": "#adc7f7",
+                        "on-background": "#1b1c1a",
+                        "surface-container": "#f0edea",
+                        "on-tertiary-fixed-variant": "#83260e",
+                        "inverse-surface": "#31302f",
+                        "tertiary-fixed": "#ffdad2",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f3f0ed",
+                        "surface-dim": "#dcdad7",
+                        "inverse-primary": "#adc7f7",
+                        "on-primary-container": "#86a0cd",
+                        "on-surface": "#1b1c1a",
+                        "primary-container": "#1a365d",
+                        "secondary": "#8e4e14",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#ffb780",
+                        "on-tertiary-container": "#f67b5c",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb4a2",
+                        "primary-fixed": "#d6e3ff",
+                        "surface": "#fcf9f6",
+                        "surface-container-low": "#f6f3f0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "space-lg": "24px",
+                        "space-sm": "8px",
+                        "gutter": "16px",
+                        "space-xs": "4px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "space-xl": "32px",
+                        "space-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Premium Shimmer Effect */
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        .premium-shimmer {
+            background: linear-gradient(to right, #F0EBE6 4%, #FCF9F6 25%, #F0EBE6 36%);
+            background-size: 1000px 100%;
+            animation: shimmer 2.5s infinite linear;
+        }
+
+        /* Pulse for icons */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased md:max-w-[1200px] md:mx-auto">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md md:max-w-[1200px] md:mx-auto">
+<div class="flex items-center justify-between px-margin-mobile h-14 w-full">
+<button class="text-primary dark:text-primary-fixed-dim hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined font-title-lg text-title-lg">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim tracking-tight md:font-headline-lg md:text-headline-lg">TravelBuddy</h1>
+<div class="w-8 h-8 rounded-full overflow-hidden hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<img alt="User profile avatar" class="object-cover w-full h-full" data-alt="A sophisticated close-up portrait of an elegant user avatar, set against a minimalistic eggshell white background. The lighting is soft and high-key, enhancing the professional and modern corporate aesthetic. The overall mood is warm, reliable, and premium, perfectly matching the Imperial Heritage design language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDBgV1ekjFwA9fFt5JilbNWLpTFxkIgZcsEIq04QcUkTR3ykjHTS6qlGkFqW9cmFHkgG8e0Brw-ur3c-AWRc4BS3d2H7aBQkt19y1G6ijJ4FmssGYzBy2bTMhwGBFCNr85nlIkf4O_Cb9UNzhUCgD8npjRn7duXqJ5AD1clggfLikuAM8smKy8R3bWlXdfvFa9Q-dAuEZqxyTWNC_XnhTHB0p7nInmv5t8vNaZvUn0QLCpRbEN_EwVlA"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[88px] pb-[100px] px-margin-mobile md:px-margin-desktop md:pt-[120px]">
+<!-- Loading Header -->
+<div class="text-center mb-space-xl md:mb-12 animate-pulse-slow">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-container text-on-primary-container mb-space-md shadow-sm">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">travel_explore</span>
+</div>
+<h2 class="font-title-lg text-title-lg md:font-headline-lg md:text-headline-lg text-primary mb-space-xs">Finding the perfect spot...</h2>
+<p class="font-body-md text-body-md text-on-surface-variant md:font-body-lg md:text-body-lg">Tailoring Indian destinations to your profile.</p>
+</div>
+<!-- Skeleton Grid Layout (Bento-inspired for tablet/desktop) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter md:gap-space-lg">
+<!-- Skeleton Card 1 (Large Image) -->
+<div class="rounded-xl overflow-hidden border border-surface-container-high bg-surface shadow-sm md:col-span-2 lg:col-span-2">
+<div class="premium-shimmer w-full h-48 md:h-64"></div>
+<div class="p-space-md bg-surface">
+<div class="premium-shimmer h-6 w-3/4 rounded mb-space-sm"></div>
+<div class="premium-shimmer h-4 w-1/2 rounded mb-space-xs"></div>
+<div class="flex items-center gap-2 mt-space-md">
+<div class="premium-shimmer h-4 w-1/4 rounded"></div>
+<div class="premium-shimmer h-4 w-1/4 rounded"></div>
+</div>
+</div>
+</div>
+<!-- Skeleton Card 2 (Standard) -->
+<div class="rounded-xl overflow-hidden border border-surface-container-high bg-surface shadow-sm">
+<div class="premium-shimmer w-full h-32 md:h-48"></div>
+<div class="p-space-md bg-surface">
+<div class="premium-shimmer h-5 w-2/3 rounded mb-space-sm"></div>
+<div class="premium-shimmer h-4 w-full rounded mb-space-xs"></div>
+<div class="premium-shimmer h-4 w-4/5 rounded"></div>
+</div>
+</div>
+<!-- Skeleton Card 3 (Standard) -->
+<div class="rounded-xl overflow-hidden border border-surface-container-high bg-surface shadow-sm hidden md:block">
+<div class="premium-shimmer w-full h-32 md:h-48"></div>
+<div class="p-space-md bg-surface">
+<div class="premium-shimmer h-5 w-3/4 rounded mb-space-sm"></div>
+<div class="premium-shimmer h-4 w-5/6 rounded mb-space-xs"></div>
+<div class="premium-shimmer h-4 w-1/2 rounded"></div>
+</div>
+</div>
+<!-- Skeleton Card 4 (Standard) -->
+<div class="rounded-xl overflow-hidden border border-surface-container-high bg-surface shadow-sm hidden md:block">
+<div class="premium-shimmer w-full h-32 md:h-48"></div>
+<div class="p-space-md bg-surface">
+<div class="premium-shimmer h-5 w-1/2 rounded mb-space-sm"></div>
+<div class="premium-shimmer h-4 w-full rounded mb-space-xs"></div>
+<div class="premium-shimmer h-4 w-2/3 rounded"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Visible only on Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-2 pb-2 bg-surface-container-low dark:bg-surface-container-lowest rounded-t-xl z-50 shadow-sm border-t border-outline-variant/30 dark:border-outline/20">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/10 rounded-full transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined font-label-sm text-label-sm mb-1">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/10 rounded-full transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined font-label-sm text-label-sm mb-1">travel_explore</span>
+<span class="font-label-sm text-label-sm">Trips</span>
+</button>
+<!-- Active Tab: Explore -->
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-5 py-1 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/10 transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined font-label-sm text-label-sm mb-1" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-sm text-label-sm">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/10 rounded-full transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined font-label-sm text-label-sm mb-1">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Budget</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/10 rounded-full transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined font-label-sm text-label-sm mb-1">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+</body></html>

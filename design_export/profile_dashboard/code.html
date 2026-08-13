@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile - TravelBuddy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#002522",
+                      "secondary-container": "#fea619",
+                      "on-secondary-fixed": "#2a1700",
+                      "on-tertiary-container": "#3cafa2",
+                      "on-surface-variant": "#43474e",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "on-tertiary-fixed": "#00201d",
+                      "outline": "#74777f",
+                      "secondary-fixed": "#ffddb8",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#89f5e7",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#d6e3ff",
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e5e2df",
+                      "surface-container-high": "#eae8e5",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#f6f3f0",
+                      "on-secondary-container": "#684000",
+                      "secondary": "#855300",
+                      "inverse-surface": "#31302f",
+                      "surface-dim": "#dcdad7",
+                      "inverse-on-surface": "#f3f0ed",
+                      "surface-container-highest": "#e5e2df",
+                      "background": "#fcf9f6",
+                      "on-primary-fixed": "#001b3c",
+                      "on-primary-container": "#86a0cd",
+                      "surface-tint": "#455f88",
+                      "primary-fixed-dim": "#adc7f7",
+                      "inverse-primary": "#adc7f7",
+                      "surface-container": "#f0edea",
+                      "on-primary": "#ffffff",
+                      "on-surface": "#1c1c1a",
+                      "surface-bright": "#fcf9f6",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#003d37",
+                      "tertiary-fixed-dim": "#6bd8cb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#005049",
+                      "outline-variant": "#c4c6cf",
+                      "primary-container": "#1a365d",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-primary-fixed-variant": "#2d476f",
+                      "on-background": "#1c1c1a",
+                      "primary": "#002045",
+                      "surface": "#fcf9f6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "xxl": "48px",
+                      "md": "16px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "gutter": "16px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "title-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "title-lg": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.25px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "57px",
+                              {
+                                      "lineHeight": "64px",
+                                      "letterSpacing": "-0.25px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.1px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopAppBar (Mobile) -->
+<header class="md:hidden bg-surface dark:bg-surface-dim shadow-sm fixed top-0 w-full z-50 flex items-center justify-between px-margin-mobile h-16 w-full">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close up, high quality headshot portrait of an Indian man in his late 20s, styled with premium, clean, modern corporate aesthetics. He has a warm smile, well groomed hair, against a bright, minimalist soft white background. The lighting is soft and natural, emphasizing trust and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwy0x6t4iHEsBUt0nXSe3YUwons4EhaZfWQuhjZ8Sn4wDvSGK2H-N3TG-cFWW3-Jux8oWvqvc7vKQEaJ2nu9tHe6o9qVYYbOTRUlY-LXW7vOL3T-quI6fGX3CbVZZmZnMcco6Jz4DQDPS6LNbe_6uaEIFq4WZxcBR3v0PL7Vz14kBwNxqMEGtDuRSnIrbvmnjSZwT6FL0ZU8s-X-7SrYtk_5pQsXksUymUB3yeUHbfYAh9M9uO_OXU7w"/>
+</div>
+<h1 class="font-display-lg text-title-lg font-bold text-primary dark:text-primary-fixed-dim tracking-tight">TravelBuddy</h1>
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-2 active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- TopAppBar (Desktop - Extended) -->
+<header class="hidden md:flex bg-surface dark:bg-surface-dim shadow-sm fixed top-0 w-full z-50 items-center justify-between px-margin-desktop h-20 w-full">
+<h1 class="font-display-lg text-title-lg font-bold text-primary dark:text-primary-fixed-dim tracking-tight">TravelBuddy</h1>
+<nav class="flex gap-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full px-4 py-2" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full px-4 py-2" href="#">Trips</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full px-4 py-2" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full px-4 py-2" href="#">Budget</a>
+<a class="text-primary dark:text-primary-fixed font-label-lg text-label-lg bg-surface-container-high dark:bg-surface-container-highest transition-colors rounded-full px-4 py-2 font-semibold" href="#">Profile</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-2 active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary">
+<img class="w-full h-full object-cover" data-alt="A close up, high quality headshot portrait of an Indian man in his late 20s, styled with premium, clean, modern corporate aesthetics. He has a warm smile, well groomed hair, against a bright, minimalist soft white background. The lighting is soft and natural, emphasizing trust and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAwVCh9DjNn0NhZFeNRT8gCcZh3wNhGHr_qjCNZ1uLtJmsTHY46R8wXVnRybmQTZKnOKi14FKdQN6lAoePkFdJlmt1Z0TUYz5Awk3IfIxl9OAOJVY0SazJwf1hKsx12G_qFvh70eZ1HDcERRhgJ8yQwDTrnNuPectDEqc4-uUQynRuzL6btqHUeMMm3NPrke_UAcsFVa2PufiPjHn5ReEmqL3kSnUqoY0lvikDHIhcu3mdAfgjlGWz2g"/>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-28 md:pt-28 md:pb-16 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto space-y-xl md:space-y-xxl">
+<!-- Profile Header -->
+<section class="flex flex-col md:flex-row items-center md:items-start gap-lg pt-lg">
+<div class="relative">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-[32px] overflow-hidden shadow-lg border-4 border-surface">
+<img class="w-full h-full object-cover" data-alt="A high quality, professional portrait of Amit, an Indian traveler. He is wearing a clean, modern, premium casual outfit, perhaps a high-quality linen shirt. The background is slightly blurred but suggests a bright, upscale airport lounge or high-end hotel lobby. The lighting is excellent, soft and flattering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5x7m8eWBt4_tIrU6NZBBdFoOjKTfA4BalF-vIqPyjobIgd-fk_kIAJieuUUtaj8BrxNlXpHFKG29vD_lo2SIrTKW3wqSbRWAwBWhDSjwjHJJIdVT_EZ2idJUo7kcceJ34cj4XNU13Vv6Y6yYR6mbQdzjgBlSMaPpCFMmIsgxW21uCVTq5e-tI60zwXxTDwDN-qVqw2er8XrWHrDy5A2iTf0vT3Uu67oVkDpCZlfnfIQdzVEeUVVFugw"/>
+</div>
+<div class="absolute -bottom-4 right-0 md:-right-4 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 shadow-md">
+<span class="material-symbols-outlined text-[16px]">explore</span>
+                    Traveler Level: Explorer
+                </div>
+</div>
+<div class="text-center md:text-left mt-4 md:mt-0 flex-1">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary font-bold mb-2">Amit</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Passionate about discovering hidden gems across India and beyond. Always planning the next adventure with a keen eye for budget and authentic experiences.</p>
+<div class="mt-md flex gap-4 justify-center md:justify-start">
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-full font-label-lg text-label-lg font-semibold hover:opacity-90 transition-opacity active:scale-95">Edit Profile</button>
+<button class="border border-outline text-primary px-6 py-3 rounded-full font-label-lg text-label-lg font-semibold hover:bg-surface-container-high transition-colors active:scale-95">Share Profile</button>
+</div>
+</div>
+</section>
+<!-- Stats Grid (Bento Style) -->
+<section>
+<h3 class="font-title-lg text-title-lg text-primary font-bold mb-lg">Travel Statistics</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="bg-surface-container-low rounded-3xl p-lg flex flex-col justify-between shadow-[0px_4px_12px_rgba(0,32,69,0.05)] relative overflow-hidden group hover:shadow-[0px_8px_24px_rgba(0,32,69,0.08)] transition-shadow">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-6xl text-primary">flight_takeoff</span>
+</div>
+<div>
+<span class="material-symbols-outlined text-secondary-container mb-4 text-3xl">flight_takeoff</span>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Trips Completed</p>
+</div>
+<p class="font-display-lg text-display-lg text-primary font-bold mt-2">12</p>
+</div>
+<div class="bg-surface-container-low rounded-3xl p-lg flex flex-col justify-between shadow-[0px_4px_12px_rgba(0,32,69,0.05)] relative overflow-hidden group hover:shadow-[0px_8px_24px_rgba(0,32,69,0.08)] transition-shadow">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-6xl text-primary">savings</span>
+</div>
+<div>
+<span class="material-symbols-outlined text-secondary-container mb-4 text-3xl">savings</span>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Money Saved</p>
+</div>
+<p class="font-display-lg text-display-lg text-primary font-bold mt-2">₹14,500</p>
+</div>
+<div class="bg-surface-container-low rounded-3xl p-lg flex flex-col justify-between shadow-[0px_4px_12px_rgba(0,32,69,0.05)] relative overflow-hidden group hover:shadow-[0px_8px_24px_rgba(0,32,69,0.08)] transition-shadow">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-6xl text-primary">public</span>
+</div>
+<div>
+<span class="material-symbols-outlined text-secondary-container mb-4 text-3xl">public</span>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Countries Visited</p>
+</div>
+<p class="font-display-lg text-display-lg text-primary font-bold mt-2">3</p>
+</div>
+</div>
+</section>
+<!-- Achievements -->
+<section>
+<h3 class="font-title-lg text-title-lg text-primary font-bold mb-lg">Achievements</h3>
+<div class="flex overflow-x-auto no-scrollbar gap-md pb-4 -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0">
+<div class="min-w-[160px] bg-surface-container-low rounded-[24px] p-6 flex flex-col items-center text-center shadow-[0px_4px_12px_rgba(0,32,69,0.05)] border border-surface-variant shrink-0">
+<div class="w-16 h-16 rounded-full bg-surface-variant mb-4 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">landscape</span>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Mountain Nomad</h4>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">High altitude expert</p>
+</div>
+<div class="min-w-[160px] bg-secondary-container rounded-[24px] p-6 flex flex-col items-center text-center shadow-[0px_4px_12px_rgba(0,32,69,0.1)] border border-secondary-fixed shrink-0">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed/50 mb-4 flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-secondary-container font-semibold">Budget Guru</h4>
+<p class="font-label-md text-label-md text-on-secondary-container/80 mt-1">Master of deals</p>
+</div>
+<div class="min-w-[160px] bg-surface-container-low rounded-[24px] p-6 flex flex-col items-center text-center shadow-[0px_4px_12px_rgba(0,32,69,0.05)] border border-surface-variant shrink-0">
+<div class="w-16 h-16 rounded-full bg-surface-variant mb-4 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">location_city</span>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">City Slicker</h4>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">Urban explorer</p>
+</div>
+<!-- Empty slot for design balance -->
+<div class="min-w-[160px] bg-surface-container border-2 border-dashed border-outline-variant rounded-[24px] p-6 flex flex-col items-center justify-center text-center shrink-0 opacity-60">
+<span class="material-symbols-outlined text-3xl text-outline mb-2">lock</span>
+<p class="font-label-md text-label-md text-on-surface-variant">More to unlock</p>
+</div>
+</div>
+</section>
+<!-- Favorite Destinations -->
+<section>
+<div class="flex justify-between items-end mb-lg">
+<h3 class="font-title-lg text-title-lg text-primary font-bold">Favorite Destinations</h3>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="relative h-64 rounded-[24px] overflow-hidden group cursor-pointer shadow-[0px_4px_12px_rgba(0,32,69,0.05)]">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A breathtaking, premium wide shot of Manali, India. Snow-capped Himalayan mountains in the background under a clear, bright blue sky. In the foreground, lush green pine forests and a winding mountain road. The image is vibrant, well-lit, and conveys a clean, serene, high-end travel aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXjVcxPicnsqB7BpxfIMXRv8DTdssx6-_0VGUcM7yR86dKAnNR37z_GWEa9c4CgWYWgeivp1HVmTxzuCN-fTU53NyA5YmI5n5EC4gZiAdIfQ9bMbUWT1e8d-KfM754JyDZAaz3WpgY4idQX_3oZJVcpWlJe1Gmzz1icfaYBDudN3SLbLKZEye6Pt_w8k5_C7KHchyXdpmdQ680Ow9_JD_4O_p0Q8IabSwb4ctmv34zsQFCZ-SqPhc1yw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 via-primary-container/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg w-full">
+<h4 class="font-title-lg text-title-lg text-white font-bold">Manali</h4>
+<div class="flex items-center gap-1 text-white/90 mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-label-md text-label-md">Himachal Pradesh</span>
+</div>
+</div>
+</div>
+<div class="relative h-64 rounded-[24px] overflow-hidden group cursor-pointer shadow-[0px_4px_12px_rgba(0,32,69,0.05)]">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stunning, high-end photograph of a pristine beach in Goa, India. White sand, clear turquoise water, and gently swaying palm trees. The lighting is golden hour, casting a warm, premium glow over the scene. There are a few stylish wooden sun loungers in the foreground. Clean, minimalist luxury travel aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsshnazxFysLzVDAZ4TqSUIbo-Lj_N9AdkEb32_1sYHzNOxd8J0_8sX0RUCvoOlU7ZN5D9Ny14gI-eHjncSQTy9OQlpdG6QB-046AERTNZIMbnlWHgg28v-fsUOISlf6M56WT4hdk3dlAqb-KHG1clPNoOBJijPTNupsuDjxmHCWsFK1A4LLRma7BmYQGKDRNBIEPGp0bNchaWWuHzMP2aYONxlwi0nRxcGpsfgAnT0O7NjNrxseB5RQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 via-primary-container/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg w-full">
+<h4 class="font-title-lg text-title-lg text-white font-bold">Goa</h4>
+<div class="flex items-center gap-1 text-white/90 mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-label-md text-label-md">Coastal Paradise</span>
+</div>
+</div>
+</div>
+<div class="relative h-64 rounded-[24px] overflow-hidden group cursor-pointer shadow-[0px_4px_12px_rgba(0,32,69,0.05)]">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An awe-inspiring, premium shot of the Golden Fort in Jaisalmer, India, rising from the desert landscape. The sandstone architecture glows brilliantly under the strong, clear sunlight. The composition is clean, modern, and emphasizes the rich textures and grand scale of the heritage site, fitting a premium travel platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiwcbhxOvXuMxtxj2U1ELb_tt3eRIBARY1323V6RZ15vGClqXBW5lY9BOK1Tbbo95gWhNyhtqe90bBHejwCOkYip_1xuNurIfc55IbrfqW4V_78xYlQwVbx6ehuizeUmD3tq74WPZzalgSlyvlRxGH8tMxFBuk2HiUyEbEYs-Frl3EXrRgryIa7gY_2xRh0w2x3Hs92Tz76wBJsNSshJt4qyuNn_1xjYKZqZy0O2N3VAyi8QsNrbaCTw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 via-primary-container/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg w-full">
+<h4 class="font-title-lg text-title-lg text-white font-bold">Jaisalmer</h4>
+<div class="flex items-center gap-1 text-white/90 mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-label-md text-label-md">Rajasthan</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Menu List (Glassmorphism inspired) -->
+<section class="bg-surface-container-low rounded-[32px] p-2 md:p-6 shadow-[0px_4px_12px_rgba(0,32,69,0.05)]">
+<ul class="space-y-2">
+<li>
+<button class="w-full flex items-center justify-between p-4 md:p-lg rounded-[24px] hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant group-hover:bg-primary-container flex items-center justify-center text-on-surface-variant group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface font-medium">Settings</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center justify-between p-4 md:p-lg rounded-[24px] hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant group-hover:bg-primary-container flex items-center justify-center text-on-surface-variant group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">history</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface font-medium">Trip History</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center justify-between p-4 md:p-lg rounded-[24px] hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant group-hover:bg-primary-container flex items-center justify-center text-on-surface-variant group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface font-medium">Saved Places</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+</li>
+<li class="pt-4 mt-4 border-t border-surface-variant">
+<button class="w-full flex items-center justify-between p-4 md:p-lg rounded-[24px] hover:bg-error-container/50 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant group-hover:bg-error flex items-center justify-center text-on-surface-variant group-hover:text-on-error transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</div>
+<span class="font-body-lg text-body-lg text-error font-medium">Logout</span>
+</div>
+</button>
+</li>
+</ul>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container dark:bg-surface-container-low shadow-[0px_-4px_12px_rgba(0,32,69,0.05)] fixed bottom-0 w-full z-50 rounded-t-xl fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4 pb-2">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 rounded-xl p-2 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 rounded-xl p-2 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">travel_explore</span>
+<span class="font-label-md text-label-md">Trips</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 rounded-xl p-2 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">explore</span>
+<span class="font-label-md text-label-md">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 rounded-xl p-2 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">account_balance_wallet</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-5 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+</body></html>

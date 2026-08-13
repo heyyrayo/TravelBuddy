@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TravelBuddy - Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#002522",
+                      "secondary-container": "#fea619",
+                      "on-secondary-fixed": "#2a1700",
+                      "on-tertiary-container": "#3cafa2",
+                      "on-surface-variant": "#43474e",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "on-tertiary-fixed": "#00201d",
+                      "outline": "#74777f",
+                      "secondary-fixed": "#ffddb8",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#89f5e7",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#d6e3ff",
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e5e2df",
+                      "surface-container-high": "#eae8e5",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#f6f3f0",
+                      "on-secondary-container": "#684000",
+                      "secondary": "#855300",
+                      "inverse-surface": "#31302f",
+                      "surface-dim": "#dcdad7",
+                      "inverse-on-surface": "#f3f0ed",
+                      "surface-container-highest": "#e5e2df",
+                      "background": "#fcf9f6",
+                      "on-primary-fixed": "#001b3c",
+                      "on-primary-container": "#86a0cd",
+                      "surface-tint": "#455f88",
+                      "primary-fixed-dim": "#adc7f7",
+                      "inverse-primary": "#adc7f7",
+                      "surface-container": "#f0edea",
+                      "on-primary": "#ffffff",
+                      "on-surface": "#1c1c1a",
+                      "surface-bright": "#fcf9f6",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#003d37",
+                      "tertiary-fixed-dim": "#6bd8cb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#005049",
+                      "outline-variant": "#c4c6cf",
+                      "primary-container": "#1a365d",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-primary-fixed-variant": "#2d476f",
+                      "on-background": "#1c1c1a",
+                      "primary": "#002045",
+                      "surface": "#fcf9f6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "xxl": "48px",
+                      "md": "16px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "gutter": "16px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "title-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "title-lg": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.5px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.25px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "57px",
+                              {
+                                      "lineHeight": "64px",
+                                      "letterSpacing": "-0.25px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.1px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col pt-16 pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-sm flex items-center justify-between px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-surface-container">
+<img alt="User profile photo of Amit" class="w-full h-full object-cover" data-alt="Close-up portrait of a young Indian man smiling gently in bright daylight. The style is premium, clean, and reassuring, fitting a travel app profile picture. Warm light accentuates the minimalistic, modern vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7dUvLckxAGRaP0xy-RCVF2vjy5usJRlLMfZ4MbPKncRyhyTKV5tkvNoaUVsEXmmcLNe6bFS15po-lhgQdCN5jptN4obSBOR2PzJo2cdwyPgtqbFp9WKTTjEkxKGnxCnRDUBf_mIFz3DG0JopRAaSisPsZ3R03fdJzSuuyvdKDP927WCogNddQWcG1Np18AuZ9KbuKLcoiIGgV7O1RYmi8Gfw7PutzdbshRKGlDVqh0faEFFuNnm3IOg"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">TravelBuddy</h1>
+</div>
+<button aria-label="notifications" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-200 ease-in-out text-primary dark:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-2xl mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-xl mt-lg">Notifications</h2>
+<div class="relative before:absolute before:inset-y-0 before:left-[19px] md:before:left-[27px] before:w-[2px] before:bg-surface-variant before:-z-10 ml-1">
+<!-- Group: Today -->
+<div class="mb-lg">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md pl-xl md:pl-xxl bg-background relative z-10 inline-block pr-4 py-1">Today</h3>
+<div class="flex flex-col gap-md">
+<!-- Notification Item: Emergency (Red) -->
+<div class="relative flex items-start gap-md group cursor-pointer">
+<div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-error-container text-on-error-container flex items-center justify-center flex-shrink-0 z-10 shadow-sm border-4 border-background transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md flex-grow shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-xs">
+<span class="font-label-lg text-label-lg text-error font-semibold">Emergency Alert</span>
+<span class="font-label-md text-label-md text-on-surface-variant">10:45 AM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">Heavy rainfall predicted in Manali. Stay indoors.</p>
+</div>
+</div>
+<!-- Notification Item: Weather (Yellow) -->
+<div class="relative flex items-start gap-md group cursor-pointer">
+<div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0 z-10 shadow-sm border-4 border-background transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">sunny</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md flex-grow shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-xs">
+<span class="font-label-lg text-label-lg text-secondary font-semibold">Weather Alert</span>
+<span class="font-label-md text-label-md text-on-surface-variant">8:30 AM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">Sunny day in Goa today. Perfect for the beach!</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Group: Earlier -->
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md mt-xl pl-xl md:pl-xxl bg-background relative z-10 inline-block pr-4 py-1">Earlier</h3>
+<div class="flex flex-col gap-md">
+<!-- Notification Item: Budget (Green/Teal tones based on theme) -->
+<div class="relative flex items-start gap-md group cursor-pointer">
+<div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center flex-shrink-0 z-10 shadow-sm border-4 border-background transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md flex-grow shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-xs">
+<span class="font-label-lg text-label-lg text-tertiary font-semibold">Budget Suggestion</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Yesterday</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">Save ₹500 by booking your Manali stay today.</p>
+</div>
+</div>
+<!-- Notification Item: Packing (Teal) -->
+<div class="relative flex items-start gap-md group cursor-pointer">
+<div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center flex-shrink-0 z-10 shadow-sm border-4 border-background transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">luggage</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md flex-grow shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-xs">
+<span class="font-label-lg text-label-lg text-on-tertiary-fixed-variant font-semibold">Packing Reminder</span>
+<span class="font-label-md text-label-md text-on-surface-variant">2 days ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">Don't forget your winter gear for Manali!</p>
+</div>
+</div>
+<!-- Notification Item: Festival (Saffron/Secondary) -->
+<div class="relative flex items-start gap-md group cursor-pointer">
+<div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center flex-shrink-0 z-10 shadow-sm border-4 border-background transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">celebration</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md flex-grow shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-xs">
+<span class="font-label-lg text-label-lg text-secondary font-semibold">Festival Notification</span>
+<span class="font-label-md text-label-md text-on-surface-variant">3 days ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">Kullu Dussehra starts tomorrow near you.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<!-- Note: While instructions say suppress if linear/transactional, this is a top-level Notifications view, often accessed from the nav or alongside it. However, the JSON labels are Home, Trips, Explore, Budget, Profile. Notifications isn't explicitly a tab. I will hide it as per semantic shell mandate "If the page intent is a sub-page... implying temporary departure" but usually notifications is a drawer or separate screen. I'll include it with no active state, or rather hide it for this focused canvas. Actually, standard practice for Notifications is a sub-screen. I will suppress it to prioritize the content canvas as per UX goal. -->
+</body></html>

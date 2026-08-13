@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nearby Essentials - TravelBuddy</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#00201d",
+                        "on-primary-fixed": "#001b3c",
+                        "on-background": "#1c1c1a",
+                        "on-secondary-container": "#684000",
+                        "tertiary": "#002522",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c4c6cf",
+                        "on-surface": "#1c1c1a",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#31302f",
+                        "primary": "#002045",
+                        "inverse-primary": "#adc7f7",
+                        "surface-container-high": "#eae8e5",
+                        "on-secondary-fixed": "#2a1700",
+                        "background": "#fcf9f6",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-container": "#f0edea",
+                        "on-surface-variant": "#43474e",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#855300",
+                        "surface-container-low": "#f6f3f0",
+                        "surface-tint": "#455f88",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "on-tertiary-container": "#3cafa2",
+                        "inverse-on-surface": "#f3f0ed",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "secondary-container": "#fea619",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffddb8",
+                        "primary-container": "#1a365d",
+                        "on-primary-container": "#86a0cd",
+                        "surface-variant": "#e5e2df",
+                        "outline": "#74777f",
+                        "primary-fixed-dim": "#adc7f7",
+                        "surface-dim": "#dcdad7",
+                        "surface": "#fcf9f6",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#89f5e7",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary-container": "#003d37",
+                        "surface-bright": "#fcf9f6",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e5e2df"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Ambient subtle watermark pattern for background */
+        .bg-watermark {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23002045' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Fluid grid system for main content */
+        .main-container {
+            padding-bottom: calc(80px + env(safe-area-inset-bottom));
+            padding-top: calc(64px + 24px);
+        }
+        
+        /* Card transitions */
+        .essential-card {
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+        .essential-card:active {
+            transform: scale(0.98);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen bg-watermark">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-sm flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full">
+<!-- Leading Avatar -->
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-full overflow-hidden hover:bg-surface-container-low transition-colors active:scale-95 duration-200">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A close-up, professional portrait of an Indian traveler smiling warmly. Soft, natural lighting. Used as a user profile avatar in a premium travel application. High resolution, clear face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvPQTwkRPINxw1HwJ7MWkwfjH0VnyECqCpXQKYAsINx4gWkNpn0gSg-LcYBDkk-PYgPKEvOT1BfAsQP6JslrKPU4JB_svrnGMy7brBBaWJFibzZaUFwEdym30DkotJ2CXXRgxKqh9-A8z-aQhrKdP3wn7mcrDnrIYLdoyF3BTj9Eurq3itGM8CHvN2xq5MoGoMnztRhDi8ZNu3ezMujnCD4_cwOsdOPBho9EolsHz-CU1-sq_SWqvr2g"/>
+</button>
+</div>
+<!-- Headline / Brand -->
+<div class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary dark:text-primary-fixed-dim tracking-tight">
+            TravelBuddy
+        </div>
+<!-- Trailing Icon -->
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="main-container px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<!-- Page Header & Controls -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-background mb-sm">Nearby Essentials</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Find critical services around your current location.</p>
+</div>
+<!-- Toggle Control (Map / List) -->
+<div class="flex bg-surface-container-high rounded-full p-1 self-start md:self-auto border border-outline-variant shadow-sm">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">map</span>
+                    Map
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-on-primary shadow-sm font-label-lg text-label-lg">
+<span class="material-symbols-outlined fill">list</span>
+                    List
+                </button>
+</div>
+</div>
+<!-- Search / Filter Area -->
+<div class="relative w-full max-w-2xl mb-xl">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full pl-12 pr-4 py-4 bg-surface rounded-full border border-outline-variant shadow-sm focus:border-primary focus:ring-1 focus:ring-primary font-body-lg text-body-lg transition-all outline-none" placeholder="Search hospitals, stations, ATMs..." type="text"/>
+<button class="absolute inset-y-0 right-0 pr-4 flex items-center text-primary hover:text-primary-container">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+<!-- Categories Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- EMERGENCY SECTION -->
+<section class="flex flex-col gap-md">
+<h2 class="font-title-lg text-title-lg text-on-background flex items-center gap-2 border-b-2 border-error pb-2">
+<span class="material-symbols-outlined text-error">emergency</span>
+                    Emergency
+                </h2>
+<!-- Card 1 -->
+<div class="essential-card bg-surface p-md rounded-xl shadow-sm border-l-4 border-error hover:shadow-md cursor-pointer flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined fill">local_hospital</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold">City General Hospital</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Multi-specialty, 24x7 ER</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-surface-variant">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-error bg-error-container/30 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[16px]">distance</span> 1.2 km
+                        </span>
+<span class="font-label-md text-label-md text-tertiary-container bg-tertiary-fixed px-2 py-1 rounded-full">Open Now</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="essential-card bg-surface p-md rounded-xl shadow-sm border-l-4 border-error hover:shadow-md cursor-pointer flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined fill">local_police</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold">Central Police Station</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Tourist Helpdesk</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-surface-variant">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span> 2.5 km
+                        </span>
+<span class="font-label-md text-label-md text-tertiary-container bg-tertiary-fixed px-2 py-1 rounded-full">Open Now</span>
+</div>
+</div>
+</section>
+<!-- TRAVEL SECTION -->
+<section class="flex flex-col gap-md">
+<h2 class="font-title-lg text-title-lg text-on-background flex items-center gap-2 border-b-2 border-tertiary-container pb-2">
+<span class="material-symbols-outlined text-tertiary-container">commute</span>
+                    Travel
+                </h2>
+<!-- Card 3 -->
+<div class="essential-card bg-surface p-md rounded-xl shadow-sm border-l-4 border-tertiary-container hover:shadow-md cursor-pointer flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">train</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold">Main Railway Station</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Intercity &amp; Local trains</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-surface-variant">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span> 0.8 km
+                        </span>
+<span class="font-label-md text-label-md text-tertiary-container bg-tertiary-fixed px-2 py-1 rounded-full">Open Now</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="essential-card bg-surface p-md rounded-xl shadow-sm border-l-4 border-tertiary-container hover:shadow-md cursor-pointer flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">airport_shuttle</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold">Interstate Bus Terminal</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Volvo &amp; State Transport</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-surface-variant">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span> 3.1 km
+                        </span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-variant px-2 py-1 rounded-full">Closes 11 PM</span>
+</div>
+</div>
+</section>
+<!-- DAILY NEEDS SECTION -->
+<section class="flex flex-col gap-md">
+<h2 class="font-title-lg text-title-lg text-on-background flex items-center gap-2 border-b-2 border-secondary-container pb-2">
+<span class="material-symbols-outlined text-secondary-container">local_convenience_store</span>
+                    Daily Needs
+                </h2>
+<!-- Card 5 -->
+<div class="essential-card bg-surface p-md rounded-xl shadow-sm border-l-4 border-secondary-container hover:shadow-md cursor-pointer flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined">local_atm</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold">Global Bank ATM</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">24/7 Cash withdrawal</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-surface-variant">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span> 0.2 km
+                        </span>
+<span class="font-label-md text-label-md text-tertiary-container bg-tertiary-fixed px-2 py-1 rounded-full">Open Now</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="essential-card bg-surface p-md rounded-xl shadow-sm border-l-4 border-secondary-container hover:shadow-md cursor-pointer flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold">Spice Route Cafe</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Local Cuisine, Vegetarian</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-surface-variant">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span> 0.5 km
+                        </span>
+<span class="font-label-md text-label-md text-tertiary-container bg-tertiary-fixed px-2 py-1 rounded-full">Open Now</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 bg-surface-container z-50 rounded-t-xl shadow-[0px_-4px_12px_rgba(0,32,69,0.05)] shadow-lg">
+<!-- Inactive: Home -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</button>
+<!-- Inactive: Trips -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md mt-1">Trips</span>
+</button>
+<!-- Active: Explore -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 hover:bg-surface-container-high transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined fill">explore</span>
+<span class="font-label-md text-label-md mt-1 font-bold">Explore</span>
+</button>
+<!-- Inactive: Budget -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md mt-1">Budget</span>
+</button>
+<!-- Inactive: Profile -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

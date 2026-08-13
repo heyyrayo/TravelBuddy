@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TravelBuddy - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#653e00",
+                      "on-tertiary": "#ffffff",
+                      "secondary": "#855300",
+                      "on-error": "#ffffff",
+                      "on-secondary-container": "#684000",
+                      "on-tertiary-fixed": "#00201d",
+                      "on-tertiary-fixed-variant": "#005049",
+                      "on-primary-fixed-variant": "#2d476f",
+                      "surface-bright": "#fcf9f6",
+                      "on-primary": "#ffffff",
+                      "on-primary-container": "#86a0cd",
+                      "on-error-container": "#93000a",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#002522",
+                      "surface-variant": "#e5e2df",
+                      "secondary-container": "#fea619",
+                      "inverse-on-surface": "#f3f0ed",
+                      "on-surface": "#1c1c1a",
+                      "on-tertiary-container": "#3cafa2",
+                      "surface-container-low": "#f6f3f0",
+                      "tertiary-container": "#003d37",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "primary-fixed": "#d6e3ff",
+                      "primary": "#002045",
+                      "error-container": "#ffdad6",
+                      "outline": "#74777f",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed-dim": "#adc7f7",
+                      "background": "#fcf9f6",
+                      "outline-variant": "#c4c6cf",
+                      "tertiary-fixed": "#89f5e7",
+                      "secondary-fixed": "#ffddb8",
+                      "inverse-surface": "#31302f",
+                      "on-primary-fixed": "#001b3c",
+                      "tertiary-fixed-dim": "#6bd8cb",
+                      "primary-container": "#1a365d",
+                      "inverse-primary": "#adc7f7",
+                      "surface-container-high": "#eae8e5",
+                      "on-secondary-fixed": "#2a1700",
+                      "surface-tint": "#455f88",
+                      "surface-dim": "#dcdad7",
+                      "on-surface-variant": "#43474e",
+                      "on-background": "#1c1c1a",
+                      "error": "#ba1a1a",
+                      "surface-container": "#f0edea",
+                      "surface": "#fcf9f6",
+                      "surface-container-highest": "#e5e2df"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xs": "4px",
+                      "xxl": "48px",
+                      "sm": "8px",
+                      "gutter": "16px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "margin-desktop": "32px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .onboarding-screen {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.2, 0.0, 0, 1.0);
+        }
+        .onboarding-screen.active {
+            display: flex;
+            opacity: 1;
+        }
+        .topographic-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e5e2df' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased topographic-pattern relative overflow-hidden">
+<!-- Top Navigation / Skip -->
+<div class="fixed top-0 w-full z-50 flex justify-end px-margin-mobile md:px-margin-desktop py-lg">
+<button class="font-label-lg text-label-lg text-primary hover:text-primary-container transition-colors duration-200" onclick="skipOnboarding()">
+            Skip
+        </button>
+</div>
+<!-- Onboarding Container -->
+<main class="flex-grow flex flex-col items-center justify-center relative w-full max-w-md mx-auto px-margin-mobile pt-xxl pb-xxl z-10 h-screen">
+<!-- Screen 1 -->
+<div class="onboarding-screen active flex-col h-full w-full justify-between items-center text-center" id="screen-1">
+<div class="w-full flex-grow flex flex-col items-center justify-center pt-xl">
+<div class="w-full h-64 md:h-80 rounded-[24px] bg-surface-container-low mb-xl relative overflow-hidden shadow-lg border border-surface-variant flex items-center justify-center">
+<img class="w-full h-full object-cover mix-blend-multiply opacity-90 absolute inset-0" data-alt="A premium digital illustration of a modern traveler exploring an Indian heritage site, blending high-tech gadgets with traditional architecture. Warm saffron and indigo tones dominant. Clean, minimalist vector style, soft ambient lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKxUIm5iGys1hlL1RSpKHu9UDAjNV2X3lKFkvcFtsrqXNNy-KBUj-TvfnyanbrQd3e6Wo_C1OWgMRM3TjYiFpf5EvZEQ5zpROeGasLEo9dX7E4D1NoDuKsufhJrRKMcGMb-eh3G6iElq1dpFOTgPNlCHk1j1lh_VFGGHic5N6RWsl5KndawQCvuyXnLyq9PN4Sbnv-mmIM-zQXE4YrmrgrRLXiQx4mpJKwrO3vV0CA-ti2BWdmDg_MiA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent"></div>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-sm px-4 leading-tight">
+                    Plan your trip confidently across India.
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant px-6">
+                    Discover hidden gems and seamless itineraries tailored just for you.
+                </p>
+</div>
+<!-- Controls -->
+<div class="w-full pb-md">
+<div class="flex justify-center items-center gap-sm mb-lg">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-md rounded-full hover:bg-primary-container active:scale-95 transition-all duration-200 shadow-md" onclick="nextScreen(1)">
+                    Next
+                </button>
+</div>
+</div>
+<!-- Screen 2 -->
+<div class="onboarding-screen flex-col h-full w-full justify-between items-center text-center" id="screen-2">
+<div class="w-full flex-grow flex flex-col items-center justify-center pt-xl">
+<div class="w-full h-64 md:h-80 rounded-[24px] bg-surface-container-low mb-xl relative overflow-hidden shadow-lg border border-surface-variant flex items-center justify-center">
+<img class="w-full h-full object-cover mix-blend-multiply opacity-90 absolute inset-0" data-alt="Abstract 3D rendering representing artificial intelligence processing travel data. Glowing nodes connecting Indian landmarks on a minimalist grid. High-end, clean tech aesthetic, utilizing deep indigo and vibrant marigold accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBnks7rbdlOQm9WynwdRlIJlvoKEwYhWa6B12NXq499AahpcAJh8N3vVWzlQXUs5Ad0CLNzfegch8OPy_6GNiwee3GHdS09ue7OuWskFt2cMwEvsJOGnAikpZ753Y74HDZp8nKpuknN-kDvl6SB8MUtmFJx5GbWcLurWLA0DVbEbjQAhldfMWAvNDFGD_WloOTSJ9QQC1geAuRk3Vqs4S9fk7EmOYPj-WAK9wut2jC2ibQoq2emXcJTg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent"></div>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-sm px-4 leading-tight">
+                    AI-powered budget planning.
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant px-6">
+                    Smart recommendations and nearby essentials tailored to your spending.
+                </p>
+</div>
+<!-- Controls -->
+<div class="w-full pb-md">
+<div class="flex justify-center items-center gap-sm mb-lg">
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-md rounded-full hover:bg-primary-container active:scale-95 transition-all duration-200 shadow-md" onclick="nextScreen(2)">
+                    Next
+                </button>
+</div>
+</div>
+<!-- Screen 3 -->
+<div class="onboarding-screen flex-col h-full w-full justify-between items-center text-center" id="screen-3">
+<div class="w-full flex-grow flex flex-col items-center justify-center pt-xl">
+<div class="w-full h-64 md:h-80 rounded-[24px] bg-surface-container-low mb-xl relative overflow-hidden shadow-lg border border-surface-variant flex items-center justify-center">
+<img class="w-full h-full object-cover mix-blend-multiply opacity-90 absolute inset-0" data-alt="Serene, minimalist illustration of a traveler relaxing with a cup of chai overlooking an Indian landscape. Soft sunrise lighting, conveying peace of mind and organization. Deep blacks, crisp whites, and a touch of warm saffron." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH6Iv8DX5Lm_KutcEZMOgfIBJEuGJ9vM7O4ykprYV6A_KyyUuPP4A95fC4kxIk_6BqLWTn5nXT3hH2zFcXubdLk9ZhIc2iz2OQs4KCVK7vagvUKn6-VSuH5emFCvE8hiF2-tZwm3WGDBDM-uHg05JcEILNp7h1JciMnwFuqczyG0fuJ4RKRbhMx9X55FyEFU1ao4Ekts5hq-Y-3hvd3krlqLcSNsSfxw-REHt-HUv2nu03rV37vY30Lw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent"></div>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-sm px-4 leading-tight">
+                    Everything you need in one place.
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant px-6">
+                    Peace of mind before and during your journey.
+                </p>
+</div>
+<!-- Controls -->
+<div class="w-full pb-md">
+<div class="flex justify-center items-center gap-sm mb-lg">
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container font-label-lg text-label-lg py-md rounded-full hover:opacity-90 active:scale-95 transition-all duration-200 shadow-md font-bold" onclick="completeOnboarding()">
+                    Get Started
+                </button>
+</div>
+</div>
+</main>
+<script>
+        function nextScreen(currentScreenIndex) {
+            document.getElementById(`screen-${currentScreenIndex}`).classList.remove('active');
+            document.getElementById(`screen-${currentScreenIndex + 1}`).classList.add('active');
+        }
+
+        function skipOnboarding() {
+            // Logic to bypass onboarding
+            document.getElementById(`screen-1`).classList.remove('active');
+            document.getElementById(`screen-2`).classList.remove('active');
+            document.getElementById(`screen-3`).classList.add('active');
+        }
+        
+        function completeOnboarding() {
+            // Final action
+            console.log("Onboarding Complete");
+        }
+    </script>
+</body></html>
