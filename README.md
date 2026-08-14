@@ -8,6 +8,7 @@ AI-powered smart travel companion app.
 - Budget management
 - Offline support
 - Multi-language
+- Dark mode
 
 A few resources to get you started if this is your first Flutter project:
 
