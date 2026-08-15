@@ -9,6 +9,7 @@ AI-powered smart travel companion app.
 - Offline support
 - Multi-language
 - Dark mode
+- Notifications
 
 A few resources to get you started if this is your first Flutter project:
 
