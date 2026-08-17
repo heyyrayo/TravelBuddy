@@ -11,6 +11,7 @@ AI-powered smart travel companion app.
 - Dark mode
 - Notifications
 - Authentication
+- Weather integration
 
 A few resources to get you started if this is your first Flutter project:
 
