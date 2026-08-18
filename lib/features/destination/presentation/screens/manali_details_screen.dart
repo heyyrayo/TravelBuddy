@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/constants/app_icons.dart';
+import '../../../../core/data/app_states.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
-import '../../../../core/constants/app_icons.dart';
 import '../../../../shared/widgets/buttons/app_buttons.dart';
 
 class ManaliDetailsScreen extends StatelessWidget {
-  const ManaliDetailsScreen({super.key, this.onPlanTrip, this.destinationName = 'Manali'});
+  const ManaliDetailsScreen({
+    super.key,
+    this.onPlanTrip,
+    this.destinationName = 'Manali',
+  });
 
   final VoidCallback? onPlanTrip;
   final String destinationName;
@@ -16,7 +23,10 @@ class ManaliDetailsScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       body: CustomScrollView(
         slivers: [
-          // Hero image app bar
+          // -------------------------------------------------------------------
+          // Hero / App Bar
+          // -------------------------------------------------------------------
+
           SliverAppBar(
             expandedHeight: 300,
             pinned: true,
@@ -25,24 +35,122 @@ class ManaliDetailsScreen extends StatelessWidget {
             leading: Semantics(
               label: 'Back',
               child: IconButton(
-                icon: const Icon(AppIcons.back, color: AppColors.onPrimary),
+                icon: const Icon(
+                  AppIcons.back,
+                  color: AppColors.onPrimary,
+                ),
                 tooltip: 'Back',
-                onPressed: () => Navigator.of(context).maybePop(),
+                onPressed: () {
+                  Navigator.of(context).maybePop();
+                },
               ),
             ),
             actions: [
-              Semantics(
-                label: 'Save to wishlist',
-                child: IconButton(
-                  icon: const Icon(AppIcons.heartOutline, color: AppColors.onPrimary),
-                  tooltip: 'Save to wishlist',
-                  onPressed: () {},
-                ),
+              // ---------------------------------------------------------------
+              // Save to Wishlist
+              // ---------------------------------------------------------------
+
+              Consumer<TripState>(
+                builder: (context, tripState, _) {
+                  final destinationId = _destinationId(destinationName);
+
+                  final isSaved = tripState.savedPlaces.any(
+                    (place) => place.destinationId == destinationId,
+                  );
+
+                  return IconButton(
+                    icon: Icon(
+                      isSaved ? Icons.favorite : Icons.favorite_border,
+                      color: AppColors.onPrimary,
+                    ),
+                    tooltip: isSaved ? 'Saved to wishlist' : 'Save to wishlist',
+                    onPressed: () async {
+                      debugPrint(
+                        'SAVE BUTTON PRESSED: '
+                        '$destinationName ($destinationId)',
+                      );
+
+                      if (isSaved) {
+                        debugPrint(
+                          'PLACE ALREADY SAVED: $destinationId',
+                        );
+
+                        if (!context.mounted) {
+                          return;
+                        }
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              '$destinationName is already saved.',
+                            ),
+                          ),
+                        );
+
+                        return;
+                      }
+
+                      debugPrint(
+                        'CALLING TripState.savePlace()',
+                      );
+
+                      await tripState.savePlace(
+                        destinationId,
+                        destinationName,
+                      );
+
+                      debugPrint(
+                        'TripState.savePlace() COMPLETED',
+                      );
+
+                      if (!context.mounted) {
+                        return;
+                      }
+
+                      if (tripState.errorMessage != null) {
+                        debugPrint(
+                          'SAVE ERROR: '
+                          '${tripState.errorMessage}',
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              tripState.errorMessage!,
+                            ),
+                          ),
+                        );
+
+                        return;
+                      }
+
+                      debugPrint(
+                        'SAVE SUCCESS: $destinationName',
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            '$destinationName saved to your wishlist.',
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
+
+              // ---------------------------------------------------------------
+              // Share
+              // ---------------------------------------------------------------
+
               Semantics(
                 label: 'Share',
                 child: IconButton(
-                  icon: const Icon(AppIcons.share, color: AppColors.onPrimary),
+                  icon: const Icon(
+                    AppIcons.share,
+                    color: AppColors.onPrimary,
+                  ),
                   tooltip: 'Share',
                   onPressed: () {},
                 ),
@@ -78,10 +186,14 @@ class ManaliDetailsScreen extends StatelessWidget {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [AppColors.primary, AppColors.primaryContainer],
+                        colors: [
+                          AppColors.primary,
+                          AppColors.primaryContainer,
+                        ],
                       ),
                     ),
                   ),
+
                   // Hero illustration placeholder
                   Center(
                     child: Icon(
@@ -90,14 +202,21 @@ class ManaliDetailsScreen extends StatelessWidget {
                       color: AppColors.onPrimary.withOpacity(0.15),
                     ),
                   ),
+
                   // Gradient overlay for text legibility
                   const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, AppColors.primary],
-                        stops: [0.5, 1.0],
+                        colors: [
+                          Colors.transparent,
+                          AppColors.primary,
+                        ],
+                        stops: [
+                          0.5,
+                          1.0,
+                        ],
                       ),
                     ),
                   ),
@@ -105,17 +224,26 @@ class ManaliDetailsScreen extends StatelessWidget {
               ),
             ),
           ),
+
+          // -------------------------------------------------------------------
+          // Main Content
+          // -------------------------------------------------------------------
+
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.md),
+              padding: const EdgeInsets.all(
+                AppSpacing.md,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Quick info metrics
-                  _QuickInfoBar(),
-                  const SizedBox(height: AppSpacing.lg),
+                  const _QuickInfoBar(),
 
-                  // About section
+                  const SizedBox(
+                    height: AppSpacing.lg,
+                  ),
+
+                  // About
                   Text(
                     'About $destinationName',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -123,16 +251,27 @@ class ManaliDetailsScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
+
+                  const SizedBox(
+                    height: AppSpacing.sm,
+                  ),
+
                   Text(
-                    'Nestled in the Kullu Valley of Himachal Pradesh, $destinationName is a high-altitude Himalayan resort town. Known for its breathtaking landscapes, adventure sports, and spiritual significance, it\'s a year-round destination loved by backpackers and luxury travelers alike.',
+                    'Nestled in the Kullu Valley of Himachal Pradesh, '
+                    '$destinationName is a high-altitude Himalayan resort '
+                    'town. Known for its breathtaking landscapes, adventure '
+                    'sports, and spiritual significance, it\'s a year-round '
+                    'destination loved by backpackers and luxury travelers alike.',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppColors.onSurfaceVariant,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.lg),
 
-                  // Photo gallery
+                  const SizedBox(
+                    height: AppSpacing.lg,
+                  ),
+
+                  // Photo Gallery
                   Text(
                     'Photo Gallery',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -140,11 +279,18 @@ class ManaliDetailsScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
-                  _PhotoGallery(),
-                  const SizedBox(height: AppSpacing.lg),
 
-                  // Nearby attractions
+                  const SizedBox(
+                    height: AppSpacing.sm,
+                  ),
+
+                  const _PhotoGallery(),
+
+                  const SizedBox(
+                    height: AppSpacing.lg,
+                  ),
+
+                  // Nearby Attractions
                   Text(
                     'Nearby Attractions',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -152,12 +298,23 @@ class ManaliDetailsScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
-                  ..._attractions.map((a) => _AttractionTile(name: a.$1, distance: a.$2)),
 
-                  const SizedBox(height: AppSpacing.lg),
+                  const SizedBox(
+                    height: AppSpacing.sm,
+                  ),
 
-                  // Local food
+                  ..._attractions.map(
+                    (attraction) => _AttractionTile(
+                      name: attraction.$1,
+                      distance: attraction.$2,
+                    ),
+                  ),
+
+                  const SizedBox(
+                    height: AppSpacing.lg,
+                  ),
+
+                  // Local Food
                   Text(
                     'Local Food',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -165,28 +322,51 @@ class ManaliDetailsScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
+
+                  const SizedBox(
+                    height: AppSpacing.sm,
+                  ),
+
                   Wrap(
                     spacing: AppSpacing.sm,
                     runSpacing: AppSpacing.sm,
-                    children: ['Siddu', 'Trout Fish', 'Dham', 'Babru', 'Aktori']
-                        .map((f) => Chip(
-                              label: Text(f),
-                              backgroundColor: AppColors.tertiaryFixed.withOpacity(0.3),
-                              labelStyle: Theme.of(context).textTheme.labelMedium,
-                              side: BorderSide.none,
-                            ))
+                    children: [
+                      'Siddu',
+                      'Trout Fish',
+                      'Dham',
+                      'Babru',
+                      'Aktori',
+                    ]
+                        .map(
+                          (food) => Chip(
+                            label: Text(food),
+                            backgroundColor:
+                                AppColors.tertiaryFixed.withOpacity(0.3),
+                            labelStyle: Theme.of(context).textTheme.labelMedium,
+                            side: BorderSide.none,
+                          ),
+                        )
                         .toList(),
                   ),
-                  const SizedBox(height: AppSpacing.xxl),
+
+                  const SizedBox(
+                    height: AppSpacing.xxl,
+                  ),
                 ],
               ),
             ),
           ),
         ],
       ),
+
+      // -----------------------------------------------------------------------
+      // Bottom CTA
+      // -----------------------------------------------------------------------
+
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
+        padding: const EdgeInsets.all(
+          AppSpacing.md,
+        ),
         decoration: BoxDecoration(
           color: AppColors.surfaceContainerLowest,
           boxShadow: AppColors.level2Shadow,
@@ -202,6 +382,23 @@ class ManaliDetailsScreen extends StatelessWidget {
     );
   }
 
+  // ===========================================================================
+  // Destination ID
+  // ===========================================================================
+
+  String _destinationId(
+    String name,
+  ) {
+    return name.trim().toLowerCase().replaceAll(
+          RegExp(r'\s+'),
+          '_',
+        );
+  }
+
+  // ===========================================================================
+  // Attractions
+  // ===========================================================================
+
   static const _attractions = [
     ('Rohtang Pass', '51 km'),
     ('Solang Valley', '14 km'),
@@ -211,52 +408,92 @@ class ManaliDetailsScreen extends StatelessWidget {
   ];
 }
 
+// =============================================================================
+// Quick Info Bar
+// =============================================================================
+
 class _QuickInfoBar extends StatelessWidget {
+  const _QuickInfoBar();
+
   @override
   Widget build(BuildContext context) {
     const metrics = [
-      (AppIcons.weather, '12°C', 'Weather'),
-      (AppIcons.calendar, 'Oct–Jun', 'Best Time'),
-      (AppIcons.currency, '₹₹', 'Budget'),
-      (AppIcons.trips, '5–7 days', 'Duration'),
+      (
+        AppIcons.weather,
+        '12°C',
+        'Weather',
+      ),
+      (
+        AppIcons.calendar,
+        'Oct–Jun',
+        'Best Time',
+      ),
+      (
+        AppIcons.currency,
+        '₹₹',
+        'Budget',
+      ),
+      (
+        AppIcons.trips,
+        '5–7 days',
+        'Duration',
+      ),
     ];
 
     return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
+      padding: const EdgeInsets.all(
+        AppSpacing.md,
+      ),
       decoration: BoxDecoration(
         color: AppColors.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+        borderRadius: BorderRadius.circular(
+          AppSpacing.radiusCard,
+        ),
       ),
       child: Row(
         children: metrics
-            .map((m) => Expanded(
-                  child: Column(
-                    children: [
-                      Icon(m.$1, color: AppColors.primary, size: 20),
-                      const SizedBox(height: 4),
-                      Text(
-                        m.$2,
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: AppColors.onSurface,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                      Text(
-                        m.$3,
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: AppColors.onSurfaceVariant,
-                            ),
-                      ),
-                    ],
-                  ),
-                ))
+            .map(
+              (metric) => Expanded(
+                child: Column(
+                  children: [
+                    Icon(
+                      metric.$1,
+                      color: AppColors.primary,
+                      size: 20,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      metric.$2,
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColors.onSurface,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    Text(
+                      metric.$3,
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: AppColors.onSurfaceVariant,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            )
             .toList(),
       ),
     );
   }
 }
 
+// =============================================================================
+// Photo Gallery
+// =============================================================================
+
 class _PhotoGallery extends StatelessWidget {
+  const _PhotoGallery();
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -268,12 +505,20 @@ class _PhotoGallery extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: AppColors.primaryContainer,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                borderRadius: BorderRadius.circular(
+                  AppSpacing.radiusMd,
+                ),
               ),
-              child: const Icon(Icons.landscape, color: AppColors.onPrimaryContainer, size: 40),
+              child: const Icon(
+                Icons.landscape,
+                color: AppColors.onPrimaryContainer,
+                size: 40,
+              ),
             ),
           ),
-          const SizedBox(width: AppSpacing.sm),
+          const SizedBox(
+            width: AppSpacing.sm,
+          ),
           Expanded(
             child: Column(
               children: [
@@ -281,19 +526,33 @@ class _PhotoGallery extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       color: AppColors.tertiaryContainer,
-                      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                      borderRadius: BorderRadius.circular(
+                        AppSpacing.radiusMd,
+                      ),
                     ),
-                    child: const Icon(Icons.water, color: AppColors.onTertiaryContainer, size: 24),
+                    child: const Icon(
+                      Icons.water,
+                      color: AppColors.onTertiaryContainer,
+                      size: 24,
+                    ),
                   ),
                 ),
-                const SizedBox(height: AppSpacing.sm),
+                const SizedBox(
+                  height: AppSpacing.sm,
+                ),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
                       color: AppColors.primaryFixed,
-                      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                      borderRadius: BorderRadius.circular(
+                        AppSpacing.radiusMd,
+                      ),
                     ),
-                    child: const Icon(Icons.ac_unit, color: AppColors.primary, size: 24),
+                    child: const Icon(
+                      Icons.ac_unit,
+                      color: AppColors.primary,
+                      size: 24,
+                    ),
                   ),
                 ),
               ],
@@ -305,8 +564,15 @@ class _PhotoGallery extends StatelessWidget {
   }
 }
 
+// =============================================================================
+// Attraction Tile
+// =============================================================================
+
 class _AttractionTile extends StatelessWidget {
-  const _AttractionTile({required this.name, required this.distance});
+  const _AttractionTile({
+    required this.name,
+    required this.distance,
+  });
 
   final String name;
   final String distance;
@@ -314,11 +580,19 @@ class _AttractionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(
+        vertical: 6,
+      ),
       child: Row(
         children: [
-          const Icon(AppIcons.location, color: AppColors.primary, size: 16),
-          const SizedBox(width: AppSpacing.sm),
+          const Icon(
+            AppIcons.location,
+            color: AppColors.primary,
+            size: 16,
+          ),
+          const SizedBox(
+            width: AppSpacing.sm,
+          ),
           Expanded(
             child: Text(
               name,

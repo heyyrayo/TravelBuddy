@@ -16,24 +16,34 @@ import '../../features/auth/presentation/screens/login_register_screen.dart';
 import '../../features/auth/presentation/screens/email_confirmation_screen.dart';
 import '../../features/auth/presentation/screens/forgot_password_screen.dart';
 import '../../features/auth/presentation/screens/reset_password_screen.dart';
+
 import '../../features/home/presentation/screens/home_dashboard_screen.dart';
 import '../../features/explore/presentation/screens/explore_india_screen.dart';
 import '../../features/search/presentation/screens/search_india_screen.dart';
 import '../../features/destination/presentation/screens/manali_details_screen.dart';
+
 import '../../features/trip/presentation/screens/trip_details_manali_screen.dart';
 import '../../features/trip/presentation/screens/trip_planner_step1_screen.dart';
+
 import '../../features/budget/presentation/screens/budget_prediction_screen.dart';
 import '../../features/budget/presentation/screens/loading_budget_prediction_screen.dart';
+
 import '../../features/recommendations/presentation/screens/recommended_for_you_screen.dart';
 import '../../features/recommendations/presentation/screens/loading_recommendations_screen.dart';
+
 import '../../features/readiness/presentation/screens/travel_readiness_dashboard_screen.dart';
 import '../../features/nearby/presentation/screens/nearby_essentials_screen.dart';
 import '../../features/notifications/presentation/screens/notification_center_screen.dart';
+
 import '../../features/profile/presentation/screens/profile_dashboard_screen.dart';
+import '../../features/profile/presentation/screens/saved_places_screen.dart';
+
 import '../../features/settings/presentation/screens/settings_screen.dart';
+
 import '../../features/errors/presentation/screens/error_gps_disabled_screen.dart';
 import '../../features/errors/presentation/screens/error_server_issue_screen.dart';
 import '../../features/errors/presentation/screens/empty_state_screens.dart';
+
 import '../../shared/widgets/nav/app_nav.dart';
 
 // ---------------------------------------------------------------------------
@@ -541,7 +551,9 @@ GoRouter buildRouter(BuildContext context) {
 
                           final error = ctx.read<TripState>().errorMessage;
 
-                          ScaffoldMessenger.of(ctx).showSnackBar(
+                          ScaffoldMessenger.of(
+                            ctx,
+                          ).showSnackBar(
                             SnackBar(
                               content: Text(
                                 error ?? 'Unable to create trip.',
@@ -747,9 +759,9 @@ GoRouter buildRouter(BuildContext context) {
             ],
           ),
 
-          // -----------------------------------------------------------------
+          // -------------------------------------------------------------------
           // Branch 3 — Recommendations
-          // -----------------------------------------------------------------
+          // -------------------------------------------------------------------
 
           StatefulShellBranch(
             routes: [
@@ -806,9 +818,9 @@ GoRouter buildRouter(BuildContext context) {
             ],
           ),
 
-          // -----------------------------------------------------------------
+          // -------------------------------------------------------------------
           // Branch 4 — Profile
-          // -----------------------------------------------------------------
+          // -------------------------------------------------------------------
 
           StatefulShellBranch(
             routes: [
@@ -818,6 +830,14 @@ GoRouter buildRouter(BuildContext context) {
                   return ProfileDashboardScreen(
                     onSettings: () {
                       ctx.push('/settings');
+                    },
+                    onTripHistory: () {
+                      ctx.go('/home/trips');
+                    },
+                    onSavedPlaces: () {
+                      ctx.push(
+                        '/home/profile/saved-places',
+                      );
                     },
                     onLogout: () async {
                       await ctx.read<AuthState>().logout();
@@ -830,6 +850,18 @@ GoRouter buildRouter(BuildContext context) {
                     },
                   );
                 },
+                routes: [
+                  // -------------------------------------------------------------
+                  // Saved Places
+                  // -------------------------------------------------------------
+
+                  GoRoute(
+                    path: 'saved-places',
+                    builder: (ctx, state) {
+                      return const SavedPlacesScreen();
+                    },
+                  ),
+                ],
               ),
             ],
           ),

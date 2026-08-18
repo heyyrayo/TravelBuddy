@@ -27,9 +27,9 @@ class DestinationState extends ChangeNotifier {
   List<Destination> _searchResults = [];
   AsyncStatus _status = AsyncStatus.idle;
 
-  List<Destination> get destinations => _destinations;
+  List<Destination> get destinations => List.unmodifiable(_destinations);
 
-  List<Destination> get searchResults => _searchResults;
+  List<Destination> get searchResults => List.unmodifiable(_searchResults);
 
   AsyncStatus get status => _status;
 
@@ -72,7 +72,16 @@ class TripState extends ChangeNotifier {
   List<SavedPlace> _savedPlaces = [];
 
   bool _isLoading = false;
+  bool _isLoadingTrips = false;
+  bool _isLoadingSavedPlaces = false;
+
   String? _errorMessage;
+  String? _tripErrorMessage;
+  String? _savedPlaceErrorMessage;
+
+  // -------------------------------------------------------------------------
+  // Getters
+  // -------------------------------------------------------------------------
 
   List<Trip> get trips => List.unmodifiable(_trips);
 
@@ -84,25 +93,97 @@ class TripState extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
+  bool get isLoadingTrips => _isLoadingTrips;
+
+  bool get isLoadingSavedPlaces => _isLoadingSavedPlaces;
+
   String? get errorMessage => _errorMessage;
 
+  String? get tripErrorMessage => _tripErrorMessage;
+
+  String? get savedPlaceErrorMessage => _savedPlaceErrorMessage;
+
+  // -------------------------------------------------------------------------
+  // Load everything
+  // -------------------------------------------------------------------------
+
   Future<void> load() async {
-    _isLoading = true;
     _errorMessage = null;
+    _tripErrorMessage = null;
+    _savedPlaceErrorMessage = null;
+
+    _isLoading = true;
     notifyListeners();
 
     try {
-      _trips = await _repo.getTrips();
-      _savedPlaces = await _repo.getSavedPlaces();
-    } on TripRepositoryException catch (error) {
-      _errorMessage = error.message;
-    } catch (_) {
-      _errorMessage = 'Unable to load your trips. Please try again.';
+      await Future.wait([
+        loadTrips(),
+        loadSavedPlaces(),
+      ]);
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
+
+  // -------------------------------------------------------------------------
+  // Load trips independently
+  // -------------------------------------------------------------------------
+
+  Future<void> loadTrips() async {
+    _isLoadingTrips = true;
+    _tripErrorMessage = null;
+
+    notifyListeners();
+
+    try {
+      final loadedTrips = await _repo.getTrips();
+
+      _trips = List<Trip>.from(loadedTrips);
+    } on TripRepositoryException catch (error) {
+      _tripErrorMessage = error.message;
+      _errorMessage = error.message;
+    } catch (_) {
+      _tripErrorMessage = 'Unable to load your trips. Please try again.';
+
+      _errorMessage = _tripErrorMessage;
+    } finally {
+      _isLoadingTrips = false;
+      notifyListeners();
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Load saved places independently
+  // -------------------------------------------------------------------------
+
+  Future<void> loadSavedPlaces() async {
+    _isLoadingSavedPlaces = true;
+    _savedPlaceErrorMessage = null;
+
+    notifyListeners();
+
+    try {
+      final loadedPlaces = await _repo.getSavedPlaces();
+
+      _savedPlaces = List<SavedPlace>.from(loadedPlaces);
+    } on TripRepositoryException catch (error) {
+      _savedPlaceErrorMessage = error.message;
+      _errorMessage = error.message;
+    } catch (_) {
+      _savedPlaceErrorMessage =
+          'Unable to load your saved places. Please try again.';
+
+      _errorMessage = _savedPlaceErrorMessage;
+    } finally {
+      _isLoadingSavedPlaces = false;
+      notifyListeners();
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Create trip
+  // -------------------------------------------------------------------------
 
   Future<Trip?> createTrip({
     required String name,
@@ -113,6 +194,8 @@ class TripState extends ChangeNotifier {
   }) async {
     _isLoading = true;
     _errorMessage = null;
+    _tripErrorMessage = null;
+
     notifyListeners();
 
     try {
@@ -136,9 +219,15 @@ class TripState extends ChangeNotifier {
       return createdTrip;
     } on TripRepositoryException catch (error) {
       _errorMessage = error.message;
+      _tripErrorMessage = error.message;
+
       return null;
     } catch (_) {
-      _errorMessage = 'Unable to create your trip. Please try again.';
+      const message = 'Unable to create your trip. Please try again.';
+
+      _errorMessage = message;
+      _tripErrorMessage = message;
+
       return null;
     } finally {
       _isLoading = false;
@@ -146,29 +235,82 @@ class TripState extends ChangeNotifier {
     }
   }
 
+  // -------------------------------------------------------------------------
+  // Save place
+  // -------------------------------------------------------------------------
+
   Future<void> savePlace(
     String destinationId,
     String name,
   ) async {
+    _errorMessage = null;
+    _savedPlaceErrorMessage = null;
+
+    // Prevent duplicate local saves.
+    final alreadySaved = _savedPlaces.any(
+      (place) => place.destinationId == destinationId,
+    );
+
+    if (alreadySaved) {
+      notifyListeners();
+      return;
+    }
+
     try {
       final place = SavedPlace(
-        id: 'sp_${DateTime.now().millisecondsSinceEpoch}',
+        id: '',
         destinationId: destinationId,
-        name: name,
+        name: name.trim(),
       );
 
       await _repo.savePlace(place);
 
+      // Generate a local fallback identifier because
+      // Supabase generates the real database ID.
+      final localPlace = SavedPlace(
+        id: 'local_${DateTime.now().microsecondsSinceEpoch}',
+        destinationId: destinationId,
+        name: name.trim(),
+      );
+
       _savedPlaces = [
         ..._savedPlaces,
-        place,
+        localPlace,
       ];
 
       notifyListeners();
     } on TripRepositoryException catch (error) {
       _errorMessage = error.message;
+      _savedPlaceErrorMessage = error.message;
+
+      notifyListeners();
+    } catch (_) {
+      const message = 'Unable to save this place. Please try again.';
+
+      _errorMessage = message;
+      _savedPlaceErrorMessage = message;
+
       notifyListeners();
     }
+  }
+
+  // -------------------------------------------------------------------------
+  // Clear state when user changes account
+  // -------------------------------------------------------------------------
+
+  void clear() {
+    _trips = [];
+    _savedPlaces = [];
+
+    _errorMessage = null;
+    _tripErrorMessage = null;
+    _savedPlaceErrorMessage = null;
+
+    _isLoading = false;
+    _isLoadingTrips = false;
+    _isLoadingSavedPlaces = false;
+
+    notifyListeners();
   }
 }
 
@@ -233,7 +375,7 @@ class RecommendationState extends ChangeNotifier {
 
   AsyncStatus get status => _status;
 
-  List<Destination> get recommendations => _recommendations;
+  List<Destination> get recommendations => List.unmodifiable(_recommendations);
 
   bool get hasRecommendations => _recommendations.isNotEmpty;
 
