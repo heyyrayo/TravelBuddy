@@ -12,10 +12,14 @@ class ProfileDashboardScreen extends StatelessWidget {
   const ProfileDashboardScreen({
     super.key,
     this.onSettings,
+    this.onTripHistory,
+    this.onSavedPlaces,
     this.onLogout,
   });
 
   final VoidCallback? onSettings;
+  final VoidCallback? onTripHistory;
+  final VoidCallback? onSavedPlaces;
   final VoidCallback? onLogout;
 
   @override
@@ -156,7 +160,9 @@ class ProfileDashboardScreen extends StatelessWidget {
                             size: 14,
                             color: AppColors.onSecondaryContainer,
                           ),
-                          SizedBox(width: 4),
+                          SizedBox(
+                            width: 4,
+                          ),
                           Text(
                             'Traveler',
                             style: TextStyle(
@@ -253,11 +259,11 @@ class ProfileDashboardScreen extends StatelessWidget {
                       onAction: tripState.load,
                     )
                   else if (trips.isEmpty)
-                    _EmptyState(
+                    const _EmptyState(
                       icon: Icons.luggage_outlined,
                       title: 'No trips yet',
-                      subtitle: 'Your trips will appear here '
-                          'once you start planning.',
+                      subtitle:
+                          'Your trips will appear here once you start planning.',
                     )
                   else
                     ...trips.map(
@@ -305,12 +311,12 @@ class ProfileDashboardScreen extends StatelessWidget {
                   _MenuTile(
                     icon: AppIcons.trips,
                     label: 'Trip History',
-                    onTap: () {},
+                    onTap: onTripHistory,
                   ),
                   _MenuTile(
                     icon: AppIcons.heart,
                     label: 'Saved Places',
-                    onTap: () {},
+                    onTap: onSavedPlaces,
                   ),
                   const SizedBox(
                     height: AppSpacing.sm,
@@ -512,7 +518,9 @@ class _StatCard extends StatelessWidget {
             color: AppColors.primary,
             size: 20,
           ),
-          const SizedBox(height: 4),
+          const SizedBox(
+            height: 4,
+          ),
           Text(
             value,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
