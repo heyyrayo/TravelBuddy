@@ -12,6 +12,7 @@ AI-powered smart travel companion app.
 - Notifications
 - Authentication
 - Weather integration
+- Booking system
 
 A few resources to get you started if this is your first Flutter project:
 
