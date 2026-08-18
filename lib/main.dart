@@ -1,23 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState;
 
+import 'core/config/supabase_config.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/app_colors.dart';
 import 'core/theme/app_spacing.dart';
 import 'core/state/auth_state.dart';
 import 'core/state/onboarding_state.dart';
 import 'core/state/connectivity_state.dart';
+import 'core/data/supabase_auth_repository.dart';
+import 'core/data/supabase_trip_repository.dart';
 import 'core/data/destination_repository.dart';
-import 'core/data/trip_repository.dart';
 import 'core/data/app_states.dart';
 import 'core/router/app_router.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize persistent states
-  final authState = AuthState();
+  SupabaseConfig.validate();
+
+  await Supabase.initialize(
+    url: SupabaseConfig.url,
+    publishableKey: SupabaseConfig.publishableKey,
+  );
+
+  // ---------------------------------------------------------------------------
+  // Repositories
+  // ---------------------------------------------------------------------------
+
+  final authRepository = SupabaseAuthRepository();
+  final destRepo = InMemoryDestinationRepository();
+  final tripRepo = SupabaseTripRepository();
+
+  // ---------------------------------------------------------------------------
+  // Persistent states
+  // ---------------------------------------------------------------------------
+
+  final authState = AuthState(authRepository);
   final onboardingState = OnboardingState();
   final connectivityState = ConnectivityState();
 
@@ -25,19 +46,33 @@ void main() async {
   await onboardingState.init();
   await connectivityState.init();
 
-  // Repositories
-  final destRepo = InMemoryDestinationRepository();
-  final tripRepo = InMemoryTripRepository();
-
+  // ---------------------------------------------------------------------------
   // Domain states
+  // ---------------------------------------------------------------------------
+
   final destinationState = DestinationState(destRepo);
   final tripState = TripState(tripRepo);
   final budgetState = BudgetState();
   final recommendationState = RecommendationState();
   final notificationState = AppNotificationState();
 
+  // ---------------------------------------------------------------------------
   // Pre-load destinations
+  // ---------------------------------------------------------------------------
+
   await destinationState.loadAll();
+
+  // ---------------------------------------------------------------------------
+  // Load authenticated user's trips
+  // ---------------------------------------------------------------------------
+
+  if (authState.isAuthenticated) {
+    await tripState.load();
+  }
+
+  // ---------------------------------------------------------------------------
+  // Start application
+  // ---------------------------------------------------------------------------
 
   runApp(
     MultiProvider(
@@ -57,7 +92,9 @@ void main() async {
 }
 
 class TravelBuddyApp extends StatefulWidget {
-  const TravelBuddyApp({super.key});
+  const TravelBuddyApp({
+    super.key,
+  });
 
   @override
   State<TravelBuddyApp> createState() => _TravelBuddyAppState();
@@ -77,12 +114,11 @@ class _TravelBuddyAppState extends State<TravelBuddyApp> {
     final isOnline = context.watch<ConnectivityState>().isOnline;
 
     return MaterialApp.router(
-      title: 'TravelBuddy India',
+      title: 'TravelBuddy',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       routerConfig: _router,
       builder: (ctx, child) {
-        // Full-screen offline overlay (shown on top of everything when offline)
         if (!isOnline) {
           return Stack(
             children: [
@@ -93,7 +129,9 @@ class _TravelBuddyAppState extends State<TravelBuddyApp> {
                   child: SafeArea(
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(AppSpacing.xl),
+                        padding: const EdgeInsets.all(
+                          AppSpacing.xl,
+                        ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -103,15 +141,19 @@ class _TravelBuddyAppState extends State<TravelBuddyApp> {
                               decoration: BoxDecoration(
                                 color: AppColors.surfaceContainerLow,
                                 borderRadius: BorderRadius.circular(
-                                    AppSpacing.radiusCard),
+                                  AppSpacing.radiusCard,
+                                ),
                               ),
                               clipBehavior: Clip.antiAlias,
                               child: Image.asset(
-                                'assets/images/empty_no_internet.png',
+                                'assets/images/'
+                                'empty_no_internet.png',
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            const SizedBox(height: AppSpacing.lg),
+                            const SizedBox(
+                              height: AppSpacing.lg,
+                            ),
                             Text(
                               'Off the Grid?',
                               style: Theme.of(ctx)
@@ -123,9 +165,13 @@ class _TravelBuddyAppState extends State<TravelBuddyApp> {
                                   ),
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: AppSpacing.sm),
+                            const SizedBox(
+                              height: AppSpacing.sm,
+                            ),
                             Text(
-                              "You're currently offline. Check your connection to continue exploring India",
+                              "You're currently offline. "
+                              "Check your connection to "
+                              "continue exploring India",
                               style:
                                   Theme.of(ctx).textTheme.bodyMedium?.copyWith(
                                         color: AppColors.onSurfaceVariant,
@@ -142,6 +188,7 @@ class _TravelBuddyAppState extends State<TravelBuddyApp> {
             ],
           );
         }
+
         return child ?? const SizedBox.shrink();
       },
     );
