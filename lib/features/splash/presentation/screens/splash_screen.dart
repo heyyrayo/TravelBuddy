@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 
@@ -19,18 +20,23 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
+
     _fadeIn = CurvedAnimation(
       parent: _controller,
       curve: const Cubic(0.2, 0.0, 0.0, 1.0),
     );
+
     _controller.forward();
 
     Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) widget.onComplete?.call();
+      if (mounted) {
+        widget.onComplete?.call();
+      }
     });
   }
 
@@ -46,63 +52,59 @@ class _SplashScreenState extends State<SplashScreen>
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Background gradient
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [AppColors.primary, AppColors.primaryContainer],
+                colors: [
+                  AppColors.primary,
+                  AppColors.primaryContainer,
+                ],
               ),
             ),
           ),
-          // Topographic pattern overlay
-          CustomPaint(painter: _TopoPainterSplash()),
-          // Content
+          CustomPaint(
+            painter: _TopoPainterSplash(),
+          ),
           FadeTransition(
             opacity: _fadeIn,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: AppColors.surfaceContainerLowest,
-                    borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                    boxShadow: AppColors.level2Shadow,
+                // TravelBuddy horizontal brand mark.
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.xl,
                   ),
-                  clipBehavior: Clip.antiAlias,
                   child: Image.asset(
-                    'assets/images/travelbuddy_logo.png',
-                    fit: BoxFit.cover,
+                    'assets/images/travelbuddy_horizontal.png',
+                    width: 260,
+                    fit: BoxFit.contain,
                   ),
                 ),
+
                 const SizedBox(height: AppSpacing.lg),
-                Text(
-                  'TravelBuddy',
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                        color: AppColors.onPrimary,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 32,
-                      ),
-                ),
-                const SizedBox(height: AppSpacing.sm),
+
                 Text(
                   'Explore India with Confidence.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: AppColors.onPrimary.withOpacity(0.8),
                       ),
+                  textAlign: TextAlign.center,
                 ),
+
                 const SizedBox(height: AppSpacing.xxl),
+
                 SizedBox(
                   width: 160,
                   child: LinearProgressIndicator(
                     backgroundColor: AppColors.onPrimary.withOpacity(0.2),
                     color: AppColors.secondaryContainer,
                     minHeight: 3,
-                    borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+                    borderRadius: BorderRadius.circular(
+                      AppSpacing.radiusPill,
+                    ),
                   ),
                 ),
               ],
@@ -125,17 +127,27 @@ class _TopoPainterSplash extends CustomPainter {
     for (var i = 0; i < 8; i++) {
       final path = Path();
       final y = size.height * (i / 8);
+
       path.moveTo(0, y);
+
       path.cubicTo(
-        size.width * 0.25, y - 40,
-        size.width * 0.5, y + 20,
-        size.width * 0.75, y - 20,
+        size.width * 0.25,
+        y - 40,
+        size.width * 0.5,
+        y + 20,
+        size.width * 0.75,
+        y - 20,
       );
+
       path.cubicTo(
-        size.width * 0.9, y - 30,
-        size.width, y + 10,
-        size.width, y,
+        size.width * 0.9,
+        y - 30,
+        size.width,
+        y + 10,
+        size.width,
+        y,
       );
+
       canvas.drawPath(path, paint);
     }
   }
@@ -143,3 +155,4 @@ class _TopoPainterSplash extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+

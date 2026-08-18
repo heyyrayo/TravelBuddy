@@ -1,57 +1,99 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../data/auth_repository.dart';
 
 class AuthState extends ChangeNotifier {
-  AuthState();
+  AuthState(this._repository);
 
-  String? _token;
-  String? _displayName;
+  final AuthRepository _repository;
+
+  LocalUser? _user;
   bool _isLoading = false;
+  bool _emailConfirmationRequired = false;
 
-  bool get isAuthenticated => _token != null;
-  String? get displayName => _displayName;
+  LocalUser? get user => _user;
+
+  bool get isAuthenticated => _user != null;
+
+  String? get displayName => _user?.name;
+
+  String? get email => _user?.email;
+
   bool get isLoading => _isLoading;
 
+  bool get emailConfirmationRequired => _emailConfirmationRequired;
+
   Future<void> init() async {
-    final prefs = await SharedPreferences.getInstance();
-    _token = prefs.getString('auth_token');
-    _displayName = prefs.getString('display_name');
+    _user = await _repository.getStoredSession();
     notifyListeners();
   }
 
-  Future<void> login(String email, String password) async {
-    _isLoading = true;
-    notifyListeners();
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 1500));
-    _token = 'mock_token_${DateTime.now().millisecondsSinceEpoch}';
-    _displayName = email.split('@').first;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('auth_token', _token!);
-    await prefs.setString('display_name', _displayName!);
-    _isLoading = false;
-    notifyListeners();
+  Future<AuthResult> register({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    return _execute<AuthResult>(() async {
+      final result = await _repository.register(
+        name: name,
+        email: email,
+        password: password,
+      );
+
+      _emailConfirmationRequired = result.requiresEmailConfirmation;
+
+      if (!result.requiresEmailConfirmation) {
+        _user = result.user;
+      }
+
+      return result;
+    });
   }
 
-  Future<void> register(String name, String email, String password) async {
-    _isLoading = true;
-    notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 1500));
-    _token = 'mock_token_${DateTime.now().millisecondsSinceEpoch}';
-    _displayName = name;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('auth_token', _token!);
-    await prefs.setString('display_name', name);
-    _isLoading = false;
-    notifyListeners();
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    await _execute<void>(() async {
+      _user = await _repository.login(
+        email: email,
+        password: password,
+      );
+
+      _emailConfirmationRequired = false;
+    });
+  }
+
+  Future<void> resetPassword({
+    required String email,
+  }) async {
+    await _execute<void>(() async {
+      await _repository.resetPassword(
+        email: email,
+      );
+    });
   }
 
   Future<void> logout() async {
-    _token = null;
-    _displayName = null;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('auth_token');
-    await prefs.remove('display_name');
+    await _repository.logout();
+
+    _user = null;
+    _emailConfirmationRequired = false;
+
     notifyListeners();
+  }
+
+  Future<T> _execute<T>(
+    Future<T> Function() operation,
+  ) async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      return await operation();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }

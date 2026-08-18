@@ -1,0 +1,10 @@
+flutter_launcher_icons:
+  image_path: "assets/images/travelbuddy_logo.png"
+
+  android: "ic_launcher"
+  min_sdk_android: 21
+
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/travelbuddy_logo.png"
+
+  ios: true
