@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -57,18 +58,174 @@ class _HomeShell extends StatelessWidget {
 
   final StatefulNavigationShell navigationShell;
 
+  // ===========================================================================
+  // QUIT DIALOG
+  // ===========================================================================
+
+  Future<void> _handleQuitRequest(BuildContext context) async {
+    final shouldQuit = await showDialog<bool>(
+      context: context,
+      barrierDismissible: true,
+      builder: (dialogContext) {
+        return AlertDialog(
+          icon: Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              color: AppColors.errorContainer,
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.logout_rounded,
+              color: AppColors.error,
+              size: 26,
+            ),
+          ),
+          title: const Text(
+            'Exit TravelBuddy?',
+            textAlign: TextAlign.center,
+          ),
+          content: const Text(
+            'Are you sure you want to quit the application?',
+            textAlign: TextAlign.center,
+          ),
+          actionsPadding: const EdgeInsets.fromLTRB(
+            24,
+            8,
+            24,
+            20,
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop(false);
+                    },
+                    child: const Text(
+                      'Cancel',
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 12,
+                ),
+                Expanded(
+                  child: FilledButton(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: AppColors.error,
+                      foregroundColor: AppColors.onError,
+                    ),
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop(true);
+                    },
+                    child: const Text(
+                      'Quit',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldQuit == true) {
+      await SystemNavigator.pop();
+    }
+  }
+
+  // ===========================================================================
+  // BACK NAVIGATION
+  // ===========================================================================
+
+  Future<void> _handleBack(BuildContext context) async {
+    final router = GoRouter.of(context);
+
+    // -------------------------------------------------------------------------
+    // STEP 1
+    //
+    // If there is a deeper page in the current navigation stack,
+    // go back to that page first.
+    //
+    // Example:
+    //
+    // Home
+    //   ↓
+    // Explore
+    //   ↓
+    // Manali
+    //   ↓
+    // Plan Trip
+    //
+    // Back:
+    //
+    // Plan Trip → Manali
+    // Manali    → Explore
+    // Explore   → Home
+    // -------------------------------------------------------------------------
+
+    if (router.canPop()) {
+      router.pop();
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // STEP 2
+    //
+    // If we're currently on another bottom-navigation section,
+    // go back to Home.
+    //
+    // Explore          → Home
+    // Trips            → Home
+    // Recommendations  → Home
+    // Profile          → Home
+    // -------------------------------------------------------------------------
+
+    if (navigationShell.currentIndex != 0) {
+      navigationShell.goBranch(
+        0,
+        initialLocation: true,
+      );
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // STEP 3
+    //
+    // We are now at the actual application Home root.
+    //
+    // ONLY HERE should the quit dialog appear.
+    // -------------------------------------------------------------------------
+
+    await _handleQuitRequest(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: navigationShell,
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: navigationShell.currentIndex,
-        onDestinationSelected: (index) {
-          navigationShell.goBranch(
-            index,
-            initialLocation: index == navigationShell.currentIndex,
-          );
-        },
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          return;
+        }
+
+        _handleBack(context);
+      },
+      child: Scaffold(
+        body: navigationShell,
+        bottomNavigationBar: BottomNavBar(
+          currentIndex: navigationShell.currentIndex,
+          onDestinationSelected: (index) {
+            navigationShell.goBranch(
+              index,
+              initialLocation: index == navigationShell.currentIndex,
+            );
+          },
+        ),
       ),
     );
   }
@@ -122,9 +279,9 @@ GoRouter buildRouter(BuildContext context) {
       return null;
     },
     routes: [
-      // ---------------------------------------------------------------------
-      // Splash
-      // ---------------------------------------------------------------------
+      // =======================================================================
+      // SPLASH
+      // =======================================================================
 
       GoRoute(
         path: '/splash',
@@ -147,9 +304,9 @@ GoRouter buildRouter(BuildContext context) {
         },
       ),
 
-      // ---------------------------------------------------------------------
-      // Onboarding
-      // ---------------------------------------------------------------------
+      // =======================================================================
+      // ONBOARDING
+      // =======================================================================
 
       GoRoute(
         path: '/onboarding',
@@ -168,9 +325,9 @@ GoRouter buildRouter(BuildContext context) {
         },
       ),
 
-      // ---------------------------------------------------------------------
-      // Authentication
-      // ---------------------------------------------------------------------
+      // =======================================================================
+      // AUTHENTICATION
+      // =======================================================================
 
       GoRoute(
         path: '/auth',
@@ -199,7 +356,7 @@ GoRouter buildRouter(BuildContext context) {
         },
         routes: [
           // -------------------------------------------------------------------
-          // Email confirmation
+          // EMAIL CONFIRMATION
           // -------------------------------------------------------------------
 
           GoRoute(
@@ -221,7 +378,7 @@ GoRouter buildRouter(BuildContext context) {
           ),
 
           // -------------------------------------------------------------------
-          // Forgot password
+          // FORGOT PASSWORD
           // -------------------------------------------------------------------
 
           GoRoute(
@@ -240,7 +397,7 @@ GoRouter buildRouter(BuildContext context) {
           ),
 
           // -------------------------------------------------------------------
-          // Reset password
+          // RESET PASSWORD
           // -------------------------------------------------------------------
 
           GoRoute(
@@ -260,9 +417,9 @@ GoRouter buildRouter(BuildContext context) {
         ],
       ),
 
-      // ---------------------------------------------------------------------
-      // Notifications
-      // ---------------------------------------------------------------------
+      // =======================================================================
+      // NOTIFICATIONS
+      // =======================================================================
 
       GoRoute(
         path: '/notifications',
@@ -271,9 +428,9 @@ GoRouter buildRouter(BuildContext context) {
         },
       ),
 
-      // ---------------------------------------------------------------------
-      // Settings
-      // ---------------------------------------------------------------------
+      // =======================================================================
+      // SETTINGS
+      // =======================================================================
 
       GoRoute(
         path: '/settings',
@@ -292,9 +449,9 @@ GoRouter buildRouter(BuildContext context) {
         },
       ),
 
-      // ---------------------------------------------------------------------
-      // GPS error
-      // ---------------------------------------------------------------------
+      // =======================================================================
+      // GPS ERROR
+      // =======================================================================
 
       GoRoute(
         path: '/error/gps',
@@ -306,9 +463,9 @@ GoRouter buildRouter(BuildContext context) {
         },
       ),
 
-      // ---------------------------------------------------------------------
-      // Server error
-      // ---------------------------------------------------------------------
+      // =======================================================================
+      // SERVER ERROR
+      // =======================================================================
 
       GoRoute(
         path: '/error/server',
@@ -320,9 +477,9 @@ GoRouter buildRouter(BuildContext context) {
         },
       ),
 
-      // ---------------------------------------------------------------------
-      // Main shell
-      // ---------------------------------------------------------------------
+      // =======================================================================
+      // MAIN APPLICATION SHELL
+      // =======================================================================
 
       StatefulShellRoute.indexedStack(
         builder: (ctx, state, shell) {
@@ -331,9 +488,9 @@ GoRouter buildRouter(BuildContext context) {
           );
         },
         branches: [
-          // -------------------------------------------------------------------
-          // Branch 0 — Home
-          // -------------------------------------------------------------------
+          // ===================================================================
+          // BRANCH 0 — HOME
+          // ===================================================================
 
           StatefulShellBranch(
             routes: [
@@ -341,11 +498,20 @@ GoRouter buildRouter(BuildContext context) {
                 path: '/home',
                 builder: (ctx, state) {
                   return HomeDashboardScreen(
+                    // ---------------------------------------------------------
+                    // PLAN TRIP
+                    // ---------------------------------------------------------
+
                     onPlanTrip: () {
                       ctx.push(
                         '/home/trips/new/planner',
                       );
                     },
+
+                    // ---------------------------------------------------------
+                    // EXISTING TRIP
+                    // ---------------------------------------------------------
+
                     onTripTap: () async {
                       final tripState = ctx.read<TripState>();
 
@@ -363,15 +529,116 @@ GoRouter buildRouter(BuildContext context) {
                         );
                       }
                     },
+
+                    // =========================================================
+                    // QUICK ACCESS
+                    // =========================================================
+
+                    // ---------------------------------------------------------
+                    // EXPLORE
+                    // ---------------------------------------------------------
+
+                    onExplore: () {
+                      ctx.go(
+                        '/home/explore',
+                      );
+                    },
+
+                    // ---------------------------------------------------------
+                    // BUDGET
+                    // ---------------------------------------------------------
+
+                    onBudget: () {
+                      final tripState = ctx.read<TripState>();
+
+                      if (tripState.trips.isEmpty) {
+                        ctx.push(
+                          '/home/trips/new/planner',
+                        );
+                        return;
+                      }
+
+                      final trip = tripState.trips.first;
+
+                      ctx.push(
+                        '/home/trips/${trip.id}/budget',
+                      );
+                    },
+
+                    // ---------------------------------------------------------
+                    // NEARBY
+                    // ---------------------------------------------------------
+
+                    onNearby: () {
+                      final tripState = ctx.read<TripState>();
+
+                      if (tripState.trips.isEmpty) {
+                        ctx.push(
+                          '/home/trips/new/planner',
+                        );
+                        return;
+                      }
+
+                      final trip = tripState.trips.first;
+
+                      ctx.push(
+                        '/home/trips/${trip.id}/nearby',
+                      );
+                    },
+
+                    // ---------------------------------------------------------
+                    // READINESS
+                    // ---------------------------------------------------------
+
+                    onReadiness: () {
+                      final tripState = ctx.read<TripState>();
+
+                      if (tripState.trips.isEmpty) {
+                        ctx.push(
+                          '/home/trips/new/planner',
+                        );
+                        return;
+                      }
+
+                      final trip = tripState.trips.first;
+
+                      ctx.push(
+                        '/home/trips/${trip.id}/readiness',
+                      );
+                    },
+
+                    // =========================================================
+                    // HEADER ACTIONS
+                    // =========================================================
+
+                    // ---------------------------------------------------------
+                    // PROFILE
+                    // ---------------------------------------------------------
+
+                    onProfile: () {
+                      ctx.go(
+                        '/home/profile',
+                      );
+                    },
+
+                    // ---------------------------------------------------------
+                    // NOTIFICATIONS
+                    // ---------------------------------------------------------
+
+                    onNotifications: () {
+                      ctx.push(
+                        '/notifications',
+                      );
+                    },
                   );
                 },
               ),
             ],
           ),
 
-          // -------------------------------------------------------------------
-          // Branch 1 — Explore
-          // -------------------------------------------------------------------
+          // ===================================================================
+          // BRANCH 1 — EXPLORE
+          // ===================================================================
 
           StatefulShellBranch(
             routes: [
@@ -392,6 +659,10 @@ GoRouter buildRouter(BuildContext context) {
                   );
                 },
                 routes: [
+                  // -----------------------------------------------------------
+                  // SEARCH
+                  // -----------------------------------------------------------
+
                   GoRoute(
                     path: 'search',
                     builder: (ctx, state) {
@@ -404,6 +675,11 @@ GoRouter buildRouter(BuildContext context) {
                       );
                     },
                   ),
+
+                  // -----------------------------------------------------------
+                  // DESTINATION
+                  // -----------------------------------------------------------
+
                   GoRoute(
                     path: 'destination/:id',
                     builder: (ctx, state) {
@@ -424,9 +700,9 @@ GoRouter buildRouter(BuildContext context) {
             ],
           ),
 
-          // -------------------------------------------------------------------
-          // Branch 2 — Trips
-          // -------------------------------------------------------------------
+          // ===================================================================
+          // BRANCH 2 — TRIPS
+          // ===================================================================
 
           StatefulShellBranch(
             routes: [
@@ -435,6 +711,10 @@ GoRouter buildRouter(BuildContext context) {
                 builder: (ctx, state) {
                   final tripState = ctx.watch<TripState>();
 
+                  // -----------------------------------------------------------
+                  // LOADING
+                  // -----------------------------------------------------------
+
                   if (tripState.isLoading) {
                     return const Scaffold(
                       body: Center(
@@ -442,6 +722,10 @@ GoRouter buildRouter(BuildContext context) {
                       ),
                     );
                   }
+
+                  // -----------------------------------------------------------
+                  // ERROR
+                  // -----------------------------------------------------------
 
                   if (tripState.errorMessage != null) {
                     return Scaffold(
@@ -481,6 +765,10 @@ GoRouter buildRouter(BuildContext context) {
                     );
                   }
 
+                  // -----------------------------------------------------------
+                  // NO TRIPS
+                  // -----------------------------------------------------------
+
                   if (!tripState.hasTrips) {
                     return Scaffold(
                       body: EmptyNoTripsScreen(
@@ -516,7 +804,7 @@ GoRouter buildRouter(BuildContext context) {
                 },
                 routes: [
                   // -----------------------------------------------------------
-                  // New trip planner
+                  // NEW TRIP PLANNER
                   // -----------------------------------------------------------
 
                   GoRoute(
@@ -567,7 +855,7 @@ GoRouter buildRouter(BuildContext context) {
                   ),
 
                   // -----------------------------------------------------------
-                  // Individual trip
+                  // INDIVIDUAL TRIP
                   // -----------------------------------------------------------
 
                   GoRoute(
@@ -585,6 +873,10 @@ GoRouter buildRouter(BuildContext context) {
                           break;
                         }
                       }
+
+                      // -------------------------------------------------------
+                      // TRIP NOT FOUND
+                      // -------------------------------------------------------
 
                       if (trip == null) {
                         return Scaffold(
@@ -645,9 +937,9 @@ GoRouter buildRouter(BuildContext context) {
                       );
                     },
                     routes: [
-                      // ---------------------------------------------------------
-                      // Planner
-                      // ---------------------------------------------------------
+                      // -------------------------------------------------------
+                      // PLANNER
+                      // -------------------------------------------------------
 
                       GoRoute(
                         path: 'planner',
@@ -684,9 +976,9 @@ GoRouter buildRouter(BuildContext context) {
                         },
                       ),
 
-                      // ---------------------------------------------------------
-                      // Budget
-                      // ---------------------------------------------------------
+                      // -------------------------------------------------------
+                      // BUDGET
+                      // -------------------------------------------------------
 
                       GoRoute(
                         path: 'budget',
@@ -731,9 +1023,9 @@ GoRouter buildRouter(BuildContext context) {
                         },
                       ),
 
-                      // ---------------------------------------------------------
-                      // Readiness
-                      // ---------------------------------------------------------
+                      // -------------------------------------------------------
+                      // READINESS
+                      // -------------------------------------------------------
 
                       GoRoute(
                         path: 'readiness',
@@ -742,9 +1034,9 @@ GoRouter buildRouter(BuildContext context) {
                         },
                       ),
 
-                      // ---------------------------------------------------------
-                      // Nearby
-                      // ---------------------------------------------------------
+                      // -------------------------------------------------------
+                      // NEARBY
+                      // -------------------------------------------------------
 
                       GoRoute(
                         path: 'nearby',
@@ -759,9 +1051,9 @@ GoRouter buildRouter(BuildContext context) {
             ],
           ),
 
-          // -------------------------------------------------------------------
-          // Branch 3 — Recommendations
-          // -------------------------------------------------------------------
+          // ===================================================================
+          // BRANCH 3 — RECOMMENDATIONS
+          // ===================================================================
 
           StatefulShellBranch(
             routes: [
@@ -800,7 +1092,9 @@ GoRouter buildRouter(BuildContext context) {
                       body: EmptyNoRecommendationsScreen(
                         onSetPreferences: () {},
                         onExplore: () {
-                          ctx.go('/home/explore');
+                          ctx.go(
+                            '/home/explore',
+                          );
                         },
                       ),
                     );
@@ -818,9 +1112,9 @@ GoRouter buildRouter(BuildContext context) {
             ],
           ),
 
-          // -------------------------------------------------------------------
-          // Branch 4 — Profile
-          // -------------------------------------------------------------------
+          // ===================================================================
+          // BRANCH 4 — PROFILE
+          // ===================================================================
 
           StatefulShellBranch(
             routes: [
@@ -851,9 +1145,9 @@ GoRouter buildRouter(BuildContext context) {
                   );
                 },
                 routes: [
-                  // -------------------------------------------------------------
-                  // Saved Places
-                  // -------------------------------------------------------------
+                  // -----------------------------------------------------------
+                  // SAVED PLACES
+                  // -----------------------------------------------------------
 
                   GoRoute(
                     path: 'saved-places',
