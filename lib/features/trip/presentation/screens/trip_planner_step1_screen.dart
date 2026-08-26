@@ -31,10 +31,11 @@ class TripPlannerStep1Screen extends StatefulWidget {
 class _TripPlannerStep1ScreenState extends State<TripPlannerStep1Screen> {
   final _destinationController = TextEditingController();
 
-  final _tripNameController = TextEditingController(
-    text: 'My TravelBuddy Trip',
-  );
+  // Intentionally empty.
+  // The user chooses their own trip name.
+  final _tripNameController = TextEditingController();
 
+  // Keep the existing default traveler count.
   final _travelersController = TextEditingController(
     text: '1',
   );
@@ -96,13 +97,19 @@ class _TripPlannerStep1ScreenState extends State<TripPlannerStep1Screen> {
 
   void _submit() {
     final destination = _destinationController.text.trim();
-
     final tripName = _tripNameController.text.trim();
 
     final travelers = int.tryParse(
           _travelersController.text.trim(),
         ) ??
         0;
+
+    if (tripName.isEmpty) {
+      _showError(
+        'Please enter a name for your trip.',
+      );
+      return;
+    }
 
     if (destination.isEmpty) {
       _showError(
@@ -143,7 +150,7 @@ class _TripPlannerStep1ScreenState extends State<TripPlannerStep1Screen> {
 
     widget.onNext?.call(
       destinationId: destinationId,
-      tripName: tripName.isEmpty ? 'My TravelBuddy Trip' : tripName,
+      tripName: tripName,
       startDate: _startDate!,
       endDate: _endDate!,
       travelers: travelers,
@@ -264,16 +271,26 @@ class _TripPlannerStep1ScreenState extends State<TripPlannerStep1Screen> {
                   const SizedBox(
                     height: AppSpacing.lg,
                   ),
+
+                  // ------------------------------------------------------------
+                  // Trip Name
+                  // ------------------------------------------------------------
                   AppTextField(
                     label: 'Trip Name',
                     controller: _tripNameController,
                     prefixIcon: const Icon(
                       Icons.edit_outlined,
                     ),
+                    hintText: 'e.g. My Manali Adventure',
                   ),
+
                   const SizedBox(
                     height: AppSpacing.md,
                   ),
+
+                  // ------------------------------------------------------------
+                  // Destination
+                  // ------------------------------------------------------------
                   AppTextField(
                     label: 'Destination',
                     controller: _destinationController,
@@ -282,9 +299,11 @@ class _TripPlannerStep1ScreenState extends State<TripPlannerStep1Screen> {
                     ),
                     hintText: 'e.g. Manali, Goa, Jaipur',
                   ),
+
                   const SizedBox(
                     height: AppSpacing.md,
                   ),
+
                   Row(
                     children: [
                       Expanded(
@@ -332,9 +351,11 @@ class _TripPlannerStep1ScreenState extends State<TripPlannerStep1Screen> {
                       ),
                     ],
                   ),
+
                   const SizedBox(
                     height: AppSpacing.md,
                   ),
+
                   AppTextField(
                     label: 'Number of Travelers',
                     controller: _travelersController,
@@ -343,6 +364,7 @@ class _TripPlannerStep1ScreenState extends State<TripPlannerStep1Screen> {
                     ),
                     keyboardType: TextInputType.number,
                   ),
+
                   const SizedBox(
                     height: AppSpacing.xxl,
                   ),

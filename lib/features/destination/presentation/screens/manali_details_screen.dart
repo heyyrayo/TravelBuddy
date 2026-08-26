@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/app_icons.dart';
+import '../../../../core/constants/destination_images.dart';
 import '../../../../core/data/app_states.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
@@ -23,15 +24,16 @@ class ManaliDetailsScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       body: CustomScrollView(
         slivers: [
-          // -------------------------------------------------------------------
-          // Hero / App Bar
-          // -------------------------------------------------------------------
+          // ===================================================================
+          // HERO / APP BAR
+          // ===================================================================
 
           SliverAppBar(
             expandedHeight: 300,
             pinned: true,
             backgroundColor: AppColors.primary,
             surfaceTintColor: Colors.transparent,
+
             leading: Semantics(
               label: 'Back',
               child: IconButton(
@@ -45,10 +47,11 @@ class ManaliDetailsScreen extends StatelessWidget {
                 },
               ),
             ),
+
             actions: [
-              // ---------------------------------------------------------------
-              // Save to Wishlist
-              // ---------------------------------------------------------------
+              // ----------------------------------------------------------------
+              // Wishlist
+              // ----------------------------------------------------------------
 
               Consumer<TripState>(
                 builder: (context, tripState, _) {
@@ -71,10 +74,6 @@ class ManaliDetailsScreen extends StatelessWidget {
                       );
 
                       if (isSaved) {
-                        debugPrint(
-                          'PLACE ALREADY SAVED: $destinationId',
-                        );
-
                         if (!context.mounted) {
                           return;
                         }
@@ -140,9 +139,9 @@ class ManaliDetailsScreen extends StatelessWidget {
                 },
               ),
 
-              // ---------------------------------------------------------------
+              // ----------------------------------------------------------------
               // Share
-              // ---------------------------------------------------------------
+              // ----------------------------------------------------------------
 
               Semantics(
                 label: 'Share',
@@ -156,6 +155,11 @@ class ManaliDetailsScreen extends StatelessWidget {
                 ),
               ),
             ],
+
+            // ------------------------------------------------------------------
+            // Hero image
+            // ------------------------------------------------------------------
+
             flexibleSpace: FlexibleSpaceBar(
               title: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -163,16 +167,20 @@ class ManaliDetailsScreen extends StatelessWidget {
                 children: [
                   Text(
                     destinationName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: AppColors.onPrimary,
                       fontWeight: FontWeight.w700,
                       fontSize: 20,
                     ),
                   ),
-                  Text(
+                  const Text(
                     'Himachal Pradesh, India',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: AppColors.onPrimary.withOpacity(0.8),
+                      color: AppColors.onPrimary,
                       fontSize: 12,
                     ),
                   ),
@@ -181,40 +189,50 @@ class ManaliDetailsScreen extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
+                  // ------------------------------------------------------------
+                  // Real destination image
+                  // ------------------------------------------------------------
+
+                  Image.network(
+                    DestinationImages.hero(destinationName),
+                    fit: BoxFit.cover,
+                    errorBuilder: (
+                      context,
+                      error,
+                      stackTrace,
+                    ) {
+                      return _heroFallback();
+                    },
+                    loadingBuilder: (
+                      context,
+                      child,
+                      progress,
+                    ) {
+                      if (progress == null) {
+                        return child;
+                      }
+
+                      return _heroLoading();
+                    },
+                  ),
+
+                  // ------------------------------------------------------------
+                  // Dark overlay
+                  // ------------------------------------------------------------
+
                   Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          AppColors.primary,
-                          AppColors.primaryContainer,
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // Hero illustration placeholder
-                  Center(
-                    child: Icon(
-                      Icons.landscape,
-                      size: 120,
-                      color: AppColors.onPrimary.withOpacity(0.15),
-                    ),
-                  ),
-
-                  // Gradient overlay for text legibility
-                  const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
+                          Colors.black.withOpacity(0.18),
                           Colors.transparent,
-                          AppColors.primary,
+                          AppColors.primary.withOpacity(0.92),
                         ],
-                        stops: [
-                          0.5,
+                        stops: const [
+                          0.0,
+                          0.45,
                           1.0,
                         ],
                       ),
@@ -225,9 +243,9 @@ class ManaliDetailsScreen extends StatelessWidget {
             ),
           ),
 
-          // -------------------------------------------------------------------
-          // Main Content
-          // -------------------------------------------------------------------
+          // ===================================================================
+          // MAIN CONTENT
+          // ===================================================================
 
           SliverToBoxAdapter(
             child: Padding(
@@ -237,13 +255,20 @@ class ManaliDetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // ----------------------------------------------------------------
+                  // Quick info
+                  // ----------------------------------------------------------------
+
                   const _QuickInfoBar(),
 
                   const SizedBox(
                     height: AppSpacing.lg,
                   ),
 
+                  // ----------------------------------------------------------------
                   // About
+                  // ----------------------------------------------------------------
+
                   Text(
                     'About $destinationName',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -271,7 +296,10 @@ class ManaliDetailsScreen extends StatelessWidget {
                     height: AppSpacing.lg,
                   ),
 
+                  // ----------------------------------------------------------------
                   // Photo Gallery
+                  // ----------------------------------------------------------------
+
                   Text(
                     'Photo Gallery',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -284,13 +312,18 @@ class ManaliDetailsScreen extends StatelessWidget {
                     height: AppSpacing.sm,
                   ),
 
-                  const _PhotoGallery(),
+                  _PhotoGallery(
+                    destinationName: destinationName,
+                  ),
 
                   const SizedBox(
                     height: AppSpacing.lg,
                   ),
 
+                  // ----------------------------------------------------------------
                   // Nearby Attractions
+                  // ----------------------------------------------------------------
+
                   Text(
                     'Nearby Attractions',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -314,7 +347,10 @@ class ManaliDetailsScreen extends StatelessWidget {
                     height: AppSpacing.lg,
                   ),
 
+                  // ----------------------------------------------------------------
                   // Local Food
+                  // ----------------------------------------------------------------
+
                   Text(
                     'Local Food',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -336,17 +372,17 @@ class ManaliDetailsScreen extends StatelessWidget {
                       'Dham',
                       'Babru',
                       'Aktori',
-                    ]
-                        .map(
-                          (food) => Chip(
-                            label: Text(food),
-                            backgroundColor:
-                                AppColors.tertiaryFixed.withOpacity(0.3),
-                            labelStyle: Theme.of(context).textTheme.labelMedium,
-                            side: BorderSide.none,
-                          ),
-                        )
-                        .toList(),
+                    ].map(
+                      (food) {
+                        return Chip(
+                          label: Text(food),
+                          backgroundColor:
+                              AppColors.tertiaryFixed.withOpacity(0.3),
+                          labelStyle: Theme.of(context).textTheme.labelMedium,
+                          side: BorderSide.none,
+                        );
+                      },
+                    ).toList(),
                   ),
 
                   const SizedBox(
@@ -359,9 +395,9 @@ class ManaliDetailsScreen extends StatelessWidget {
         ],
       ),
 
-      // -----------------------------------------------------------------------
-      // Bottom CTA
-      // -----------------------------------------------------------------------
+      // =======================================================================
+      // BOTTOM CTA
+      // =======================================================================
 
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(
@@ -386,13 +422,52 @@ class ManaliDetailsScreen extends StatelessWidget {
   // Destination ID
   // ===========================================================================
 
-  String _destinationId(
-    String name,
-  ) {
+  String _destinationId(String name) {
     return name.trim().toLowerCase().replaceAll(
           RegExp(r'\s+'),
           '_',
         );
+  }
+
+  // ===========================================================================
+  // Hero loading state
+  // ===========================================================================
+
+  static Widget _heroLoading() {
+    return Container(
+      color: AppColors.primaryContainer,
+      child: const Center(
+        child: CircularProgressIndicator(
+          color: AppColors.onPrimary,
+        ),
+      ),
+    );
+  }
+
+  // ===========================================================================
+  // Hero fallback
+  // ===========================================================================
+
+  static Widget _heroFallback() {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            AppColors.primary,
+            AppColors.primaryContainer,
+          ],
+        ),
+      ),
+      child: const Center(
+        child: Icon(
+          Icons.landscape,
+          size: 100,
+          color: AppColors.onPrimary,
+        ),
+      ),
+    );
   }
 
   // ===========================================================================
@@ -451,37 +526,42 @@ class _QuickInfoBar extends StatelessWidget {
         ),
       ),
       child: Row(
-        children: metrics
-            .map(
-              (metric) => Expanded(
-                child: Column(
-                  children: [
-                    Icon(
-                      metric.$1,
-                      color: AppColors.primary,
-                      size: 20,
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      metric.$2,
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: AppColors.onSurface,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                    Text(
-                      metric.$3,
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: AppColors.onSurfaceVariant,
-                          ),
-                    ),
-                  ],
-                ),
+        children: metrics.map(
+          (metric) {
+            return Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    metric.$1,
+                    color: AppColors.primary,
+                    size: 20,
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    metric.$2,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: AppColors.onSurface,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                  Text(
+                    metric.$3,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: AppColors.onSurfaceVariant,
+                        ),
+                  ),
+                ],
               ),
-            )
-            .toList(),
+            );
+          },
+        ).toList(),
       ),
     );
   }
@@ -492,48 +572,50 @@ class _QuickInfoBar extends StatelessWidget {
 // =============================================================================
 
 class _PhotoGallery extends StatelessWidget {
-  const _PhotoGallery();
+  const _PhotoGallery({
+    required this.destinationName,
+  });
+
+  final String destinationName;
 
   @override
   Widget build(BuildContext context) {
+    final images = DestinationImages.gallery(destinationName);
+
     return SizedBox(
-      height: 120,
+      height: 180,
       child: Row(
         children: [
+          // ---------------------------------------------------------------
+          // Main image
+          // ---------------------------------------------------------------
+
           Expanded(
             flex: 2,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.primaryContainer,
-                borderRadius: BorderRadius.circular(
-                  AppSpacing.radiusMd,
-                ),
-              ),
-              child: const Icon(
-                Icons.landscape,
-                color: AppColors.onPrimaryContainer,
-                size: 40,
+            child: _GalleryImage(
+              url: images[0],
+              borderRadius: BorderRadius.circular(
+                AppSpacing.radiusMd,
               ),
             ),
           ),
+
           const SizedBox(
             width: AppSpacing.sm,
           ),
+
+          // ---------------------------------------------------------------
+          // Side images
+          // ---------------------------------------------------------------
+
           Expanded(
             child: Column(
               children: [
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.tertiaryContainer,
-                      borderRadius: BorderRadius.circular(
-                        AppSpacing.radiusMd,
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.water,
-                      color: AppColors.onTertiaryContainer,
-                      size: 24,
+                  child: _GalleryImage(
+                    url: images[1],
+                    borderRadius: BorderRadius.circular(
+                      AppSpacing.radiusMd,
                     ),
                   ),
                 ),
@@ -541,17 +623,10 @@ class _PhotoGallery extends StatelessWidget {
                   height: AppSpacing.sm,
                 ),
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryFixed,
-                      borderRadius: BorderRadius.circular(
-                        AppSpacing.radiusMd,
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.ac_unit,
-                      color: AppColors.primary,
-                      size: 24,
+                  child: _GalleryImage(
+                    url: images[2],
+                    borderRadius: BorderRadius.circular(
+                      AppSpacing.radiusMd,
                     ),
                   ),
                 ),
@@ -559,6 +634,67 @@ class _PhotoGallery extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// =============================================================================
+// Gallery Image
+// =============================================================================
+
+class _GalleryImage extends StatelessWidget {
+  const _GalleryImage({
+    required this.url,
+    required this.borderRadius,
+  });
+
+  final String url;
+  final BorderRadius borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child: SizedBox.expand(
+        child: Image.network(
+          url,
+          fit: BoxFit.cover,
+          errorBuilder: (
+            context,
+            error,
+            stackTrace,
+          ) {
+            return Container(
+              color: AppColors.primaryContainer,
+              child: const Center(
+                child: Icon(
+                  Icons.image_not_supported_outlined,
+                  color: AppColors.onPrimaryContainer,
+                  size: 32,
+                ),
+              ),
+            );
+          },
+          loadingBuilder: (
+            context,
+            child,
+            loadingProgress,
+          ) {
+            if (loadingProgress == null) {
+              return child;
+            }
+
+            return Container(
+              color: AppColors.surfaceContainerLow,
+              child: const Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -596,10 +732,15 @@ class _AttractionTile extends StatelessWidget {
           Expanded(
             child: Text(
               name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.onSurface,
                   ),
             ),
+          ),
+          const SizedBox(
+            width: AppSpacing.sm,
           ),
           Text(
             distance,
