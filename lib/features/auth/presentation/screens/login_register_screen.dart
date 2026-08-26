@@ -176,7 +176,6 @@ class _LoginRegisterScreenState extends State<LoginRegisterScreen>
             // -----------------------------------------------------------------
             // Header
             // -----------------------------------------------------------------
-
             Container(
               padding: const EdgeInsets.all(AppSpacing.xl),
               decoration: const BoxDecoration(
