@@ -163,12 +163,18 @@ The app uses **Supabase PostgreSQL** for:
 - Destination information
 - Budget records
 - Notifications
-Open a Pull Request
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+1. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+2. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+3. Push to the branch (`git push origin feature/AmazingFeature`)
+4. Open a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Support
 
 For issues, bugs, or feature requests, please open an issue on the repository.
