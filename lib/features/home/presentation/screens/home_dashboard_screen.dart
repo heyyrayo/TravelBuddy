@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/constants/app_icons.dart';
 import '../../../../core/data/app_states.dart';
 import '../../../../core/data/trip_repository.dart';
 import '../../../../core/state/auth_state.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
-import '../../../../core/constants/app_icons.dart';
 import '../../../../shared/widgets/cards/travel_card.dart';
 
 class HomeDashboardScreen extends StatelessWidget {
@@ -14,10 +14,28 @@ class HomeDashboardScreen extends StatelessWidget {
     super.key,
     this.onPlanTrip,
     this.onTripTap,
+
+    // Quick Access
+    this.onExplore,
+    this.onBudget,
+    this.onNearby,
+    this.onReadiness,
+
+    // Header actions
+    this.onProfile,
+    this.onNotifications,
   });
 
   final VoidCallback? onPlanTrip;
   final VoidCallback? onTripTap;
+
+  final VoidCallback? onExplore;
+  final VoidCallback? onBudget;
+  final VoidCallback? onNearby;
+  final VoidCallback? onReadiness;
+
+  final VoidCallback? onProfile;
+  final VoidCallback? onNotifications;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +49,10 @@ class HomeDashboardScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       body: CustomScrollView(
         slivers: [
+          // -------------------------------------------------------------------
+          // App Bar
+          // -------------------------------------------------------------------
+
           SliverAppBar(
             floating: true,
             backgroundColor: AppColors.surfaceContainerLowest,
@@ -43,33 +65,50 @@ class HomeDashboardScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
             ),
             actions: [
+              // Notifications
               Semantics(
                 label: 'Notifications',
+                button: true,
                 child: IconButton(
                   icon: const Icon(AppIcons.bell),
                   tooltip: 'Notifications',
-                  onPressed: () {},
+                  onPressed: onNotifications,
                 ),
               ),
+
+              // Profile
               Padding(
                 padding: const EdgeInsets.only(
                   right: AppSpacing.md,
                 ),
-                child: CircleAvatar(
-                  radius: 16,
-                  backgroundColor: AppColors.primaryFixed,
-                  child: Text(
-                    _initial(displayName),
-                    style: const TextStyle(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
+                child: Semantics(
+                  label: 'Profile',
+                  button: true,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: onProfile,
+                    child: CircleAvatar(
+                      radius: 16,
+                      backgroundColor: AppColors.primaryFixed,
+                      child: Text(
+                        _initial(displayName),
+                        style: const TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ],
           ),
+
+          // -------------------------------------------------------------------
+          // Main Content
+          // -------------------------------------------------------------------
+
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(
@@ -78,14 +117,22 @@ class HomeDashboardScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // -----------------------------------------------------------------
+                  // Dynamic Greeting
+                  // -----------------------------------------------------------------
+
                   Text(
-                    'Good Morning, $displayName',
+                    '${_getGreeting()}, $displayName',
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                           color: AppColors.onSurface,
                           fontWeight: FontWeight.w700,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.xs),
+
+                  const SizedBox(
+                    height: AppSpacing.xs,
+                  ),
+
                   Text(
                     trips.isEmpty
                         ? 'Ready to plan your first adventure?'
@@ -94,18 +141,41 @@ class HomeDashboardScreen extends StatelessWidget {
                           color: AppColors.onSurfaceVariant,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.lg),
+
+                  const SizedBox(
+                    height: AppSpacing.lg,
+                  ),
+
+                  // -----------------------------------------------------------------
+                  // Readiness
+                  // -----------------------------------------------------------------
+
                   if (trips.isNotEmpty) ...[
                     _ReadinessCard(
                       trip: trips.first,
                       onTap: onTripTap,
                     ),
-                    const SizedBox(height: AppSpacing.lg),
+                    const SizedBox(
+                      height: AppSpacing.lg,
+                    ),
                   ],
+
+                  // -----------------------------------------------------------------
+                  // Plan Trip
+                  // -----------------------------------------------------------------
+
                   _PlanTripBanner(
                     onTap: onPlanTrip,
                   ),
-                  const SizedBox(height: AppSpacing.lg),
+
+                  const SizedBox(
+                    height: AppSpacing.lg,
+                  ),
+
+                  // -----------------------------------------------------------------
+                  // Your Journeys
+                  // -----------------------------------------------------------------
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -122,10 +192,14 @@ class HomeDashboardScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSpacing.sm),
+
+                  const SizedBox(
+                    height: AppSpacing.sm,
+                  ),
+
                   if (tripState.isLoading)
                     const SizedBox(
-                      height: 220,
+                      height: 260,
                       child: Center(
                         child: CircularProgressIndicator(),
                       ),
@@ -140,52 +214,19 @@ class HomeDashboardScreen extends StatelessWidget {
                       onPlanTrip: onPlanTrip,
                     )
                   else
-                    SizedBox(
-                      height: 220,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: trips.length,
-                        separatorBuilder: (_, __) => const SizedBox(
-                          width: AppSpacing.md,
-                        ),
-                        itemBuilder: (ctx, index) {
-                          final trip = trips[index];
-
-                          return SizedBox(
-                            width: 220,
-                            child: TravelCard(
-                              title: trip.name,
-                              subtitle: _tripSubtitle(trip),
-                              imageUrl: _imageForDestination(
-                                trip.destinationId,
-                              ),
-                              onTap: onTripTap,
-                              footer: Row(
-                                children: [
-                                  const Icon(
-                                    AppIcons.trips,
-                                    size: 14,
-                                    color: AppColors.onSurfaceVariant,
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    '${trip.travelers} '
-                                    '${trip.travelers == 1 ? 'Traveler' : 'Travelers'}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelMedium
-                                        ?.copyWith(
-                                          color: AppColors.onSurfaceVariant,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                    _JourneyList(
+                      trips: trips,
+                      onTripTap: onTripTap,
                     ),
-                  const SizedBox(height: AppSpacing.lg),
+
+                  const SizedBox(
+                    height: AppSpacing.lg,
+                  ),
+
+                  // -----------------------------------------------------------------
+                  // Quick Access
+                  // -----------------------------------------------------------------
+
                   Text(
                     'Quick Access',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -193,33 +234,45 @@ class HomeDashboardScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.md),
+
+                  const SizedBox(
+                    height: AppSpacing.md,
+                  ),
+
                   GridView.count(
                     crossAxisCount: 4,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisSpacing: AppSpacing.sm,
                     mainAxisSpacing: AppSpacing.sm,
-                    children: const [
+                    childAspectRatio: 0.95,
+                    children: [
                       _QuickAction(
                         icon: AppIcons.explore,
                         label: 'Explore',
+                        onTap: onExplore,
                       ),
                       _QuickAction(
                         icon: AppIcons.budget,
                         label: 'Budget',
+                        onTap: onBudget,
                       ),
                       _QuickAction(
                         icon: AppIcons.gps,
                         label: 'Nearby',
+                        onTap: onNearby,
                       ),
                       _QuickAction(
                         icon: AppIcons.check,
                         label: 'Readiness',
+                        onTap: onReadiness,
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSpacing.xxl),
+
+                  const SizedBox(
+                    height: AppSpacing.xxl,
+                  ),
                 ],
               ),
             ),
@@ -228,6 +281,32 @@ class HomeDashboardScreen extends StatelessWidget {
       ),
     );
   }
+
+  // ===========================================================================
+  // DYNAMIC GREETING
+  // ===========================================================================
+
+  static String _getGreeting() {
+    final hour = DateTime.now().hour;
+
+    if (hour >= 5 && hour < 12) {
+      return 'Good Morning';
+    }
+
+    if (hour >= 12 && hour < 17) {
+      return 'Good Afternoon';
+    }
+
+    if (hour >= 17 && hour < 21) {
+      return 'Good Evening';
+    }
+
+    return 'Good Night';
+  }
+
+  // ===========================================================================
+  // DISPLAY NAME
+  // ===========================================================================
 
   static String _displayName(String? value) {
     final name = value?.trim();
@@ -239,6 +318,10 @@ class HomeDashboardScreen extends StatelessWidget {
     return name.split(' ').first;
   }
 
+  // ===========================================================================
+  // PROFILE INITIAL
+  // ===========================================================================
+
   static String _initial(String name) {
     if (name.trim().isEmpty) {
       return 'T';
@@ -247,12 +330,20 @@ class HomeDashboardScreen extends StatelessWidget {
     return name.trim()[0].toUpperCase();
   }
 
+  // ===========================================================================
+  // TRIP SUBTITLE
+  // ===========================================================================
+
   static String _tripSubtitle(Trip trip) {
     final start = _formatDate(trip.startDate);
     final end = _formatDate(trip.endDate);
 
     return '$start–$end · ${_statusLabel(trip.status)}';
   }
+
+  // ===========================================================================
+  // DATE FORMAT
+  // ===========================================================================
 
   static String _formatDate(DateTime date) {
     const months = [
@@ -273,18 +364,29 @@ class HomeDashboardScreen extends StatelessWidget {
     return '${months[date.month - 1]} ${date.day}';
   }
 
+  // ===========================================================================
+  // TRIP STATUS
+  // ===========================================================================
+
   static String _statusLabel(TripStatus status) {
     switch (status) {
       case TripStatus.planning:
         return 'Planning';
+
       case TripStatus.upcoming:
         return 'Upcoming';
+
       case TripStatus.active:
         return 'Active';
+
       case TripStatus.completed:
         return 'Completed';
     }
   }
+
+  // ===========================================================================
+  // DESTINATION IMAGE
+  // ===========================================================================
 
   static String _imageForDestination(
     String destinationId,
@@ -292,15 +394,91 @@ class HomeDashboardScreen extends StatelessWidget {
     switch (destinationId.toLowerCase()) {
       case 'goa':
         return 'https://picsum.photos/seed/goa/400/300';
+
       case 'jaipur':
       case 'rajasthan':
         return 'https://picsum.photos/seed/jaipur/400/300';
+
       case 'manali':
       default:
         return 'https://picsum.photos/seed/manali/400/300';
     }
   }
 }
+
+// =============================================================================
+// JOURNEY LIST
+// =============================================================================
+
+class _JourneyList extends StatelessWidget {
+  const _JourneyList({
+    required this.trips,
+    this.onTripTap,
+  });
+
+  final List<Trip> trips;
+  final VoidCallback? onTripTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 270,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(
+          bottom: AppSpacing.xs,
+        ),
+        itemCount: trips.length,
+        separatorBuilder: (_, __) => const SizedBox(
+          width: AppSpacing.md,
+        ),
+        itemBuilder: (ctx, index) {
+          final trip = trips[index];
+
+          return SizedBox(
+            width: 220,
+            child: TravelCard(
+              title: trip.name,
+              subtitle: HomeDashboardScreen._tripSubtitle(trip),
+              imageUrl: HomeDashboardScreen._imageForDestination(
+                trip.destinationId,
+              ),
+              onTap: onTripTap,
+              footer: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    AppIcons.trips,
+                    size: 14,
+                    color: AppColors.onSurfaceVariant,
+                  ),
+                  const SizedBox(
+                    width: 4,
+                  ),
+                  Flexible(
+                    child: Text(
+                      '${trip.travelers} '
+                      '${trip.travelers == 1 ? 'Traveler' : 'Travelers'}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: AppColors.onSurfaceVariant,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// =============================================================================
+// READINESS CARD
+// =============================================================================
 
 class _ReadinessCard extends StatelessWidget {
   const _ReadinessCard({
@@ -316,7 +494,9 @@ class _ReadinessCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(AppSpacing.lg),
+        padding: const EdgeInsets.all(
+          AppSpacing.lg,
+        ),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
@@ -326,13 +506,16 @@ class _ReadinessCard extends StatelessWidget {
               AppColors.primaryContainer,
             ],
           ),
-          borderRadius: BorderRadius.circular(AppSpacing.radiusBanner),
+          borderRadius: BorderRadius.circular(
+            AppSpacing.radiusBanner,
+          ),
           boxShadow: AppColors.level2Shadow,
         ),
         child: Row(
           children: [
             Expanded(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -344,14 +527,20 @@ class _ReadinessCard extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.xs),
+                  const SizedBox(
+                    height: AppSpacing.xs,
+                  ),
                   Text(
                     'Your next journey',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppColors.onPrimary.withOpacity(0.8),
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.md),
+                  const SizedBox(
+                    height: AppSpacing.md,
+                  ),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppSpacing.md,
@@ -374,7 +563,9 @@ class _ReadinessCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: AppSpacing.md),
+            const SizedBox(
+              width: AppSpacing.md,
+            ),
             const Icon(
               AppIcons.chevronRight,
               color: AppColors.onPrimary,
@@ -386,6 +577,10 @@ class _ReadinessCard extends StatelessWidget {
     );
   }
 }
+
+// =============================================================================
+// PLAN TRIP BANNER
+// =============================================================================
 
 class _PlanTripBanner extends StatelessWidget {
   const _PlanTripBanner({
@@ -399,10 +594,14 @@ class _PlanTripBanner extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(AppSpacing.lg),
+        padding: const EdgeInsets.all(
+          AppSpacing.lg,
+        ),
         decoration: BoxDecoration(
           color: AppColors.secondaryFixed,
-          borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+          borderRadius: BorderRadius.circular(
+            AppSpacing.radiusCard,
+          ),
         ),
         child: Row(
           children: [
@@ -411,13 +610,18 @@ class _PlanTripBanner extends StatelessWidget {
               color: AppColors.secondary,
               size: 24,
             ),
-            const SizedBox(width: AppSpacing.md),
+            const SizedBox(
+              width: AppSpacing.md,
+            ),
             Expanded(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Plan New Trip',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: AppColors.secondary,
                           fontWeight: FontWeight.w600,
@@ -425,6 +629,8 @@ class _PlanTripBanner extends StatelessWidget {
                   ),
                   Text(
                     'Create a personalized itinerary',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.onSecondaryFixed,
                         ),
@@ -443,6 +649,10 @@ class _PlanTripBanner extends StatelessWidget {
   }
 }
 
+// =============================================================================
+// EMPTY TRIPS
+// =============================================================================
+
 class _EmptyTripsCard extends StatelessWidget {
   const _EmptyTripsCard({
     this.onPlanTrip,
@@ -453,45 +663,61 @@ class _EmptyTripsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
       width: double.infinity,
-      padding: const EdgeInsets.all(AppSpacing.lg),
+      padding: const EdgeInsets.all(
+        AppSpacing.lg,
+      ),
       decoration: BoxDecoration(
         color: AppColors.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+        borderRadius: BorderRadius.circular(
+          AppSpacing.radiusCard,
+        ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(
             Icons.luggage_outlined,
             size: 40,
             color: AppColors.primary,
           ),
-          const SizedBox(height: AppSpacing.sm),
+          const SizedBox(
+            height: AppSpacing.sm,
+          ),
           Text(
             'No trips yet',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
           ),
-          const SizedBox(height: AppSpacing.xs),
+          const SizedBox(
+            height: AppSpacing.xs,
+          ),
           Text(
             'Start planning your first journey.',
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.onSurfaceVariant,
                 ),
           ),
-          const SizedBox(height: AppSpacing.md),
+          const SizedBox(
+            height: AppSpacing.md,
+          ),
           TextButton(
             onPressed: onPlanTrip,
-            child: const Text('Plan a Trip'),
+            child: const Text(
+              'Plan a Trip',
+            ),
           ),
         ],
       ),
     );
   }
 }
+
+// =============================================================================
+// ERROR CARD
+// =============================================================================
 
 class _ErrorCard extends StatelessWidget {
   const _ErrorCard({
@@ -505,33 +731,42 @@ class _ErrorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
       width: double.infinity,
-      padding: const EdgeInsets.all(AppSpacing.lg),
+      padding: const EdgeInsets.all(
+        AppSpacing.lg,
+      ),
       decoration: BoxDecoration(
         color: AppColors.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+        borderRadius: BorderRadius.circular(
+          AppSpacing.radiusCard,
+        ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(
             Icons.error_outline,
             color: AppColors.error,
             size: 36,
           ),
-          const SizedBox(height: AppSpacing.sm),
+          const SizedBox(
+            height: AppSpacing.sm,
+          ),
           Text(
             message,
-            maxLines: 2,
+            maxLines: 3,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
-          const SizedBox(height: AppSpacing.sm),
+          const SizedBox(
+            height: AppSpacing.sm,
+          ),
           TextButton(
             onPressed: onRetry,
-            child: const Text('Retry'),
+            child: const Text(
+              'Retry',
+            ),
           ),
         ],
       ),
@@ -539,14 +774,20 @@ class _ErrorCard extends StatelessWidget {
   }
 }
 
+// =============================================================================
+// QUICK ACTION
+// =============================================================================
+
 class _QuickAction extends StatelessWidget {
   const _QuickAction({
     required this.icon,
     required this.label,
+    this.onTap,
   });
 
   final IconData icon;
   final String label;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -554,7 +795,8 @@ class _QuickAction extends StatelessWidget {
       button: true,
       label: label,
       child: GestureDetector(
-        onTap: () {},
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -573,14 +815,19 @@ class _QuickAction extends StatelessWidget {
                 size: 24,
               ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: AppColors.onSurfaceVariant,
-                  ),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
+            const SizedBox(
+              height: 4,
+            ),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: AppColors.onSurfaceVariant,
+                    ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),
