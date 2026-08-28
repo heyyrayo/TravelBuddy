@@ -1,0 +1,16 @@
+{
+  "name": "travelbuddy-ai",
+  "version": "1.0.0",
+  "description": "TravelBuddy AI backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "groq-sdk": "^1.6.0"
+  }
+}

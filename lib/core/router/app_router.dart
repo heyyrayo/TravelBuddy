@@ -45,6 +45,9 @@ import '../../features/errors/presentation/screens/error_gps_disabled_screen.dar
 import '../../features/errors/presentation/screens/error_server_issue_screen.dart';
 import '../../features/errors/presentation/screens/empty_state_screens.dart';
 
+import '../../features/ai/data/travelbuddy_ai_service.dart';
+import '../../features/ai/presentation/screens/travelbuddy_ai_screen.dart';
+
 import '../../shared/widgets/nav/app_nav.dart';
 
 // ---------------------------------------------------------------------------
@@ -104,14 +107,10 @@ class _HomeShell extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(dialogContext).pop(false);
                     },
-                    child: const Text(
-                      'Cancel',
-                    ),
+                    child: const Text('Cancel'),
                   ),
                 ),
-                const SizedBox(
-                  width: 12,
-                ),
+                const SizedBox(width: 12),
                 Expanded(
                   child: FilledButton(
                     style: FilledButton.styleFrom(
@@ -121,9 +120,7 @@ class _HomeShell extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(dialogContext).pop(true);
                     },
-                    child: const Text(
-                      'Quit',
-                    ),
+                    child: const Text('Quit'),
                   ),
                 ),
               ],
@@ -148,18 +145,9 @@ class _HomeShell extends StatelessWidget {
     // -------------------------------------------------------------------------
     // STEP 1
     //
-    // If there is a deeper page in the current navigation stack,
-    // go back to that page first.
+    // Return through the current navigation stack first.
     //
-    // Example:
-    //
-    // Home
-    //   ↓
-    // Explore
-    //   ↓
-    // Manali
-    //   ↓
-    // Plan Trip
+    // Home → Explore → Manali → Plan Trip
     //
     // Back:
     //
@@ -176,13 +164,8 @@ class _HomeShell extends StatelessWidget {
     // -------------------------------------------------------------------------
     // STEP 2
     //
-    // If we're currently on another bottom-navigation section,
-    // go back to Home.
-    //
-    // Explore          → Home
-    // Trips            → Home
-    // Recommendations  → Home
-    // Profile          → Home
+    // If we're on another bottom-navigation section,
+    // return to Home.
     // -------------------------------------------------------------------------
 
     if (navigationShell.currentIndex != 0) {
@@ -196,13 +179,69 @@ class _HomeShell extends StatelessWidget {
     // -------------------------------------------------------------------------
     // STEP 3
     //
-    // We are now at the actual application Home root.
-    //
-    // ONLY HERE should the quit dialog appear.
+    // Only the actual Home root can show the quit dialog.
     // -------------------------------------------------------------------------
 
     await _handleQuitRequest(context);
   }
+
+  // ===========================================================================
+  // TRAVELBUDDY AI CONTEXT
+  // ===========================================================================
+
+  TravelBuddyAiContext _aiContextForCurrentSection() {
+    switch (navigationShell.currentIndex) {
+      // Home
+      case 0:
+        return const TravelBuddyAiContext(
+          screen: 'home',
+        );
+
+      // Explore
+      case 1:
+        return const TravelBuddyAiContext(
+          screen: 'explore',
+        );
+
+      // Recommendations
+      case 2:
+        return const TravelBuddyAiContext(
+          screen: 'recommendations',
+        );
+
+      // Profile
+      case 3:
+        return const TravelBuddyAiContext(
+          screen: 'profile',
+        );
+
+      // Trips / remaining navigation branch
+      case 4:
+        return const TravelBuddyAiContext(
+          screen: 'trips',
+        );
+
+      default:
+        return const TravelBuddyAiContext(
+          screen: 'home',
+        );
+    }
+  }
+
+  // ===========================================================================
+  // OPEN TRAVELBUDDY AI
+  // ===========================================================================
+
+  void _openTravelBuddyAi(BuildContext context) {
+    context.push(
+      '/travelbuddy-ai',
+      extra: _aiContextForCurrentSection(),
+    );
+  }
+
+  // ===========================================================================
+  // BUILD
+  // ===========================================================================
 
   @override
   Widget build(BuildContext context) {
@@ -217,6 +256,37 @@ class _HomeShell extends StatelessWidget {
       },
       child: Scaffold(
         body: navigationShell,
+
+        // ---------------------------------------------------------------------
+        // TRAVELBUDDY AI BUTTON
+        // ---------------------------------------------------------------------
+        //
+        // The AI button floats above the existing bottom navigation.
+        //
+        // It does NOT replace or modify BottomNavBar.
+        // ---------------------------------------------------------------------
+
+        floatingActionButton: FloatingActionButton(
+          heroTag: 'travelbuddy-ai-fab',
+          tooltip: 'TravelBuddy AI',
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.onPrimary,
+          elevation: 6,
+          onPressed: () {
+            _openTravelBuddyAi(context);
+          },
+          child: const Icon(
+            Icons.auto_awesome_rounded,
+            size: 25,
+          ),
+        ),
+
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+        // ---------------------------------------------------------------------
+        // EXISTING BOTTOM NAVIGATION
+        // ---------------------------------------------------------------------
+
         bottomNavigationBar: BottomNavBar(
           currentIndex: navigationShell.currentIndex,
           onDestinationSelected: (index) {
@@ -474,6 +544,26 @@ GoRouter buildRouter(BuildContext context) {
             onRetry: () => ctx.pop(),
             onHome: () => ctx.go('/home'),
           );
+        },
+      ),
+
+      // =======================================================================
+      // TRAVELBUDDY AI
+      // =======================================================================
+
+      GoRoute(
+        path: '/travelbuddy-ai',
+        name: 'travelbuddy-ai',
+        builder: (ctx, state) {
+          final extra = state.extra;
+
+          if (extra is TravelBuddyAiContext) {
+            return TravelBuddyAiScreen(
+              context: extra,
+            );
+          }
+
+          return const TravelBuddyAiScreen();
         },
       ),
 

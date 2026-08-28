@@ -48,3 +48,9 @@ app.*.map.json
 .env
 .env.*
 !.env.example
+
+backend/travelbuddy-ai/.env
+backend/travelbuddy-ai/node_modules/
+
+# Android/Gradle build output
+/android/build/
