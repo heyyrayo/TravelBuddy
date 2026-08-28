@@ -1,0 +1,6 @@
+# Local environment and dependencies
+.env
+node_modules/
+
+# Runtime logs
+*.log
