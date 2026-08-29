@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/widgets/branding/travelbuddy_ai_logo.dart';
 import '../../data/travelbuddy_ai_service.dart';
 
 class TravelBuddyAiButton extends StatelessWidget {
@@ -27,9 +28,7 @@ class TravelBuddyAiButton extends StatelessWidget {
     if (showLabel) {
       return FilledButton.icon(
         onPressed: () => _openAi(context),
-        icon: const Icon(
-          Icons.auto_awesome_rounded,
-        ),
+        icon: const TravelBuddyAiLogo(size: 24),
         label: const Text(
           'TravelBuddy AI',
         ),
@@ -70,11 +69,7 @@ class TravelBuddyAiButton extends StatelessWidget {
               ),
             ],
           ),
-          child: const Icon(
-            Icons.auto_awesome_rounded,
-            color: AppColors.onPrimary,
-            size: 25,
-          ),
+          child: const TravelBuddyAiLogo(size: 32),
         ),
       ),
     );

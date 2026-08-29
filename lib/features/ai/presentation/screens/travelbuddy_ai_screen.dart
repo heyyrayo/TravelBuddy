@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/widgets/branding/travelbuddy_ai_logo.dart';
 import '../../data/travelbuddy_ai_service.dart';
 import '../../domain/travelbuddy_ai_message.dart';
 
@@ -252,20 +253,7 @@ class _TravelBuddyAiScreenState extends State<TravelBuddyAiScreen> {
   }
 
   Widget _buildAiLogo() {
-    return Container(
-      width: 42,
-      height: 42,
-      decoration: BoxDecoration(
-        color: AppColors.primaryContainer,
-        borderRadius: BorderRadius.circular(14),
-      ),
-      alignment: Alignment.center,
-      child: Icon(
-        Icons.travel_explore_rounded,
-        color: AppColors.onPrimaryContainer,
-        size: 24,
-      ),
-    );
+    return const TravelBuddyAiLogo(size: 40);
   }
 
   Widget _buildSuggestions() {
@@ -407,85 +395,98 @@ class _MessageBubble extends StatelessWidget {
 
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.sizeOf(context).width * 0.86,
-        ),
-        margin: EdgeInsets.only(
-          bottom: AppSpacing.sm,
-          left: isUser ? AppSpacing.xl : 0,
-          right: isUser ? 0 : AppSpacing.xl,
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: 12,
-        ),
-        decoration: BoxDecoration(
-          color: isUser ? AppColors.primary : AppColors.surfaceContainerLow,
-          borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(18),
-            topRight: const Radius.circular(18),
-            bottomLeft: Radius.circular(isUser ? 18 : 5),
-            bottomRight: Radius.circular(isUser ? 5 : 18),
-          ),
-        ),
-        child: isUser
-            ? Text(
-                message.content,
-                style: TextStyle(
-                  color: AppColors.onPrimary,
-                  fontSize: 15,
-                  height: 1.45,
-                ),
-              )
-            : MarkdownBody(
-                data: message.content,
-                selectable: true,
-                shrinkWrap: true,
-                styleSheet: MarkdownStyleSheet(
-                  p: TextStyle(
-                    color: AppColors.onSurface,
-                    fontSize: 15,
-                    height: 1.5,
-                  ),
-                  h1: TextStyle(
-                    color: AppColors.onSurface,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                    height: 1.3,
-                  ),
-                  h2: TextStyle(
-                    color: AppColors.onSurface,
-                    fontSize: 19,
-                    fontWeight: FontWeight.w700,
-                    height: 1.35,
-                  ),
-                  h3: TextStyle(
-                    color: AppColors.onSurface,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                    height: 1.4,
-                  ),
-                  strong: TextStyle(
-                    color: AppColors.onSurface,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  listBullet: TextStyle(
-                    color: AppColors.primary,
-                    fontSize: 15,
-                  ),
-                  blockquote: TextStyle(
-                    color: AppColors.onSurfaceVariant,
-                    fontSize: 14,
-                    height: 1.45,
-                  ),
-                  code: TextStyle(
-                    color: AppColors.onSurface,
-                    fontSize: 13,
-                    fontFamily: 'monospace',
-                  ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          if (!isUser) ...[
+            const TravelBuddyAiLogo(size: 30),
+            const SizedBox(width: AppSpacing.xs),
+          ],
+          Flexible(
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.sizeOf(context).width * 0.86,
+              ),
+              margin: EdgeInsets.only(
+                bottom: AppSpacing.sm,
+                left: isUser ? AppSpacing.xl : 0,
+                right: isUser ? 0 : AppSpacing.xl,
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: 12,
+              ),
+              decoration: BoxDecoration(
+                color:
+                    isUser ? AppColors.primary : AppColors.surfaceContainerLow,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(18),
+                  topRight: const Radius.circular(18),
+                  bottomLeft: Radius.circular(isUser ? 18 : 5),
+                  bottomRight: Radius.circular(isUser ? 5 : 18),
                 ),
               ),
+              child: isUser
+                  ? Text(
+                      message.content,
+                      style: TextStyle(
+                        color: AppColors.onPrimary,
+                        fontSize: 15,
+                        height: 1.45,
+                      ),
+                    )
+                  : MarkdownBody(
+                      data: message.content,
+                      selectable: true,
+                      shrinkWrap: true,
+                      styleSheet: MarkdownStyleSheet(
+                        p: TextStyle(
+                          color: AppColors.onSurface,
+                          fontSize: 15,
+                          height: 1.5,
+                        ),
+                        h1: TextStyle(
+                          color: AppColors.onSurface,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          height: 1.3,
+                        ),
+                        h2: TextStyle(
+                          color: AppColors.onSurface,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700,
+                          height: 1.35,
+                        ),
+                        h3: TextStyle(
+                          color: AppColors.onSurface,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700,
+                          height: 1.4,
+                        ),
+                        strong: TextStyle(
+                          color: AppColors.onSurface,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        listBullet: TextStyle(
+                          color: AppColors.primary,
+                          fontSize: 15,
+                        ),
+                        blockquote: TextStyle(
+                          color: AppColors.onSurfaceVariant,
+                          fontSize: 14,
+                          height: 1.45,
+                        ),
+                        code: TextStyle(
+                          color: AppColors.onSurface,
+                          fontSize: 13,
+                          fontFamily: 'monospace',
+                        ),
+                      ),
+                    ),
+            ),
+          ),
+        ],
       ),
     );
   }

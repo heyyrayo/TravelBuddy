@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -47,14 +48,35 @@ class TravelBuddyAiService {
     http.Client? client,
     String? baseUrl,
   })  : _client = client ?? http.Client(),
-        _baseUrl = baseUrl ?? _defaultBaseUrl;
+        _baseUrl = _normalizeBaseUrl(
+          baseUrl ?? _defaultBaseUrl,
+        );
 
-  static const String _defaultBaseUrl = 'http://127.0.0.2:3000';
+  // ==========================================================
+  // PRODUCTION BACKEND
+  // ==========================================================
+  //
+  // TravelBuddy now uses the deployed cloud backend.
+  // The app no longer depends on server.js running on your laptop.
+  //
+  static const String _defaultBaseUrl =
+      'https://travelbuddy-ai-xxt9.onrender.com';
 
   final http.Client _client;
   final String _baseUrl;
 
-  Uri get _chatUri => Uri.parse('$_baseUrl/api/ai/chat');
+  static String _normalizeBaseUrl(String value) {
+    return value.trim().replaceFirst(
+          RegExp(r'/+$'),
+          '',
+        );
+  }
+
+  Uri get _chatUri {
+    return Uri.parse(
+      '$_baseUrl/api/ai/chat',
+    );
+  }
 
   Future<String> sendMessage({
     required String message,
@@ -62,6 +84,10 @@ class TravelBuddyAiService {
     TravelBuddyAiContext? context,
   }) async {
     final cleanMessage = message.trim();
+
+    // ========================================================
+    // VALIDATION
+    // ========================================================
 
     if (cleanMessage.isEmpty) {
       throw const TravelBuddyAiException(
@@ -75,33 +101,48 @@ class TravelBuddyAiService {
       );
     }
 
-    final requestBody = {
+    final requestBody = <String, dynamic>{
       'message': cleanMessage,
-      'history': history.map((item) => item.toApiJson()).toList(),
-      'context': context?.toJson() ?? <String, dynamic>{},
+      'history': history
+          .map(
+            (item) => item.toApiJson(),
+          )
+          .toList(),
+      'context':
+          context?.toJson() ??
+          <String, dynamic>{},
     };
+
+    // ========================================================
+    // NETWORK REQUEST
+    // ========================================================
 
     try {
       final response = await _client
           .post(
             _chatUri,
-            headers: {
+            headers: const {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
             },
             body: jsonEncode(requestBody),
           )
           .timeout(
-            const Duration(seconds: 45),
+            const Duration(seconds: 75),
           );
 
       return _handleResponse(response);
     } on TravelBuddyAiException {
       rethrow;
+    } on TimeoutException {
+      throw const TravelBuddyAiException(
+        'TravelBuddy AI is taking too long to respond. '
+        'Please try again in a moment.',
+      );
     } on http.ClientException {
       throw const TravelBuddyAiException(
-        'Unable to connect to TravelBuddy AI. '
-        'Please make sure the AI server is running.',
+        'Unable to connect to TravelBuddy AI right now. '
+        'Please check your internet connection and try again.',
       );
     } on FormatException {
       throw const TravelBuddyAiException(
@@ -120,6 +161,10 @@ class TravelBuddyAiService {
   ) {
     dynamic decoded;
 
+    // ========================================================
+    // PARSE JSON
+    // ========================================================
+
     try {
       decoded = jsonDecode(response.body);
     } on FormatException {
@@ -134,12 +179,21 @@ class TravelBuddyAiService {
       );
     }
 
-    final success = decoded['success'] == true;
+    final success =
+        decoded['success'] == true;
+
+    // ========================================================
+    // SUCCESS
+    // ========================================================
 
     if (success) {
-      final answer = decoded['answer'];
+      final answer =
+          decoded['answer'];
 
-      if (answer is String && answer.trim().isNotEmpty) {
+      if (
+        answer is String &&
+        answer.trim().isNotEmpty
+      ) {
         return answer.trim();
       }
 
@@ -148,9 +202,17 @@ class TravelBuddyAiService {
       );
     }
 
-    final error = decoded['error'];
+    // ========================================================
+    // SERVER ERROR
+    // ========================================================
 
-    if (error is String && error.trim().isNotEmpty) {
+    final error =
+        decoded['error'];
+
+    if (
+      error is String &&
+      error.trim().isNotEmpty
+    ) {
       throw TravelBuddyAiException(
         error.trim(),
       );
@@ -162,6 +224,16 @@ class TravelBuddyAiService {
           'TravelBuddy AI could not understand that request.',
         );
 
+      case 401:
+        throw const TravelBuddyAiException(
+          'TravelBuddy AI authentication failed on the server.',
+        );
+
+      case 404:
+        throw const TravelBuddyAiException(
+          'TravelBuddy AI service endpoint was not found.',
+        );
+
       case 429:
         throw const TravelBuddyAiException(
           'TravelBuddy AI is temporarily busy. '
@@ -170,6 +242,7 @@ class TravelBuddyAiService {
 
       case 500:
       case 502:
+      case 503:
         throw const TravelBuddyAiException(
           'TravelBuddy AI is temporarily unavailable. '
           'Please try again.',

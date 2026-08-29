@@ -38,6 +38,7 @@ import '../../features/notifications/presentation/screens/notification_center_sc
 
 import '../../features/profile/presentation/screens/profile_dashboard_screen.dart';
 import '../../features/profile/presentation/screens/saved_places_screen.dart';
+import '../../shared/widgets/branding/travelbuddy_ai_logo.dart';
 
 import '../../features/settings/presentation/screens/settings_screen.dart';
 
@@ -275,10 +276,7 @@ class _HomeShell extends StatelessWidget {
           onPressed: () {
             _openTravelBuddyAi(context);
           },
-          child: const Icon(
-            Icons.auto_awesome_rounded,
-            size: 25,
-          ),
+          child: const TravelBuddyAiLogo(size: 34),
         ),
 
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
