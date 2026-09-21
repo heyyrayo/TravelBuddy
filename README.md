@@ -6,6 +6,8 @@ Your AI-powered smart travel companion for exploring India with confidence.
 
 TravelBuddy India is a comprehensive Flutter mobile application designed to help travelers plan, budget, and explore India. The app combines AI-powered recommendations with real-time features to provide a seamless travel planning experience.
 
+The current implementation includes trip budgeting, expense tracking, nearby essentials, accommodation discovery, destination details, and recommendation presentation flows backed by Supabase repositories and migrations.
+
 ## Key Features
 
 ### 🏠 Core Travel Features
@@ -20,6 +22,7 @@ TravelBuddy India is a comprehensive Flutter mobile application designed to help
 - **AI Recommendations** - Get personalized travel suggestions based on your preferences
 - **Travel Readiness Check** - Assess your preparation level for upcoming trips
 - **Budget Management** - Track expenses and manage trip budgets
+- **Accommodation Discovery** - Search stays by state and accommodation type
 - **Real-time Connectivity** - Offline support with automatic sync when online
 
 ### 👤 User Management
@@ -104,7 +107,7 @@ lib/
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd travelbuddy_india
+   cd TravelBuddy
    ```
 
 2. **Install dependencies**
@@ -140,6 +143,15 @@ flutter build apk
 flutter build ios
 ```
 
+### Validation
+
+Run the project checks before opening a pull request:
+
+```bash
+flutter analyze
+flutter test --no-pub
+```
+
 ## Architecture
 
 This project follows **Clean Architecture** principles with **Feature-based structure**:
@@ -162,6 +174,7 @@ The app uses **Supabase PostgreSQL** for:
 - Trip data and itineraries
 - Destination information
 - Budget records
+- Accommodation records and nearby place data
 - Notifications
 
 ## Contributing
