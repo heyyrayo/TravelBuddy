@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/recommendation_presentation.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
@@ -8,9 +9,11 @@ import '../../../../shared/widgets/cards/travel_card.dart';
 class RecommendedForYouScreen extends StatelessWidget {
   const RecommendedForYouScreen({
     super.key,
+    required this.recommendations,
     this.onDestinationTap,
   });
 
+  final List<RecommendationPresentation> recommendations;
   final ValueChanged<String>? onDestinationTap;
 
   @override
@@ -27,417 +30,170 @@ class RecommendedForYouScreen extends StatelessWidget {
             child: IconButton(
               icon: const Icon(AppIcons.filter),
               tooltip: 'Filter',
-              onPressed: () {},
+              onPressed: null,
             ),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // -----------------------------------------------------------------
-            // Intro
-            // -----------------------------------------------------------------
-
-            Text(
-              'Tailored for your travel style',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.onSurfaceVariant,
+      body: recommendations.isEmpty
+          ? _EmptyRecommendations()
+          : SingleChildScrollView(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Recommendations based on available travel evidence',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.onSurfaceVariant,
+                        ),
                   ),
-            ),
-
-            const SizedBox(
-              height: AppSpacing.md,
-            ),
-
-            // -----------------------------------------------------------------
-            // Featured recommendation
-            // -----------------------------------------------------------------
-
-            _FeaturedCard(
-              title: 'Rishikesh',
-              subtitle:
-                  'Ideal for a spiritual retreat and thrilling river rapids',
-              tags: const [
-                'Perfect for Students',
-                'Adventure',
-                'Solo/Friends',
-              ],
-              season: 'Sep–Nov',
-              imageUrl: 'https://picsum.photos/seed/rishikesh-featured/900/500',
-              onTap: () {
-                onDestinationTap?.call('Rishikesh');
-              },
-            ),
-
-            const SizedBox(
-              height: AppSpacing.lg,
-            ),
-
-            // -----------------------------------------------------------------
-            // Recommendation grid
-            //
-            // IMPORTANT:
-            // Use a deterministic height instead of childAspectRatio.
-            // This prevents fractional-pixel overflow on different devices.
-            // -----------------------------------------------------------------
-
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisSpacing: AppSpacing.md,
-              mainAxisSpacing: AppSpacing.md,
-              mainAxisExtent: 300,
-              children: [
-                // -------------------------------------------------------------
-                // Munnar
-                // -------------------------------------------------------------
-
-                TravelCard(
-                  title: 'Munnar',
-                  subtitle: 'Kerala · Hill Stations',
-                  imageUrl: 'https://picsum.photos/seed/munnar/400/300',
-                  onTap: () {
-                    onDestinationTap?.call('Munnar');
-                  },
-                  badge: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 3,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.secondaryContainer,
-                      borderRadius: BorderRadius.circular(
-                        AppSpacing.radiusPill,
-                      ),
-                    ),
-                    child: const Text(
-                      'Family Friendly',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: AppColors.onSecondaryContainer,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                  const SizedBox(height: AppSpacing.md),
+                  _RecommendationGrid(
+                    recommendations: recommendations,
+                    onDestinationTap: onDestinationTap,
                   ),
-                ),
-
-                // -------------------------------------------------------------
-                // Jaisalmer
-                // -------------------------------------------------------------
-
-                TravelCard(
-                  title: 'Jaisalmer',
-                  subtitle: 'Rajasthan · Heritage',
-                  imageUrl: 'https://picsum.photos/seed/jaisalmer/400/300',
-                  onTap: () {
-                    onDestinationTap?.call('Jaisalmer');
-                  },
-                  badge: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 3,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.tertiaryContainer,
-                      borderRadius: BorderRadius.circular(
-                        AppSpacing.radiusPill,
-                      ),
-                    ),
-                    child: const Text(
-                      'Heritage',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: AppColors.onTertiaryContainer,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-
-                // -------------------------------------------------------------
-                // Gokarna
-                // -------------------------------------------------------------
-
-                TravelCard(
-                  title: 'Gokarna',
-                  subtitle: 'Karnataka · Beaches',
-                  imageUrl: 'https://picsum.photos/seed/gokarna/400/300',
-                  onTap: () {
-                    onDestinationTap?.call('Gokarna');
-                  },
-                ),
-
-                // -------------------------------------------------------------
-                // Coorg
-                // -------------------------------------------------------------
-
-                TravelCard(
-                  title: 'Coorg',
-                  subtitle: 'Karnataka · Hill Stations',
-                  imageUrl: 'https://picsum.photos/seed/coorg/400/300',
-                  onTap: () {
-                    onDestinationTap?.call('Coorg');
-                  },
-                  badge: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 3,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.secondaryContainer,
-                      borderRadius: BorderRadius.circular(
-                        AppSpacing.radiusPill,
-                      ),
-                    ),
-                    child: const Text(
-                      'Budget',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: AppColors.onSecondaryContainer,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                  const SizedBox(height: AppSpacing.xxl),
+                ],
+              ),
             ),
-
-            const SizedBox(
-              height: AppSpacing.xxl,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
 
-// =============================================================================
-// Featured Recommendation Card
-// =============================================================================
-
-class _FeaturedCard extends StatelessWidget {
-  const _FeaturedCard({
-    required this.title,
-    required this.subtitle,
-    required this.tags,
-    required this.season,
-    required this.imageUrl,
-    this.onTap,
+class _RecommendationGrid extends StatelessWidget {
+  const _RecommendationGrid({
+    required this.recommendations,
+    this.onDestinationTap,
   });
 
-  final String title;
-  final String subtitle;
-  final List<String> tags;
-  final String season;
-  final String imageUrl;
-  final VoidCallback? onTap;
+  final List<RecommendationPresentation> recommendations;
+  final ValueChanged<String>? onDestinationTap;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.primaryContainer,
-          borderRadius: BorderRadius.circular(
-            AppSpacing.radiusBanner,
+    return GridView.builder(
+      itemCount: recommendations.length,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: AppSpacing.md,
+        mainAxisSpacing: AppSpacing.md,
+        mainAxisExtent: 300,
+      ),
+      itemBuilder: (context, index) {
+        final recommendation = recommendations[index];
+
+        return TravelCard(
+          title: recommendation.destinationName,
+          subtitle: recommendation.stateOrRegion,
+          imageUrl: recommendation.imageReference,
+          onTap: () {
+            onDestinationTap?.call(recommendation.destinationId);
+          },
+          footer: _RecommendationEvidence(
+            explanation: recommendation.explanation,
+            signals: recommendation.supportedSignals,
           ),
-          boxShadow: AppColors.level2Shadow,
+        );
+      },
+    );
+  }
+}
+
+class _RecommendationEvidence extends StatelessWidget {
+  const _RecommendationEvidence({
+    required this.explanation,
+    required this.signals,
+  });
+
+  final String explanation;
+  final List<String> signals;
+
+  @override
+  Widget build(BuildContext context) {
+    final visibleSignals = signals
+        .map((signal) => signal.trim())
+        .where((signal) => signal.isNotEmpty)
+        .take(3)
+        .toList(growable: false);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          explanation,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: AppColors.onSurfaceVariant,
+              ),
         ),
-        clipBehavior: Clip.antiAlias,
+        if (visibleSignals.isNotEmpty) ...[
+          const SizedBox(height: AppSpacing.xs),
+          Wrap(
+            spacing: AppSpacing.xs,
+            runSpacing: AppSpacing.xs,
+            children: visibleSignals.map((signal) {
+              return Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.sm,
+                  vertical: 3,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.surfaceContainerHigh,
+                  borderRadius: BorderRadius.circular(
+                    AppSpacing.radiusPill,
+                  ),
+                ),
+                child: Text(
+                  signal,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: AppColors.onSurfaceVariant,
+                      ),
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _EmptyRecommendations extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.xl),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            // -----------------------------------------------------------------
-            // Featured image
-            // -----------------------------------------------------------------
-
-            SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.network(
-                    imageUrl,
-                    fit: BoxFit.cover,
-                    errorBuilder: (
-                      context,
-                      error,
-                      stackTrace,
-                    ) {
-                      return Container(
-                        color: AppColors.primary,
-                        child: const Center(
-                          child: Icon(
-                            Icons.landscape,
-                            size: 80,
-                            color: Colors.white24,
-                          ),
-                        ),
-                      );
-                    },
-                    loadingBuilder: (
-                      context,
-                      child,
-                      loadingProgress,
-                    ) {
-                      if (loadingProgress == null) {
-                        return child;
-                      }
-
-                      return Container(
-                        color: AppColors.primary,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    },
-                  ),
-
-                  // Image overlay
-                  Container(
-                    color: AppColors.primary.withOpacity(0.28),
-                  ),
-
-                  // -----------------------------------------------------------------
-                  // Tags
-                  // -----------------------------------------------------------------
-
-                  Positioned(
-                    top: AppSpacing.md,
-                    left: AppSpacing.md,
-                    right: 56,
-                    child: Wrap(
-                      spacing: AppSpacing.xs,
-                      runSpacing: AppSpacing.xs,
-                      children: tags.map(
-                        (tag) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 3,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.secondaryContainer,
-                              borderRadius: BorderRadius.circular(
-                                AppSpacing.radiusPill,
-                              ),
-                            ),
-                            child: Text(
-                              tag,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 10,
-                                color: AppColors.onSecondaryContainer,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          );
-                        },
-                      ).toList(),
-                    ),
-                  ),
-
-                  // -----------------------------------------------------------------
-                  // Wishlist button
-                  // -----------------------------------------------------------------
-
-                  Positioned(
-                    top: AppSpacing.sm,
-                    right: AppSpacing.sm,
-                    child: Semantics(
-                      label: 'Save to wishlist',
-                      child: Material(
-                        color: Colors.transparent,
-                        child: IconButton(
-                          icon: const Icon(
-                            AppIcons.heartOutline,
-                            color: AppColors.onPrimary,
-                          ),
-                          tooltip: 'Save to wishlist',
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            Icon(
+              Icons.travel_explore,
+              size: 56,
+              color: AppColors.onSurfaceVariant,
             ),
-
-            // -----------------------------------------------------------------
-            // Featured content
-            // -----------------------------------------------------------------
-
-            Padding(
-              padding: const EdgeInsets.all(
-                AppSpacing.md,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: AppColors.onPrimary,
-                          fontWeight: FontWeight.w700,
-                        ),
+            const SizedBox(height: AppSpacing.md),
+            Text(
+              'No recommendations available',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: AppColors.onSurface,
+                    fontWeight: FontWeight.w600,
                   ),
-                  const SizedBox(
-                    height: AppSpacing.xs,
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              'Recommendations will appear when validated recommendation data is available.',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.onSurfaceVariant,
                   ),
-                  Text(
-                    subtitle,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.onPrimary.withOpacity(0.8),
-                        ),
-                  ),
-                  const SizedBox(
-                    height: AppSpacing.sm,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        AppIcons.calendar,
-                        size: 14,
-                        color: AppColors.onPrimaryContainer,
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Flexible(
-                        child: Text(
-                          'Best Season: $season',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                              Theme.of(context).textTheme.labelSmall?.copyWith(
-                                    color: AppColors.onPrimaryContainer,
-                                  ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ),
           ],
         ),

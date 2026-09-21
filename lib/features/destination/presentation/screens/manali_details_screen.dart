@@ -6,17 +6,20 @@ import '../../../../core/constants/destination_images.dart';
 import '../../../../core/data/app_states.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../domain/destination_detail.dart';
 import '../../../../shared/widgets/buttons/app_buttons.dart';
 
 class ManaliDetailsScreen extends StatelessWidget {
   const ManaliDetailsScreen({
     super.key,
+    required this.detail,
     this.onPlanTrip,
-    this.destinationName = 'Manali',
   });
 
+  final DestinationDetail detail;
   final VoidCallback? onPlanTrip;
-  final String destinationName;
+
+  String get destinationName => detail.destinationName;
 
   @override
   Widget build(BuildContext context) {
@@ -495,22 +498,22 @@ class _QuickInfoBar extends StatelessWidget {
     const metrics = [
       (
         AppIcons.weather,
-        '12°C',
+        '12Ãƒâ€šÃ‚Â°C',
         'Weather',
       ),
       (
         AppIcons.calendar,
-        'Oct–Jun',
+        'OctÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Jun',
         'Best Time',
       ),
       (
         AppIcons.currency,
-        '₹₹',
+        'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹',
         'Budget',
       ),
       (
         AppIcons.trips,
-        '5–7 days',
+        '5ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“7 days',
         'Duration',
       ),
     ];

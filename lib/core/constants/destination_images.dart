@@ -19,8 +19,8 @@ class DestinationImages {
 
   static const List<String> manaliGallery = [
     manaliHero,
-    '${_commonsRedirect}View%20in%20Manali.jpg',
-    '${_commonsRedirect}The%20Himalayan%20mountains%20in%20Manali%2C%20Himachal%20Pradesh.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/0/04/View_in_Manali.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/a/a8/The_Himalayan_mountains_in_Manali%2C_Himachal_Pradesh.jpg',
   ];
 
   // ===========================================================================
