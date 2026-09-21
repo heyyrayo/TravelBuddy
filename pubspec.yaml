@@ -23,6 +23,11 @@ dependencies:
   supabase_flutter: ^2.17.2
   geolocator: ^14.0.3
   flutter_markdown: ^0.7.7+1
+  sqflite: ^2.4.4
+  path: ^1.9.1
+  path_provider: ^2.1.6
+  flutter_map: ^8.3.2
+  latlong2: ^0.10.1
 
 dev_dependencies:
   flutter_test:
@@ -36,9 +41,10 @@ flutter:
 
   assets:
     - assets/images/
-
+    - assets/databases/nidhi_accommodation.db
 flutter_launcher_icons:
   image_path: "assets/images/travelbuddy_icon.png"
   android: "ic_launcher"
   min_sdk_android: 21
   ios: true
+
