@@ -54,3 +54,100 @@ backend/travelbuddy-ai/node_modules/
 
 # Android/Gradle build output
 /android/build/
+# Widget Preview related
+.widget_preview/
+
+# ============================================================
+# TravelBuddy — GitHub repository protection
+# ============================================================
+
+# Local environment / credentials
+.env
+.env.*
+!.env.example
+backend/travelbuddy-ai/.env
+backend/travelbuddy-ai/.env.*
+!backend/travelbuddy-ai/.env.example
+
+# Local Supabase CLI state
+supabase/.temp/
+
+# Dependencies
+node_modules/
+backend/**/node_modules/
+
+# Flutter / Dart generated files
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+build/
+coverage/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local crash / profiling dumps
+*.hprof
+*.dmp
+
+# Android / Gradle generated state
+.gradle/
+android/.gradle/
+android/build/
+android/app/build/
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+# iOS generated dependencies / build state
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/Flutter/.last_build_id
+
+# IDE / editor local state
+.idea/
+*.iml
+.vscode/*.code-workspace
+
+# Local generated project reports
+project_structure.txt
+project_structure_source_only.txt
+
+# Engineering backup / migration snapshots
+**/*.pre_*
+**/*_backup_*
+**/*before_*
+**/*attempt*
+
+# Weather collection artifacts kept local
+datasets/raw/weather/
+datasets/datasets/raw/weather/
+datasets/cleaned/weather/backups/
+datasets/cleaned/weather/weather_collection_targets_v2_eligible_missing_*.csv
+datasets/cleaned/weather/destination_weather_daily_v2_eligible_missing_*.csv
+datasets/cleaned/weather/weather_collection_report_v2_eligible_missing_*.txt
+datasets/raw/weather/open_meteo_v2_eligible_missing_*/
+datasets/scripts/weather/*_adaptive_free_*.py
+datasets/scripts/weather/__pycache__/
+
+# Large / raw dataset layers kept local
+datasets/raw/
+datasets/datasets/raw/
+datasets/cleaned/weather/
+datasets/processed/weather/
+datasets/ml/
+datasets/final/
+
+# Local database files
+assets/databases/**/*.db
+assets/databases/**/*.sqlite
+assets/databases/**/*.sqlite3
+
+# Temporary / crash files
+*.tmp
+*.temp
