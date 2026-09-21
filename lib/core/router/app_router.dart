@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../state/auth_state.dart';
 import '../state/onboarding_state.dart';
 import '../data/app_states.dart';
+import '../../features/destination/data/destination_detail_demo_data.dart';
 import '../data/trip_repository.dart';
 
 import '../theme/app_colors.dart';
@@ -20,14 +21,14 @@ import '../../features/auth/presentation/screens/reset_password_screen.dart';
 
 import '../../features/home/presentation/screens/home_dashboard_screen.dart';
 import '../../features/explore/presentation/screens/explore_india_screen.dart';
+import '../../features/accommodation/presentation/screens/accommodation_list_screen.dart';
 import '../../features/search/presentation/screens/search_india_screen.dart';
-import '../../features/destination/presentation/screens/manali_details_screen.dart';
+import '../../features/destination/presentation/screens/destination_details_screen_v2.dart';
 
 import '../../features/trip/presentation/screens/trip_details_manali_screen.dart';
 import '../../features/trip/presentation/screens/trip_planner_step1_screen.dart';
 
-import '../../features/budget/presentation/screens/budget_prediction_screen.dart';
-import '../../features/budget/presentation/screens/loading_budget_prediction_screen.dart';
+import '../../features/budget/presentation/screens/trip_budget_screen.dart';
 
 import '../../features/recommendations/presentation/screens/recommended_for_you_screen.dart';
 import '../../features/recommendations/presentation/screens/loading_recommendations_screen.dart';
@@ -148,13 +149,13 @@ class _HomeShell extends StatelessWidget {
     //
     // Return through the current navigation stack first.
     //
-    // Home → Explore → Manali → Plan Trip
+    // Home ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ Explore ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ Manali ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ Plan Trip
     //
     // Back:
     //
-    // Plan Trip → Manali
-    // Manali    → Explore
-    // Explore   → Home
+    // Plan Trip ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ Manali
+    // Manali    ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ Explore
+    // Explore   ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ Home
     // -------------------------------------------------------------------------
 
     if (router.canPop()) {
@@ -577,7 +578,7 @@ GoRouter buildRouter(BuildContext context) {
         },
         branches: [
           // ===================================================================
-          // BRANCH 0 — HOME
+          // BRANCH 0 ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â HOME
           // ===================================================================
 
           StatefulShellBranch(
@@ -725,7 +726,7 @@ GoRouter buildRouter(BuildContext context) {
           ),
 
           // ===================================================================
-          // BRANCH 1 — EXPLORE
+          // BRANCH 1 ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â EXPLORE
           // ===================================================================
 
           StatefulShellBranch(
@@ -751,6 +752,15 @@ GoRouter buildRouter(BuildContext context) {
                   // SEARCH
                   // -----------------------------------------------------------
 
+                  // ACCOMMODATIONS
+
+                  GoRoute(
+                    path: 'accommodations',
+                    builder: (ctx, state) {
+                      return const AccommodationListScreen();
+                    },
+                  ),
+
                   GoRoute(
                     path: 'search',
                     builder: (ctx, state) {
@@ -771,10 +781,8 @@ GoRouter buildRouter(BuildContext context) {
                   GoRoute(
                     path: 'destination/:id',
                     builder: (ctx, state) {
-                      final id = state.pathParameters['id'] ?? 'manali';
-
-                      return ManaliDetailsScreen(
-                        destinationName: id.replaceAll('-', ' '),
+                      return DestinationDetailsScreen(
+                        detail: DestinationDetailDemoData.manali,
                         onPlanTrip: () {
                           ctx.push(
                             '/home/trips/new/planner',
@@ -789,7 +797,7 @@ GoRouter buildRouter(BuildContext context) {
           ),
 
           // ===================================================================
-          // BRANCH 2 — TRIPS
+          // BRANCH 2 ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â TRIPS
           // ===================================================================
 
           StatefulShellBranch(
@@ -1071,42 +1079,18 @@ GoRouter buildRouter(BuildContext context) {
                       GoRoute(
                         path: 'budget',
                         builder: (ctx, state) {
-                          final budgetState = ctx.watch<BudgetState>();
+                          final tripId = state.pathParameters['tripId'];
 
-                          if (budgetState.status == AsyncStatus.idle) {
-                            WidgetsBinding.instance.addPostFrameCallback(
-                              (_) {
-                                ctx.read<BudgetState>().calculateBudget(
-                                      destination: 'travel',
-                                      days: 5,
-                                      travelers: 1,
-                                    );
-                              },
-                            );
-
-                            return const LoadingBudgetPredictionScreen();
-                          }
-
-                          if (budgetState.status == AsyncStatus.loading) {
-                            return const LoadingBudgetPredictionScreen();
-                          }
-
-                          if (budgetState.status == AsyncStatus.error) {
-                            return ErrorServerIssueScreen(
-                              onRetry: () {
-                                ctx.read<BudgetState>().reset();
-                              },
-                              onHome: () {
-                                ctx.go('/home');
-                              },
+                          if (tripId == null || tripId.trim().isEmpty) {
+                            return const Scaffold(
+                              body: Center(
+                                child: Text('Trip not found'),
+                              ),
                             );
                           }
 
-                          return BudgetPredictionScreen(
-                            onSave: () => ctx.pop(),
-                            onRecalculate: () {
-                              ctx.read<BudgetState>().reset();
-                            },
+                          return TripBudgetScreen(
+                            tripId: tripId,
                           );
                         },
                       ),
@@ -1140,7 +1124,7 @@ GoRouter buildRouter(BuildContext context) {
           ),
 
           // ===================================================================
-          // BRANCH 3 — RECOMMENDATIONS
+          // BRANCH 3 ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â RECOMMENDATIONS
           // ===================================================================
 
           StatefulShellBranch(
@@ -1189,6 +1173,7 @@ GoRouter buildRouter(BuildContext context) {
                   }
 
                   return RecommendedForYouScreen(
+                    recommendations: recommendationState.recommendations,
                     onDestinationTap: (id) {
                       ctx.push(
                         '/home/explore/destination/$id',
@@ -1201,7 +1186,7 @@ GoRouter buildRouter(BuildContext context) {
           ),
 
           // ===================================================================
-          // BRANCH 4 — PROFILE
+          // BRANCH 4 ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â PROFILE
           // ===================================================================
 
           StatefulShellBranch(

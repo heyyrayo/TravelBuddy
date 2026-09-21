@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'itinerary_item.dart';
 import 'trip_repository.dart';
 
 /// Supabase-backed implementation for the Trip domain.
@@ -241,6 +242,228 @@ class SupabaseTripRepository implements TripRepository {
         'Unable to create your trip. '
         'Please try again. '
         'Details: $error',
+      );
+    }
+  }
+
+  // ===========================================================================
+  // Itinerary — READ
+  // ===========================================================================
+
+  @override
+  Future<List<ItineraryItem>> getItinerary(
+    String tripId,
+  ) async {
+    _requireNonEmpty(
+      tripId,
+      'Trip id',
+    );
+
+    _requireAuthenticatedUser();
+
+    try {
+      final rows = await _client
+          .from('itinerary_items')
+          .select()
+          .eq(
+            'trip_id',
+            tripId,
+          )
+          .order(
+            'day_number',
+            ascending: true,
+          )
+          .order(
+            'sort_order',
+            ascending: true,
+          );
+
+      return rows
+          .map(
+            (row) => _itineraryItemFromRow(
+              Map<String, dynamic>.from(row),
+            ),
+          )
+          .toList();
+    } on PostgrestException catch (error) {
+      _logPostgrestError(
+        operation: 'GET itinerary_items',
+        error: error,
+      );
+
+      throw TripRepositoryException(
+        'Unable to load the trip itinerary: ${error.message}',
+      );
+    } catch (error, stackTrace) {
+      debugPrint('[TravelBuddy][ITINERARY] GET UNEXPECTED ERROR: $error');
+      debugPrint('[TravelBuddy][ITINERARY] STACK TRACE: $stackTrace');
+
+      if (error is TripRepositoryException) {
+        rethrow;
+      }
+
+      throw TripRepositoryException(
+        'Unable to load the trip itinerary. Please try again.',
+      );
+    }
+  }
+
+  // ===========================================================================
+  // Itinerary — CREATE
+  // ===========================================================================
+
+  @override
+  Future<ItineraryItem> addItineraryItem(
+    ItineraryItem item,
+  ) async {
+    _validateItineraryItem(
+      item,
+      requireId: false,
+    );
+
+    _requireAuthenticatedUser();
+
+    try {
+      final row = await _client
+          .from('itinerary_items')
+          .insert(
+            {
+              'trip_id': item.tripId,
+              'day_number': item.dayNumber,
+              'title': item.title.trim(),
+              'description': item.description,
+              'location': item.location,
+              'category': item.category,
+              'sort_order': item.sortOrder,
+            },
+          )
+          .select()
+          .single();
+
+      return _itineraryItemFromRow(
+        Map<String, dynamic>.from(row),
+      );
+    } on PostgrestException catch (error) {
+      _logPostgrestError(
+        operation: 'INSERT itinerary_items',
+        error: error,
+      );
+
+      throw TripRepositoryException(
+        'Unable to add the itinerary item: ${error.message}',
+      );
+    } catch (error, stackTrace) {
+      debugPrint('[TravelBuddy][ITINERARY] INSERT UNEXPECTED ERROR: $error');
+      debugPrint('[TravelBuddy][ITINERARY] STACK TRACE: $stackTrace');
+
+      if (error is TripRepositoryException) {
+        rethrow;
+      }
+
+      throw TripRepositoryException(
+        'Unable to add the itinerary item. Please try again.',
+      );
+    }
+  }
+
+  // ===========================================================================
+  // Itinerary — UPDATE
+  // ===========================================================================
+
+  @override
+  Future<ItineraryItem> updateItineraryItem(
+    ItineraryItem item,
+  ) async {
+    _validateItineraryItem(item);
+
+    _requireAuthenticatedUser();
+
+    try {
+      final row = await _client
+          .from('itinerary_items')
+          .update(
+            {
+              'day_number': item.dayNumber,
+              'title': item.title.trim(),
+              'description': item.description,
+              'location': item.location,
+              'category': item.category,
+              'sort_order': item.sortOrder,
+              'updated_at': DateTime.now().toUtc().toIso8601String(),
+            },
+          )
+          .eq(
+            'id',
+            item.id,
+          )
+          .select()
+          .single();
+
+      return _itineraryItemFromRow(
+        Map<String, dynamic>.from(row),
+      );
+    } on PostgrestException catch (error) {
+      _logPostgrestError(
+        operation: 'UPDATE itinerary_items',
+        error: error,
+      );
+
+      throw TripRepositoryException(
+        'Unable to update the itinerary item: ${error.message}',
+      );
+    } catch (error, stackTrace) {
+      debugPrint('[TravelBuddy][ITINERARY] UPDATE UNEXPECTED ERROR: $error');
+      debugPrint('[TravelBuddy][ITINERARY] STACK TRACE: $stackTrace');
+
+      if (error is TripRepositoryException) {
+        rethrow;
+      }
+
+      throw TripRepositoryException(
+        'Unable to update the itinerary item. Please try again.',
+      );
+    }
+  }
+
+  // ===========================================================================
+  // Itinerary — DELETE
+  // ===========================================================================
+
+  @override
+  Future<void> deleteItineraryItem(
+    String itemId,
+  ) async {
+    _requireNonEmpty(
+      itemId,
+      'Itinerary item id',
+    );
+
+    _requireAuthenticatedUser();
+
+    try {
+      await _client.from('itinerary_items').delete().eq(
+            'id',
+            itemId,
+          );
+    } on PostgrestException catch (error) {
+      _logPostgrestError(
+        operation: 'DELETE itinerary_items',
+        error: error,
+      );
+
+      throw TripRepositoryException(
+        'Unable to delete the itinerary item: ${error.message}',
+      );
+    } catch (error, stackTrace) {
+      debugPrint('[TravelBuddy][ITINERARY] DELETE UNEXPECTED ERROR: $error');
+      debugPrint('[TravelBuddy][ITINERARY] STACK TRACE: $stackTrace');
+
+      if (error is TripRepositoryException) {
+        rethrow;
+      }
+
+      throw TripRepositoryException(
+        'Unable to delete the itinerary item. Please try again.',
       );
     }
   }
@@ -560,6 +783,44 @@ class SupabaseTripRepository implements TripRepository {
       destinationId: destinationId,
       name: name,
     );
+  }
+
+  // ===========================================================================
+  // Itinerary mapping and validation
+  // ===========================================================================
+
+  static ItineraryItem _itineraryItemFromRow(
+    Map<String, dynamic> row,
+  ) {
+    try {
+      final item = ItineraryItem.fromMap(row);
+      item.validate();
+      return item;
+    } on FormatException catch (error) {
+      throw TripRepositoryException(
+        'An itinerary item returned by Supabase is invalid: ${error.message}',
+      );
+    }
+  }
+
+  static void _validateItineraryItem(
+    ItineraryItem item, {
+    bool requireId = true,
+  }) {
+    try {
+      item.validate(requireId: requireId);
+    } on FormatException catch (error) {
+      throw TripRepositoryException(error.message);
+    }
+  }
+
+  static void _requireNonEmpty(
+    String value,
+    String fieldName,
+  ) {
+    if (value.trim().isEmpty) {
+      throw TripRepositoryException('$fieldName must not be empty.');
+    }
   }
 
   // ===========================================================================

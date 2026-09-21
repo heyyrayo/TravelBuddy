@@ -1,5 +1,7 @@
 // Trip domain models and repository contract.
 
+import 'itinerary_item.dart';
+
 class Trip {
   Trip({
     required this.id,
@@ -48,6 +50,14 @@ abstract class TripRepository {
   Future<List<SavedPlace>> getSavedPlaces();
 
   Future<void> savePlace(SavedPlace place);
+
+  Future<List<ItineraryItem>> getItinerary(String tripId);
+
+  Future<ItineraryItem> addItineraryItem(ItineraryItem item);
+
+  Future<ItineraryItem> updateItineraryItem(ItineraryItem item);
+
+  Future<void> deleteItineraryItem(String itemId);
 }
 
 class TripRepositoryException implements Exception {

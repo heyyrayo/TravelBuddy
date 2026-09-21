@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState;
@@ -11,10 +11,12 @@ import 'core/state/auth_state.dart';
 import 'core/state/onboarding_state.dart';
 import 'core/state/connectivity_state.dart';
 import 'core/data/supabase_auth_repository.dart';
+import 'core/data/supabase_budget_repository.dart';
 import 'core/data/supabase_trip_repository.dart';
 import 'core/data/destination_repository.dart';
 import 'core/data/app_states.dart';
 import 'core/router/app_router.dart';
+import 'providers/accommodation_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +33,7 @@ Future<void> main() async {
   // ---------------------------------------------------------------------------
 
   final authRepository = SupabaseAuthRepository();
+  final budgetRepository = SupabaseBudgetRepository();
   final destRepo = InMemoryDestinationRepository();
   final tripRepo = SupabaseTripRepository();
 
@@ -53,8 +56,10 @@ Future<void> main() async {
   final destinationState = DestinationState(destRepo);
   final tripState = TripState(tripRepo);
   final budgetState = BudgetState();
+  final tripBudgetState = TripBudgetState(budgetRepository);
   final recommendationState = RecommendationState();
   final notificationState = AppNotificationState();
+  final accommodationProvider = AccommodationProvider();
 
   // ---------------------------------------------------------------------------
   // Pre-load destinations
@@ -83,8 +88,10 @@ Future<void> main() async {
         ChangeNotifierProvider.value(value: destinationState),
         ChangeNotifierProvider.value(value: tripState),
         ChangeNotifierProvider.value(value: budgetState),
+        ChangeNotifierProvider.value(value: tripBudgetState),
         ChangeNotifierProvider.value(value: recommendationState),
         ChangeNotifierProvider.value(value: notificationState),
+        ChangeNotifierProvider.value(value: accommodationProvider),
       ],
       child: const TravelBuddyApp(),
     ),

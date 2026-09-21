@@ -5,8 +5,14 @@ import '../../../../core/constants/app_icons.dart';
 import '../../../../shared/widgets/buttons/app_buttons.dart';
 
 class BudgetPredictionScreen extends StatelessWidget {
-  const BudgetPredictionScreen({super.key, this.onSave, this.onRecalculate});
+  const BudgetPredictionScreen({
+    super.key,
+    this.tripId,
+    this.onSave,
+    this.onRecalculate,
+  });
 
+  final String? tripId;
   final VoidCallback? onSave;
   final VoidCallback? onRecalculate;
 
@@ -103,7 +109,8 @@ class BudgetPredictionScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  const Icon(AppIcons.saveMoney, color: AppColors.secondary, size: 24),
+                  const Icon(AppIcons.saveMoney,
+                      color: AppColors.secondary, size: 24),
                   const SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: Column(
@@ -111,16 +118,18 @@ class BudgetPredictionScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Potential Savings: ₹3,200',
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: AppColors.secondary,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    color: AppColors.secondary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                         ),
                         Text(
                           'Book accommodation 2 weeks earlier to save on hotel rates',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: AppColors.onSecondaryFixed,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: AppColors.onSecondaryFixed,
+                                  ),
                         ),
                       ],
                     ),
@@ -139,7 +148,8 @@ class BudgetPredictionScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.auto_awesome, color: AppColors.primary, size: 24),
+                  const Icon(Icons.auto_awesome,
+                      color: AppColors.primary, size: 24),
                   const SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: Column(
@@ -147,16 +157,18 @@ class BudgetPredictionScreen extends StatelessWidget {
                       children: [
                         Text(
                           'AI Suggestion',
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                         ),
                         Text(
                           'Consider traveling mid-week — fares are typically 15% lower for Kullu–Manali route',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: AppColors.onSurface,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: AppColors.onSurface,
+                                  ),
                         ),
                       ],
                     ),
