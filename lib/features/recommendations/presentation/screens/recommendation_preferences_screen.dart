@@ -1,6 +1,8 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/data/app_states.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../application/recommendation_preferences_state.dart';
@@ -20,8 +22,7 @@ class RecommendationPreferencesScreen extends StatefulWidget {
 class _RecommendationPreferencesScreenState
     extends State<RecommendationPreferencesScreen> {
   String _travelMonth = '01';
-  TemperaturePreference _temperaturePreference =
-      TemperaturePreference.moderate;
+  TemperaturePreference _temperaturePreference = TemperaturePreference.moderate;
 
   bool _templeInterest = false;
   bool _shrineInterest = false;
@@ -48,8 +49,7 @@ class _RecommendationPreferencesScreenState
   TourismPreference _tourismPreference = TourismPreference.either;
   PopulationPreference _populationPreference = PopulationPreference.either;
 
-  final TextEditingController _tripDurationController =
-      TextEditingController();
+  final TextEditingController _tripDurationController = TextEditingController();
 
   @override
   void initState() {
@@ -69,6 +69,7 @@ class _RecommendationPreferencesScreenState
       _museumInterest = preferences.museumInterest;
       _stadiumInterest = preferences.stadiumInterest;
       _customsHouseInterest = preferences.customsHouseInterest;
+
       _experiences
         ..clear()
         ..addAll(
@@ -76,13 +77,13 @@ class _RecommendationPreferencesScreenState
             _supportedExperiences.contains,
           ),
         );
+
       _transportPreference = preferences.transportPreference;
       _tourismPreference = preferences.tourismPreference;
       _populationPreference = preferences.populationPreference;
 
       if (preferences.tripDurationDays != null) {
-        _tripDurationController.text =
-            preferences.tripDurationDays.toString();
+        _tripDurationController.text = preferences.tripDurationDays.toString();
       }
     }
   }
@@ -130,15 +131,15 @@ class _RecommendationPreferencesScreenState
       experiences: Set<RecommendationExperience>.from(_experiences),
     );
 
-    await context.read<RecommendationPreferencesState>().save(preferences);
+    final preferencesState = context.read<RecommendationPreferencesState>();
+
+    await preferencesState.save(preferences);
 
     if (!mounted) {
       return;
     }
 
-    final state = context.read<RecommendationPreferencesState>();
-
-    if (state.status == RecommendationPreferencesStatus.error) {
+    if (preferencesState.status == RecommendationPreferencesStatus.error) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
@@ -149,18 +150,44 @@ class _RecommendationPreferencesScreenState
       return;
     }
 
+    final savedPreferences = preferencesState.preferences;
+
+    if (savedPreferences == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Recommendation preferences were not available after saving.',
+          ),
+        ),
+      );
+      return;
+    }
+
+    await context.read<RecommendationState>().load(
+          preferences: savedPreferences,
+        );
+
+    if (!mounted) {
+      return;
+    }
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Recommendation preferences saved.'),
       ),
     );
+
+    if (!mounted) {
+      return;
+    }
+
+    context.pop();
   }
 
   @override
   Widget build(BuildContext context) {
     final state = context.watch<RecommendationPreferencesState>();
-    final isSaving =
-        state.status == RecommendationPreferencesStatus.saving;
+    final isSaving = state.status == RecommendationPreferencesStatus.saving;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -179,7 +206,6 @@ class _RecommendationPreferencesScreenState
                 ),
           ),
           const SizedBox(height: AppSpacing.lg),
-
           _SectionTitle(title: 'Travel Month'),
           DropdownButtonFormField<String>(
             value: _travelMonth,
@@ -205,7 +231,6 @@ class _RecommendationPreferencesScreenState
                     }
                   },
           ),
-
           const SizedBox(height: AppSpacing.lg),
           _SectionTitle(title: 'Temperature'),
           SegmentedButton<TemperaturePreference>(
@@ -232,7 +257,6 @@ class _RecommendationPreferencesScreenState
                     );
                   },
           ),
-
           const SizedBox(height: AppSpacing.lg),
           _SectionTitle(title: 'Experience Interests'),
           Text(
@@ -242,7 +266,6 @@ class _RecommendationPreferencesScreenState
                 ),
           ),
           const SizedBox(height: AppSpacing.sm),
-
           ..._supportedExperiences.map(
             (experience) => CheckboxListTile(
               contentPadding: EdgeInsets.zero,
@@ -265,10 +288,8 @@ class _RecommendationPreferencesScreenState
                     },
             ),
           ),
-
           const SizedBox(height: AppSpacing.lg),
           _SectionTitle(title: 'Attraction Interests'),
-
           _interestTile(
             'Temples',
             _templeInterest,
@@ -317,7 +338,6 @@ class _RecommendationPreferencesScreenState
             (value) => setState(() => _customsHouseInterest = value),
             isSaving,
           ),
-
           const SizedBox(height: AppSpacing.lg),
           _SectionTitle(title: 'Transport'),
           SegmentedButton<TransportPreference>(
@@ -344,7 +364,6 @@ class _RecommendationPreferencesScreenState
                     );
                   },
           ),
-
           const SizedBox(height: AppSpacing.lg),
           _SectionTitle(title: 'Tourism Preference'),
           SegmentedButton<TourismPreference>(
@@ -371,7 +390,6 @@ class _RecommendationPreferencesScreenState
                     );
                   },
           ),
-
           const SizedBox(height: AppSpacing.lg),
           _SectionTitle(title: 'City Size'),
           SegmentedButton<PopulationPreference>(
@@ -398,7 +416,6 @@ class _RecommendationPreferencesScreenState
                     );
                   },
           ),
-
           const SizedBox(height: AppSpacing.lg),
           _SectionTitle(title: 'Trip Duration'),
           TextField(
@@ -410,7 +427,6 @@ class _RecommendationPreferencesScreenState
               hintText: 'Example: 5',
             ),
           ),
-
           const SizedBox(height: AppSpacing.xl),
           FilledButton(
             onPressed: isSaving ? null : _save,
@@ -466,4 +482,3 @@ class _SectionTitle extends StatelessWidget {
     );
   }
 }
-
