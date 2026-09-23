@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/constants/app_icons.dart';
@@ -48,6 +49,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             label: 'Language',
             trailing: 'English',
             onTap: () {},
+          ),
+          _NavTile(
+            icon: AppIcons.explore,
+            label: 'Recommendation Preferences',
+            onTap: () => context.push('/recommendation-preferences'),
           ),
           _ToggleTile(
             icon: AppIcons.bell,
@@ -195,3 +201,4 @@ class _NavTile extends StatelessWidget {
     );
   }
 }
+

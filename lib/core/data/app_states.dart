@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+﻿import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
@@ -9,6 +9,8 @@ import 'trip_repository.dart';
 import '../../models/expense.dart';
 import '../../models/trip_budget.dart';
 import '../../features/recommendations/domain/recommendation_presentation.dart';
+import '../../features/recommendations/application/recommendation_service.dart';
+import '../../features/recommendations/domain/recommendation_user_preferences.dart';
 
 // ---------------------------------------------------------------------------
 // Async lifecycle enum
@@ -1002,6 +1004,10 @@ class BudgetState extends ChangeNotifier {
 // ---------------------------------------------------------------------------
 
 class RecommendationState extends ChangeNotifier {
+  RecommendationState(this._service);
+
+  final RecommendationService _service;
+
   AsyncStatus _status = AsyncStatus.idle;
 
   List<RecommendationPresentation> _recommendations = [];
@@ -1013,16 +1019,30 @@ class RecommendationState extends ChangeNotifier {
 
   bool get hasRecommendations => _recommendations.isNotEmpty;
 
-  Future<void> load() async {
+  Future<void> load({
+    RecommendationUserPreferences? preferences,
+  }) async {
     _status = AsyncStatus.loading;
     notifyListeners();
 
-    // Real recommendation data is not connected yet.
-    // Keep the production UI empty rather than presenting fabricated
-    // destinations or unsupported recommendation claims.
-    _recommendations = [];
+    try {
+      if (preferences == null) {
+        _recommendations = [];
+        _status = AsyncStatus.success;
+        notifyListeners();
+        return;
+      }
 
-    _status = AsyncStatus.success;
+      _recommendations = await _service.generate(
+        preferences: preferences,
+      );
+
+      _status = AsyncStatus.success;
+    } catch (_) {
+      _recommendations = [];
+      _status = AsyncStatus.error;
+    }
+
     notifyListeners();
   }
 
@@ -1051,3 +1071,10 @@ class AppNotificationState extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
+
+
+
+
+

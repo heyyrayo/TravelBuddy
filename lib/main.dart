@@ -14,7 +14,12 @@ import 'core/data/supabase_auth_repository.dart';
 import 'core/data/supabase_budget_repository.dart';
 import 'core/data/supabase_trip_repository.dart';
 import 'core/data/destination_repository.dart';
+import 'features/destination/data/destination_detail_repository.dart';
 import 'core/data/app_states.dart';
+import 'features/recommendations/application/recommendation_service.dart';
+import 'features/recommendations/application/recommendation_preferences_state.dart';
+import 'features/recommendations/data/recommendation_preferences_repository.dart';
+import 'features/recommendations/data/recommendation_experience_repository.dart';
 import 'core/router/app_router.dart';
 import 'providers/accommodation_provider.dart';
 
@@ -35,6 +40,7 @@ Future<void> main() async {
   final authRepository = SupabaseAuthRepository();
   final budgetRepository = SupabaseBudgetRepository();
   final destRepo = InMemoryDestinationRepository();
+final destinationDetailRepository = DestinationDetailRepository();
   final tripRepo = SupabaseTripRepository();
 
   // ---------------------------------------------------------------------------
@@ -57,7 +63,19 @@ Future<void> main() async {
   final tripState = TripState(tripRepo);
   final budgetState = BudgetState();
   final tripBudgetState = TripBudgetState(budgetRepository);
-  final recommendationState = RecommendationState();
+  final recommendationExperienceRepository =
+      RecommendationExperienceRepository();
+  final recommendationService = RecommendationService(
+    experienceRepository: recommendationExperienceRepository,
+  );
+  final recommendationState = RecommendationState(recommendationService);
+  final recommendationPreferencesRepository =
+      RecommendationPreferencesRepository();
+  final recommendationPreferencesState = RecommendationPreferencesState(
+    recommendationPreferencesRepository,
+  );
+
+  await recommendationPreferencesState.load();
   final notificationState = AppNotificationState();
   final accommodationProvider = AccommodationProvider();
 
@@ -86,10 +104,22 @@ Future<void> main() async {
         ChangeNotifierProvider.value(value: onboardingState),
         ChangeNotifierProvider.value(value: connectivityState),
         ChangeNotifierProvider.value(value: destinationState),
+        Provider<DestinationDetailRepository>.value(
+          value: destinationDetailRepository,
+        ),
         ChangeNotifierProvider.value(value: tripState),
         ChangeNotifierProvider.value(value: budgetState),
         ChangeNotifierProvider.value(value: tripBudgetState),
+        Provider<RecommendationService>.value(
+          value: recommendationService,
+        ),
         ChangeNotifierProvider.value(value: recommendationState),
+        Provider<RecommendationExperienceRepository>.value(
+          value: recommendationExperienceRepository,
+        ),
+        ChangeNotifierProvider.value(
+          value: recommendationPreferencesState,
+        ),
         ChangeNotifierProvider.value(value: notificationState),
         ChangeNotifierProvider.value(value: accommodationProvider),
       ],
@@ -201,3 +231,4 @@ class _TravelBuddyAppState extends State<TravelBuddyApp> {
     );
   }
 }
+

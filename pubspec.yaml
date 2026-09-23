@@ -1,4 +1,4 @@
-name: travelbuddy_india
+﻿name: travelbuddy_india
 description: "TravelBuddy - Smart travel planning for India"
 publish_to: 'none'
 version: 1.0.0+1
@@ -42,9 +42,12 @@ flutter:
   assets:
     - assets/images/
     - assets/databases/nidhi_accommodation.db
+    - assets/databases/travelbuddy_recommendations.db
+    - assets/databases/travelbuddy_recommendations_experience_v1.db
 flutter_launcher_icons:
   image_path: "assets/images/travelbuddy_icon.png"
   android: "ic_launcher"
   min_sdk_android: 21
   ios: true
+    - assets/databases/travelbuddy_destination_details.db
 
