@@ -1,8 +1,9 @@
-﻿import '../data/recommendation_experience_repository.dart';
+import '../data/recommendation_experience_repository.dart';
 import '../data/recommendation_repository.dart';
 import '../domain/experience_aware_recommendation_engine.dart';
 import '../domain/recommendation_candidate.dart';
 import '../domain/recommendation_experience_ranking_policy.dart';
+import '../domain/recommendation_monthly_experience_evidence.dart';
 import '../domain/recommendation_presentation.dart';
 import '../domain/recommendation_user_preferences.dart';
 
@@ -39,24 +40,27 @@ class RecommendationService {
       return const <RecommendationPresentation>[];
     }
 
-    final evidenceRows =
+    final List<RecommendationMonthlyExperienceEvidence> evidenceRows =
         preferences.experiences.isEmpty
-            ? const <dynamic>[]
+            ? const <RecommendationMonthlyExperienceEvidence>[]
             : await _experienceRepository.getEvidenceByMonth(
                 preferences.travelMonth,
               );
 
-    final evidenceByDestination = <String, dynamic>{
+    final Map<String, RecommendationMonthlyExperienceEvidence>
+        evidenceByDestination = <String, RecommendationMonthlyExperienceEvidence>{
       for (final evidence in evidenceRows)
         evidence.destinationId: evidence,
     };
 
-    final candidates = features.map(
-      (feature) => RecommendationCandidate(
-        features: feature,
-        experienceEvidence: evidenceByDestination[feature.destinationId],
-      ),
-    ).toList(growable: false);
+    final candidates = features
+        .map(
+          (feature) => RecommendationCandidate(
+            features: feature,
+            experienceEvidence: evidenceByDestination[feature.destinationId],
+          ),
+        )
+        .toList(growable: false);
 
     final recommendations = _engine.generate(
       candidates: candidates,
